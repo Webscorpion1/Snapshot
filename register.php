@@ -1,0 +1,116 @@
+<?php
+
+include_once("classes/User.class.php");
+
+// Alleen saven in DB alles alle velden ingevuld zijn
+if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POST['username']) && !empty ($_POST['email']) && !empty ($_POST['password'])){
+    if($_POST['password'] == $_POST['password_confirmation']) {
+        $user = new User();
+        $user->setFirstName($_POST['firstname']);
+        $user->setLastName($_POST['lastname']);
+        $user->setUsername($_POST['username']);
+        $user->setEmail($_POST['email']);
+        $user->setPassword($_POST['password']);
+
+        if($user->register()){
+            $user->login();
+        }
+    }
+    else{
+        $error_confirmation = true;
+       // if no -> $error tonen
+    }
+}
+?><!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Register - Snapshot</title>
+    <meta name="description" content="snapshot" />
+    <meta name="keywords" content="snapshot, imd" />
+    <meta name="author" content="Lucas Debelder, Jasmina Dahou, Sander Verbesselt, Frederik Delaet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800|Open+Sans" rel="stylesheet">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/master.css" />
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
+    
+    <meta property="og:url" content="">
+    <meta property="og:type" content=""/>
+    <meta property="og:title" content=""/>
+    <meta property="og:description" content=""/>
+    <meta property="og:image" content=""/>
+    
+    
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="">
+    <meta name="twitter:creator" content="">
+    <meta name="twitter:title" content="">
+    <meta name="twitter:description" content=" ">
+    <meta name="twitter:image" content=""> 
+    
+</head>
+
+<body class="login">
+    <div class="grid container_login">
+        <div class="login_grid">
+
+            <form class="form_login" action="" method="post">
+            <h1>Get started absolutely free.</h1>
+            <h2>Enter your details below.</h2>
+
+                
+                
+                <div>
+					<label for="firstname">FIRST NAME</label><br/>
+					<input type="text" id="firstname" name="firstname" placeholder="Lucas" required>
+                </div>
+                <div>
+					<label for="lastname">LAST NAME</label><br/>
+					<input type="text" id="lastname" name="lastname" placeholder="Debelder" required>
+				</div>
+                <div>
+					<label for="username">USERNAME</label><br/>
+					<input type="text" id="username" name="username" placeholder="ZanicL3" required>
+				</div>
+				<div>
+					<label for="email">EMAIL</label><br/>
+					<input type="email" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
+				</div>
+                
+                <!-- PW matchen ni error mssg -->
+                <?php if(isset($error_confirmation)): ?>
+                <div>
+                    <p class="error_red">
+                        The passwords do not match, could you try again?
+                    </p>
+                </div>
+                <?php endif; ?>
+
+				<div>
+					<label for="password">PASSWORD</label><br/>
+					<input type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
+                </div>
+                <div>
+                    <label for="password_confirmation">CONFIRM YOUR PASSWORD</label><br/>
+                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password confirm" required>
+                </div>
+
+                
+				<div>
+                    <input type="submit" value="REGISTER" class="btn_login">
+                </div>
+                
+                <p class="center_align">Already have an account?</p>
+                <br/>
+                <a class="center_align" href="register.php">Login here.</a>
+
+            </form>
+    </div>
+</body>
+</html>
+
+

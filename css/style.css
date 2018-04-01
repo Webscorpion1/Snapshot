@@ -1,7 +1,81 @@
-h1, h2 {
-    font-family: 'Montserrat', sans-serif;
+
+
+.container_login {
+    grid-template-columns: repeat(1fr);
+    height: 100vh;
 }
 
-p {
-    font-family: 'Open Sans', sans-serif;
+.login_grid {
+    grid-column: 1;
+    padding-top: 100px;
+    padding-bottom: 100px;
+    background-image: url(../media/frontend/logo.svg), url(../media/frontend/daniil-silantev-364304-unsplash.png);
+    background-repeat: no-repeat;
+    background-position: 40px 40px, center;
+    background-attachment: fixed, scroll;
+    background-size: 50px, cover;
+}
+
+.login {
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100vh;
+}
+.form_login {
+    max-width: 540px;
+    margin: 0 auto;
+    background-color: white;
+    padding: 60px;
+    border-radius: 5px;
+}
+.form_login h1 {
+    margin-bottom: 30px;
+}
+.form_login h2 {
+    margin-bottom: 90px;
+}
+.form_login label {
+    font-weight: bold;
+    display: block;
+    font-size: 12px;
+}
+.form_login input {
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 14px;
+    outline: 0;
+    transition: border-color 0.7s ease;
+    display: block;
+    width: 90%;
+}
+.form_login .btn_login {
+    display: block;
+    margin: 0px auto;
+    width: 50%;
+    background: var(--light_purple);
+    border-color: var(--light_purple);
+    border-radius: 100px;
+    height: 60px;
+    line-height: 50px;
+    padding: 0 60px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #FFF;
+    cursor: pointer;
+    box-shadow: 0 6px var(--dark_purple);
+    position: relative;
+
+    margin: 50px auto;
+}
+.form_login .btn_login:hover {
+    top: 2px;
+    box-shadow: 0 4px var(--dark_purple);
+}
+.form_login div {
+    margin: 20px 0px;
+}
+textarea:focus, input:focus, *:focus {
+    border-color: var(--primary_blue);
+    transition: border-color 0.7s ease;
 }

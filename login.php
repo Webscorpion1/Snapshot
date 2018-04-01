@@ -4,13 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Snapshot</title>
+    <title>Log in - Snapshot</title>
     <meta name="description" content="snapshot" />
     <meta name="keywords" content="snapshot, imd" />
     <meta name="author" content="Lucas Debelder, Jasmina Dahou, Sander Verbesselt, Frederik Delaet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800|Open+Sans" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/master.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
     
     <meta property="og:url" content="">
@@ -29,5 +31,46 @@
     
 </head>
 
+<body class="login">
+    <div class="grid container_login">
+        <div class="login_grid">
 
+            <form class="form_login" action="" method="post">
+            <h1>Sign in to Snapshot.</h1>
+            <h2>Enter your details below.</h2>
+
+                <?php if( isset($error) ): ?>
+				<div class="form__error">
+					<p>
+						Sorry, we can't log you in with that email address and password. Can you try again?
+					</p>
+				</div>
+                <?php endif;?>
+
+				<div>
+					<label for="email">EMAIL</label><br/>
+					<input type="text" id="email" name="email" placeholder="Lucasdebelder@snapshot.be">
+				</div>
+				<div>
+					<label for="password">PASSWORD</label><br/>
+					<input type="password" id="password" name="password" placeholder="Atleast 8 characters">
+				</div>
+
+                
+				<div>
+                    <input type="submit" value="LOG IN" class="btn_login">
+                    <!-- REMEMBER ME - kunnen we later nog toevoegen? 
+                    <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label>
+                    -->
+                </div>
+                
+                <p class="center_align">Or</p>
+                <br/>
+                <a class="center_align" href="register.php">Register here.</a>
+
+            </form>
+    </div>
+</body>
 </html>
+
+

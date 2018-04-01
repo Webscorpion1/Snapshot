@@ -1,0 +1,72 @@
+h1, h2, h3, h4 {
+    font-family: 'Montserrat', sans-serif;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* CSS variables */
+
+
+/* HOW TO USE
+:root {
+  --font-size: 20px
+}
+
+p {
+  font-size: var(--font-size)
+}
+*/
+
+
+:root {
+    /*Primary colors*/
+    --primary_blue: #5C00C5;
+    --primary_orange: #F17318;
+
+    /*Secundary colors*/
+    --dark_purple: #5302B0;
+    --light_purple: #7D0DFF;
+
+    --dark_blue: #1DBFF3;
+    --light_blue: #32FBFC;
+
+    --dark_orange: #F78122;
+    --light_orange: #F2C314;
+
+    /* Font colors*/
+    --grey: #CECECF;
+    --black: #08080D;
+
+    /*Gradients*/
+    --gradient__blue: linear-gradient(-135deg, #32FBFC 0%, #3272F6 100%);
+    --gradient__orange: linear-gradient(-139deg, #F78122 0%, #F2C314 100%);
+    --gradient__purple: linear-gradient(-135deg, #E458FC 0%, #1D1279 100%);
+    --gradient__yellow: linear-gradient(-135deg, #15EAFA 0%, #FDF70F 100%);
+}
+
+
+
+/* Shortcuts */
+
+.grid {
+    display: grid;
+}
+.none {
+    display: none;
+}
+.block {
+    display: block;
+}
+a {
+    color: var(--dark_purple);
+}
+.center_align {
+    text-align: center;
+    display: block;
+}
+
+.error_red {
+    color: red;
+}
