@@ -5,7 +5,7 @@ class Db {
 
     public static function getInstance() {
 
-        include_once("settings/db.php");
+        include_once("../settings/settings.php");
 
 
         if( self::$conn == null ){
