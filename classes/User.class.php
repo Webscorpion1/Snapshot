@@ -1,5 +1,7 @@
 <?php
-include_once(__DIR__ . "/../settings/settings.php");
+
+//das hier voor die DB connectie met arrays ma sander moet ge ff manueel aanpassen werkt ni juist 100% en wij hebbn da nie echt nodig tbh
+//include_once(__DIR__ . "/../settings/settings.php");
 
 
  class User {

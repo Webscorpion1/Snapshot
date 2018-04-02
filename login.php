@@ -1,4 +1,29 @@
-<!DOCTYPE html>
+<?php 
+
+include_once("includes/functions.inc.php");
+
+// get username and password from $_POST
+if(!empty($_POST)){
+    $username = $_POST['email'];
+    $password = $_POST['password'];
+
+    // check if a user can login (function)
+    if(canilogin($username, $password)){
+        session_start();
+        $_SESSION['username'] = $username;
+        $_SESSION['loggedin'] = true; 
+    //    setcookie("login", $cookieval, time()+60*60*24*7); //1 week
+        header('Location: index.php');
+    }
+    else{
+        $error = true;
+    // if no -> $error tonen
+    }
+}
+
+
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -49,11 +74,11 @@
 
 				<div>
 					<label for="email">EMAIL</label><br/>
-					<input type="text" id="email" name="email" placeholder="Lucasdebelder@snapshot.be">
+					<input type="text" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
 				</div>
 				<div>
 					<label for="password">PASSWORD</label><br/>
-					<input type="password" id="password" name="password" placeholder="Atleast 8 characters">
+					<input type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
 				</div>
 
                 
