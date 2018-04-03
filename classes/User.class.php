@@ -60,6 +60,9 @@
 
      public function setPassword($password)
      {
+         if(strlen($password) < 8){
+             throw  new Exception("Password must be at least 8 characters long.");
+         }
          //encrypten van het password
          $hash = password_hash($password,PASSWORD_DEFAULT);// standaard 10 keer als je geen options mee geeft
          $this->password = $hash;
