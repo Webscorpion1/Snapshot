@@ -1,5 +1,6 @@
 <?php
 
+include_once("Db.class.php");
 //das hier voor die DB connectie met arrays ma sander moet ge ff manueel aanpassen werkt ni juist 100% en wij hebbn da nie echt nodig tbh
 //include_once("../settings/settings.php");
 
@@ -49,6 +50,15 @@
 
     public function setEmail($email)
     {
+        $conn = db::getInstance();
+        $sthandler = $conn->prepare("SELECT email FROM users WHERE email = :email");
+        $sthandler->bindParam(':email', $email);
+        $sthandler->execute();
+        if($sthandler->rowCount() > 0){
+            throw  new Exception("E-mail already exists.");
+        }
+
+
         $this->email = $email;
     }
 
@@ -60,6 +70,9 @@
 
      public function setPassword($password)
      {
+         if(strlen($password) < 8){
+             throw  new Exception("Password must be at least 8 characters long.");
+         }
          //encrypten van het password
          $hash = password_hash($password,PASSWORD_DEFAULT);// standaard 10 keer als je geen options mee geeft
          $this->password = $hash;

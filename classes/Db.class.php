@@ -2,14 +2,13 @@
 
 class Db {
     private static $conn;
-
     public static function getInstance() {
 
-        include_once("../settings/settings.php");
+
 
 
         if( self::$conn == null ){
-            self::$conn = new PDO("mysql:host=".$db['host'].";dbname=".$db['dbname'], $db['username'], $db['password']);
+            self::$conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
             return self::$conn;
 
         }

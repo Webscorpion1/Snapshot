@@ -23,7 +23,8 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
        // if no -> $error tonen
             }
         }
-    }catch (Exception $e){
+    }
+    catch (Exception $e){
     $error_confirmation = $e->getMessage();
 }
 ?><!DOCTYPE html>
@@ -67,8 +68,6 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
             <h1>Get started absolutely free.</h1>
             <h2>Enter your details below.</h2>
 
-                
-                
                 <div>
 					<label for="firstname">FIRST NAME</label><br/>
 					<input type="text" id="firstname" name="firstname" placeholder="Lucas" required>
@@ -115,6 +114,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
 
             </form>
     </div>
+
 </body>
 </html>
 
