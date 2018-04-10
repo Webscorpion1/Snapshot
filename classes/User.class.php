@@ -12,7 +12,6 @@ include_once("Db.class.php");
     private $password;
 
 
-
     public function setFirstname($firstname)
      {
          $this->firstname = $firstname;
@@ -38,6 +37,16 @@ include_once("Db.class.php");
 
     public function setUsername($username)
     {
+        $conn = db::getInstance();
+        $sthandler = $conn->prepare("SELECT username FROM users WHERE username = :username");
+        $sthandler->bindParam(':username', $username);
+        $sthandler->execute();
+        if($sthandler->rowCount() > 0){
+            throw  new Exception("Username already exists.");
+        }
+        if(strlen($username) < 4){
+            throw  new Exception("Username must be at least 4 characters long.");
+        }
         $this->username = $username;
     }
 
@@ -57,7 +66,6 @@ include_once("Db.class.php");
         if($sthandler->rowCount() > 0){
             throw  new Exception("E-mail already exists.");
         }
-
 
         $this->email = $email;
     }
