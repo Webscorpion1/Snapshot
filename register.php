@@ -1,6 +1,8 @@
 <?php
 
 include_once("classes/User.class.php");
+try{
+    
 
 // Alleen saven in DB alles alle velden ingevuld zijn
 if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POST['username']) && !empty ($_POST['email']) && !empty ($_POST['password'])){
@@ -17,9 +19,12 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
         }
     }
     else{
-        $error_confirmation = true;
+        $error_confirmation = "Passwords don't match";
        // if no -> $error tonen
-    }
+            }
+        }
+    }catch (Exception $e){
+    $error_confirmation = $e->getMessage();
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -82,13 +87,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
 				</div>
                 
                 <!-- PW matchen ni error mssg -->
-                <?php if(isset($error_confirmation)): ?>
-                <div>
-                    <p class="error_red">
-                        The passwords do not match, could you try again?
-                    </p>
-                </div>
-                <?php endif; ?>
+               
 
 				<div>
 					<label for="password">PASSWORD</label><br/>
@@ -98,7 +97,13 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
                     <label for="password_confirmation">CONFIRM YOUR PASSWORD</label><br/>
                     <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password confirm" required>
                 </div>
-
+                 <?php if(isset($error_confirmation)): ?>
+                <div>
+                    <p class="error_red">
+                        <?php echo $error_confirmation ?>
+                    </p>
+                </div>
+                <?php endif; ?>
                 
 				<div>
                     <input type="submit" value="REGISTER" class="btn_login">
