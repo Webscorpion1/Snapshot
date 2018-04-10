@@ -1,4 +1,11 @@
-<!doctype html>
+<?php
+include_once('classes/Post.class.php');
+include_once('classes/User.class.php');
+
+Post::ShowPosts();
+
+
+?><!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">

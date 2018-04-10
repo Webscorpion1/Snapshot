@@ -30,11 +30,21 @@ function canilogin( $username, $password){
     }
     $user = $result->fetch(PDO::FETCH_ASSOC);
     if(password_verify($password, $user['password'])){
+        session_start();
+        $_SESSION['userid']= $user['id'];
         return true;
     }
     else{
         return false;
     }
 
+}
+
+function checklogin()
+{
+    session_start();
+    if (!isset($_SESSION['loggedin'])) {
+        header('Location: login.php');
+    }
 }
 ?>
