@@ -80,6 +80,6 @@ textarea:focus, input:focus, *:focus {
     transition: border-color 0.7s ease;
 }
 .post img{
-    width: 250px;
+    width: 50px;
 }
 

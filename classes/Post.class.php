@@ -90,11 +90,11 @@ class Post {
         return $result;
     }
     public function AddPost(){
-        $userid = $_SESSION['userid'];
 
         $conn = db::getInstance();
-        $query = "insert into posts (picture, description, location, user_id, post_date) values (:picture, :description, :location, :user_id, :post_date)";
+        $query = "insert into posts (post_title, picture, description, location, user_id, post_date) values (:post_title, :picture, :description, :location, :user_id, :post_date)";
         $statement = $conn->prepare($query);
+        $statement->bindValue(':post_title',$this->getTitle());
         $statement->bindValue(':picture',$this->getPicture());
         $statement->bindValue(':description',$this->getDescription());
         $statement->bindValue(':location',$this->getLocation());

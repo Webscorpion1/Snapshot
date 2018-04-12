@@ -44,7 +44,7 @@ $post = Post::ShowPosts();
 <a href="login.php">Login</a>
 <a href="posts.php">Posts</a>
 <a href="account.php">Profile settings</a>
-<a href="addpost.php">Profile settings</a>
+<a href="addpost.php">Add post</a>
 <div class="wrapper">
 <h1>Posts</h1>
 <div class="post-container">

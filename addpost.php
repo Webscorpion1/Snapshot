@@ -5,7 +5,57 @@ include_once("includes/functions.inc.php");
 checklogin();
 $post = Post::ShowPosts();
 
+if(! empty($_POST)) {
 
+    $file = $_FILES['file'];
+    $fileName = $_FILES['file']['name'];
+    $fileTmpName = $_FILES['file']['tmp_name'];
+    $fileSize = $_FILES['file']['size'];
+    $fileError = $_FILES['file']['error'];
+    $fileType = $_FILES['file']['type'];
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
+
+    $allowed = array('jpg', 'jpeg', 'png');
+
+    if (in_array($fileActualExt, $allowed)){
+        if ($fileError === 0){
+            if ($fileSize < 10000){
+                $fileNameNew = uniqid('', true).".".$fileActualExt;
+                $fileDestination = 'uploads/'.$fileNameNew;
+                print_r($fileDestination);
+                move_uploaded_file($fileTmpName, $fileDestination);
+
+                $title = $_POST['title'];
+                $desc = $_POST['description'];
+                $date = date("Y-m-d");
+                $location = "";
+                $userid = $_SESSION['userid'];
+                $newPost = new Post();
+
+                $newPost->setTitle($title);
+                $newPost->setPicture($fileDestination);
+                $newPost->setDescription($desc);
+                $newPost->setDate($date);
+                $newPost->setUserId($userid);
+                $newPost->setLocation($location);
+                if ($newPost->AddPost() ){
+                    $feedback = "Post has been saved.";
+                }
+
+            } else{
+                $feedback = "Your file is too big.";
+            }
+        } else{
+            $feedback = "There was an error uploading your file.";
+        }
+    } else{
+        $feedback = "You cannot upload files of this type.";
+    }
+
+
+
+}
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -40,26 +90,26 @@ $post = Post::ShowPosts();
 </head>
 
 <body>
-<a href="register.php">Register</a>
-<a href="login.php">Login</a>
-<a href="posts.php">Posts</a>
-<a href="account.php">Profile settings</a>
+
 <div class="wrapper">
     <h1>Posts</h1>
     <div class="container">
         <form action="" method="post" enctype="multipart/form-data">
             <h2 form__title>Add post</h2>
-
+            <div class="form__field">
+                <label for="title" class="label">Title</label>
+                <input type="text" name="title">
+            </div>
             <div class="form__field">
                 <label for="file" class="label">Upload picture</label>
                 <input type="file" name="file" id="fileToUpload">
             </div>
             <div class="form__field">
-                <label for="question" class="label">Description</label>
-                <textarea name="question" id="question" cols="25" rows="5"></textarea>
+                <label for="description" class="label">Description</label>
+                <textarea name="description" cols="25" rows="5"></textarea>
             </div>
             <div class="form__field">
-                <input type="submit" name="submit" value="Add question"">
+                <input type="submit" name="submit" value="Add post"">
             </div>
         </form>
     </div>
