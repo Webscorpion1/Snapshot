@@ -49,7 +49,7 @@ class Post {
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
                   WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
                   ORDER BY posts.post_date DESC
-                  LIMIT 20";
+                  LIMIT 5";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);

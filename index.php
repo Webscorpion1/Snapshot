@@ -5,7 +5,7 @@ include_once("includes/functions.inc.php");
 checklogin();
 $post = Post::ShowPosts();
 
-echo $_SESSION['userid'];
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -44,8 +44,9 @@ echo $_SESSION['userid'];
 <a href="login.php">Login</a>
 <a href="posts.php">Posts</a>
 <a href="account.php">Profile settings</a>
-
+<div class="wrapper">
 <h1>Posts</h1>
+<div class="post-container">
 <?php foreach($post as $p): ?>
     <div class="post">
         <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
@@ -53,7 +54,25 @@ echo $_SESSION['userid'];
         <div class="post_date"><?php echo $p['post_date'] ?></div>
     </div>
 <?php endforeach; ?>
+</div>
+</div>
+<input type="button" name="load-more" class="button button--load-more" value="load more">
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    var limit = 5;
+    $('.button--load-more').on('click',function () {
+        limit = limit + 5;
+        $.ajax({
+            url:"ajax/post_load.php",
+            method: "POST",
+            data:{limit:limit},
+            success:function (data) {
+                $(".post-container").html(data);
+            }
+        });
+    });
+</script>
 </html>
 
 
