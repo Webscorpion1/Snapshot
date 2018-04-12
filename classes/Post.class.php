@@ -41,13 +41,14 @@ class Post {
 
     public static function ShowPosts(){
         $userid = $_SESSION['userid'];
+        echo $userid;
         $conn = db::getInstance();
-        $query = "SELECT post.picture,post.description, post.location, post.post_date
+        $query = "SELECT posts.picture ,posts.description, posts.location, posts.post_date
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
                   WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
-                  ORDER BY post.post_date DESC
+                  ORDER BY posts.post_date DESC
                   LIMIT 20";
         $statement = $conn->prepare($query);
         $statement->execute();

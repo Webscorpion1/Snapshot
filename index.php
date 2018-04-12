@@ -1,5 +1,11 @@
 <?php
-echo 'dit zou index pagina moeten zijn'
+include_once('classes/Post.class.php');
+include_once('classes/User.class.php');
+include_once("includes/functions.inc.php");
+checklogin();
+$post = Post::ShowPosts();
+
+echo $_SESSION['userid'];
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -36,8 +42,17 @@ echo 'dit zou index pagina moeten zijn'
 <body>
 <a href="register.php">Register</a>
 <a href="login.php">Login</a>
+<a href="posts.php">Posts</a>
 <a href="account.php">Profile settings</a>
 
+<h1>Posts</h1>
+<?php foreach($post as $p): ?>
+    <div class="post">
+        <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
+        <div class="post_desc"><p><?php echo $p['description'] ?></p></div>
+        <div class="post_date"><?php echo $p['post_date'] ?></div>
+    </div>
+<?php endforeach; ?>
 </body>
 </html>
 
