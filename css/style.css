@@ -79,4 +79,7 @@ textarea:focus, input:focus, *:focus {
     border-color: var(--primary_blue);
     transition: border-color 0.7s ease;
 }
+.post img{
+    width: 50px;
+}
 
