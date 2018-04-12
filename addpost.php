@@ -22,21 +22,21 @@ $post = Post::ShowPosts();
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/master.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    
+
     <meta property="og:url" content="">
     <meta property="og:type" content=""/>
     <meta property="og:title" content=""/>
     <meta property="og:description" content=""/>
     <meta property="og:image" content=""/>
-    
-    
+
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="">
     <meta name="twitter:creator" content="">
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content=" ">
-    <meta name="twitter:image" content=""> 
-    
+    <meta name="twitter:image" content="">
+
 </head>
 
 <body>
@@ -44,36 +44,31 @@ $post = Post::ShowPosts();
 <a href="login.php">Login</a>
 <a href="posts.php">Posts</a>
 <a href="account.php">Profile settings</a>
-<a href="addpost.php">Profile settings</a>
 <div class="wrapper">
-<h1>Posts</h1>
-<div class="post-container">
-<?php foreach($post as $p): ?>
-    <div class="post">
-        <div class="post_title"><p><?php echo $p['post_title'] ?></p></div>
-        <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-        <div class="post_desc"><p><?php echo $p['description'] ?></p></div>
-        <div class="post_date"><?php echo $p['post_date'] ?></div>
+    <h1>Posts</h1>
+    <div class="container">
+        <form action="" method="post" enctype="multipart/form-data">
+            <h2 form__title>Add post</h2>
+
+            <div class="form__field">
+                <label for="file" class="label">Upload picture</label>
+                <input type="file" name="file" id="fileToUpload">
+            </div>
+            <div class="form__field">
+                <label for="question" class="label">Description</label>
+                <textarea name="question" id="question" cols="25" rows="5"></textarea>
+            </div>
+            <div class="form__field">
+                <input type="submit" name="submit" value="Add question"">
+            </div>
+        </form>
     </div>
-<?php endforeach; ?>
 </div>
-</div>
-<input type="button" name="load-more" class="button button--load-more" value="load more">
+
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    var limit = 5;
-    $('.button--load-more').on('click',function () {
-        limit = limit + 5;
-        $.ajax({
-            url:"ajax/post_load.php",
-            method: "POST",
-            data:{limit:limit},
-            success:function (data) {
-                $(".post-container").html(data);
-            }
-        });
-    });
+
 </script>
 </html>
 

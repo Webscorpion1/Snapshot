@@ -8,7 +8,7 @@ if(isset($limit)){
     if($limit != ""){
         $conn = db::getInstance();
 
-        $query ="SELECT posts.picture ,posts.description, posts.location, posts.post_date
+        $query ="SELECT posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
@@ -20,6 +20,7 @@ if(isset($limit)){
 
         while($row = $result->fetch()) {
             $output.=' <div class="post">';
+            $output .='<div class="post_desc"><p>'. $row['post_title'].'</p></div>';
             $output .='<div class="post__picture"><img src="'. $row['picture'].'" alt=""></div>';
             $output .='<div class="post_desc"><p>'. $row['description'].'</p></div>';
             $output .=' <div class="post_date">'. $row['post_date'].'</div>';
