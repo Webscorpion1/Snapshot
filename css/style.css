@@ -21,25 +21,24 @@
     background-size: cover;
     height: 100vh;
 }
-.form_login {
+form {
     max-width: 540px;
-    margin: 0 auto;
+    margin: 60px auto;
     background-color: white;
-    padding: 60px;
     border-radius: 5px;
 }
-.form_login h1 {
+form h1 {
     margin-bottom: 30px;
 }
-.form_login h2 {
+form h2 {
     margin-bottom: 90px;
 }
-.form_login label {
+form label {
     font-weight: bold;
     display: block;
     font-size: 12px;
 }
-.form_login input {
+form input, textarea {
     border: 1px solid var(--grey);
     border-radius: 5px;
     padding: 15px;
@@ -49,7 +48,7 @@
     display: block;
     width: 90%;
 }
-.form_login .btn_login {
+form .btn_login {
     display: block;
     margin: 0px auto;
     width: 50%;
@@ -68,11 +67,11 @@
 
     margin: 50px auto;
 }
-.form_login .btn_login:hover {
+form .btn_login:hover {
     top: 2px;
     box-shadow: 0 4px var(--dark_purple);
 }
-.form_login div {
+form div {
     margin: 20px 0px;
 }
 textarea:focus, input:focus, *:focus {
@@ -119,3 +118,4 @@ li a:hover:not(.active) {
     background-color: var(--dark_purple);
     color: white;
 }
+

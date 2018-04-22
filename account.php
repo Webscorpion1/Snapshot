@@ -34,7 +34,20 @@
 </head>
 
 <body>
-        <form class="form_login" action="" method="post">
+<nav>
+    <ul>
+        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
+
+        <li><a href="index.php">Home</a></li>
+        <li><a href="posts.php">Posts</a></li>
+        <li><a href="addpost.php">Add post</a></li>
+        <li><a class="active" href="account.php">Profile settings</a></li>
+        <li><a href="logout.php">Log out</a></li>
+    </ul>
+</nav>
+        <form action="" method="post">
+            <h1 form__title>Update account</h1>
+
             <!-- Profiel foto -->
             <div>
                 <label for="photo">UPDATE PROFILE PICTURE</label><br/>

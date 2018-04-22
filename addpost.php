@@ -62,10 +62,10 @@ if(! empty($_POST)) {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Homepage - Snapshot</title>
+    <title>Add post - Snapshot</title>
     <meta name="description" content="snapshot" />
     <meta name="keywords" content="snapshot, imd" />
-    <meta name="author" content="Lucas Debelder, Jasmina Dahou, Sander Verbesselt, Frederik Delaet" />
+    <meta name="author" content="Lucas Debelder, Sander Verbesselt, Frederik Delaet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800|Open+Sans" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
@@ -90,30 +90,46 @@ if(! empty($_POST)) {
 </head>
 
 <body>
+<nav>
+    <ul>
+        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
 
-<div class="wrapper">
-    <h1>Posts</h1>
-    <div class="container">
-        <form action="" method="post" enctype="multipart/form-data">
-            <h2 form__title>Add post</h2>
+        <li><a href="index.php">Home</a></li>
+        <li><a href="posts.php">Posts</a></li>
+        <li><a class="active" href="addpost.php">Add post</a></li>
+        <li><a href="account.php">Profile settings</a></li>
+        <li><a href="logout.php">Log out</a></li>
+    </ul>
+</nav>
+
+<form  action="" method="post" enctype="multipart/form-data">
+
+            <h1 form__title>Add post</h1>
             <div class="form__field">
-                <label for="title" class="label">Title</label>
+                <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
                 <input type="text" name="title">
             </div>
             <div class="form__field">
-                <label for="file" class="label">Upload picture</label>
+                <label for="file" class="label">UPLOAD PICTURE</label><br/>
                 <input type="file" name="file" id="fileToUpload">
             </div>
             <div class="form__field">
-                <label for="description" class="label">Description</label>
+                <label for="description" class="label">DESCRIPTION</label><br/>
                 <textarea name="description" cols="25" rows="5"></textarea>
             </div>
+
             <div class="form__field">
-                <input type="submit" name="submit" value="Add post"">
+                <label for="tag" class="label">ADD SOME TAGS TO YOUR SHOT (seperated with , )</label><br/>
+                <input type="text" name="tag">
             </div>
+
+            <p>JPG, GIF or PNG. Snapshots are 400 × 300 pixels or 800 × 600 (for HiDPI displays). </p>
+
+            <div class="form__field">
+                <input class="btn_login" type="submit" name="submit" value="Add post"">
+            </div>
+
         </form>
-    </div>
-</div>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
