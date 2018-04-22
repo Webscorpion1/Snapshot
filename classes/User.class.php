@@ -93,7 +93,7 @@ include_once("Db.class.php");
 
      public function register(){
         //connection
-         $conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
+         $conn = new PDO('mysql:host=localhost:4000; dbname=snapshot', 'root', 'root');
          //$conn = new PDO("mysql:host=".['host'].['port'].";dbname=".['dbname'], ['username'], ['password']);
          //query (insert)
          $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password) values(:firstname,:lastname,:username,:email,:password)");
