@@ -6,6 +6,7 @@ checklogin();
 $post = Post::ShowPosts();
 
 
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -49,6 +50,10 @@ $post = Post::ShowPosts();
             <li><a href="addpost.php">Add post</a></li>
             <li><a href="account.php">Profile settings</a></li>
             <li><a href="logout.php">Log out</a></li>
+            <form action="" method="post">
+                <input type="text" id="bio" name="bio" placeholder="">
+                <input type="submit" name="submit" value="SEARCH">
+            </form>
         </ul>
     </nav>
 <div class="wrapper">
