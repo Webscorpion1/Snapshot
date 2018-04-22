@@ -10,7 +10,44 @@ include_once("Db.class.php");
     private $username;
     private $email;
     private $password;
+    private $avatar;
+    private $descr;
 
+     /**
+      * @return mixed
+      */
+     public function getDescr()
+     {
+         return $this->descr;
+     }
+
+     /**
+      * @param mixed $descr
+      */
+     public function setDescr($descr)
+     {
+         $this->descr = $descr;
+     }
+
+     /**
+      * @return mixed
+      */
+     public function getAvatar()
+     {
+         return $this->avatar;
+     }
+
+     /**
+      * @param mixed $avatar
+      */
+     public function setAvatar($avatar)
+     {
+         $this->avatar = $avatar;
+     }
+
+     /**
+      * @return mixed
+      */
 
     public function setFirstname($firstname)
      {
@@ -87,6 +124,7 @@ include_once("Db.class.php");
          return $this;
      }
      public function getPassword()
+
      {
          return $this->password;
      }
@@ -116,6 +154,18 @@ include_once("Db.class.php");
          session_start();
          $_SESSION['loggedin'] = true;
          header('Location: index.php');
+     }
+     public function editprofile(){
+         $userid = $_SESSION['userid'];
+
+         $conn = db::getInstance();
+         $statement = $conn->prepare("update users set avatar = :avatar, description = :descr, email = :email, password = :password WHERE  id = $userid");
+         $statement->bindParam(':avatar',$this->avatar);
+         $statement->bindParam(':descr',$this->descr);
+         $statement->bindParam(':email',$this->email);
+         $statement->bindParam(':password',$this->password);
+         $result = $statement->execute();
+         return $result;
      }
  }
  ?>
