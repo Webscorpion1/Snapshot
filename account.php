@@ -4,7 +4,8 @@ include_once("includes/functions.inc.php");
 
 checklogin();
 if (!empty ($_POST)) {
-        $user = new User();
+    $user = new User();
+    if($_POST['confirmation_pw'] == $user->getPassword()){}
     $user->setEmail($_POST['change_email']);
     $user->setAvatar($_POST['photo']);
     $user->setDescr($_POST['bio']);
@@ -85,7 +86,7 @@ if (!empty ($_POST)) {
     <!-- RETYPE PASSWORD -->
     <div>
         <label for="confirmation_pw">TYPE IN THE CURRENT PASSWORD TO VERIFY</label><br/>
-        <input style="background-color: rgba(247, 129, 34, 0.1);"" type="password" id="confirmation_pw" name="confirmation_pw" placeholder="">
+        <input style="background-color: rgba(247, 129, 34, 0.1);" type="password" id="confirmation_pw" name="confirmation_pw" placeholder="">
     </div>
 
     <div>
