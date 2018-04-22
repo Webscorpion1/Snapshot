@@ -110,7 +110,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
                 
                 <p class="center_align">Already have an account?</p>
                 <br/>
-                <a class="center_align" href="register.php">Login here.</a>
+                <a class="center_align" href="login.php">Login here.</a>
 
             </form>
     </div>
