@@ -4,15 +4,37 @@ include_once("includes/functions.inc.php");
 
 checklogin();
 if (!empty ($_POST)) {
-    $user = new User();
-    if($_POST['confirmation_pw'] == $user->getPassword()){}
-    $user->setEmail($_POST['change_email']);
-    $user->setAvatar($_POST['photo']);
-    $user->setDescr($_POST['bio']);
-    $user->setPassword($_POST['change_password']);
-    $user->editprofile();
-    header('Location: index.php');
+    $file = $_FILES['photo'];
+    $fileName = $_FILES['photo']['name'];
+    $fileTmpName = $_FILES['photo']['tmp_name'];
+    $fileSize = $_FILES['photo']['size'];
+    $fileError = $_FILES['photo']['error'];
+    $fileType = $_FILES['photo']['type'];
+    $fileExt = explode('.', $fileName);
+    $fileActualExt = strtolower(end($fileExt));
 
+    $allowed = array('jpg', 'jpeg', 'png');
+
+if (in_array($fileActualExt, $allowed)) {
+    if ($fileError === 0) {
+        if ($fileSize < 10000) {
+            $fileNameNew = uniqid('', true) . "." . $fileActualExt;
+            $fileDestination = 'uploads/' . $fileNameNew;
+            print_r($fileDestination);
+            move_uploaded_file($fileTmpName, $fileDestination);
+
+            $user = new User();
+            if ($_POST['confirmation_pw'] == $user->getPassword()) {
+            }
+            $user->setEmail($_POST['change_email']);
+            $user->setAvatar($fileDestination);
+            $user->setDescr($_POST['bio']);
+            $user->setPassword($_POST['change_password']);
+            $user->editprofile();
+            header('Location: index.php');
+        }
+    }
+}
 }
 
 ?><!DOCTYPE html>
@@ -56,13 +78,13 @@ if (!empty ($_POST)) {
         <li><a href="logout.php">Log out</a></li>
     </ul>
 </nav>
-<form action="" method="post">
+<form action="" method="post" enctype="multipart/form-data">
     <h1 form__title>Update account</h1>
 
     <!-- Profiel foto -->
     <div>
         <label for="photo">UPDATE PROFILE PICTURE</label><br/>
-        <input type="text" id="photo" name="photo" placeholder="">
+        <input type="file" class="fileToUpload" name="photo" placeholder="">
     </div>
 
     <!-- Bio/descriptie -->
@@ -90,7 +112,9 @@ if (!empty ($_POST)) {
     </div>
 
     <div>
-        <input type="submit" value="SAVE PROFILE" class="btn_login">
+        <input type="submit" name="submit" value="SAVE PROFILE" class="btn_login">
     </div>
-        </body>
+    </form>
+    </body>
+
         </html>

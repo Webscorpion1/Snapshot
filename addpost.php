@@ -111,7 +111,7 @@ if(! empty($_POST)) {
             </div>
             <div class="form__field">
                 <label for="file" class="label">UPLOAD PICTURE</label><br/>
-                <input type="file" name="file" id="fileToUpload">
+                <input type="file" name="file" class="fileToUpload">
             </div>
             <div class="form__field">
                 <label for="description" class="label">DESCRIPTION</label><br/>
