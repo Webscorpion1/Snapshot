@@ -40,11 +40,17 @@ $post = Post::ShowPosts();
 </head>
 
 <body>
-<a href="register.php">Register</a>
-<a href="login.php">Login</a>
-<a href="posts.php">Posts</a>
-<a href="account.php">Profile settings</a>
-<a href="addpost.php">Add post</a>
+    <nav>
+        <ul>
+            <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
+
+            <li><a class="active" href="index.php">Home</a></li>
+            <li><a href="posts.php">Posts</a></li>
+            <li><a href="addpost.php">Add post</a></li>
+            <li><a href="account.php">Profile settings</a></li>
+            <li><a href="logout.php">Log out</a></li>
+        </ul>
+    </nav>
 <div class="wrapper">
 <h1>Posts</h1>
 <div class="post-container">

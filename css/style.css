@@ -82,4 +82,40 @@ textarea:focus, input:focus, *:focus {
 .post img{
     width: 50px;
 }
+nav {
+    width: 100%;
+    box-shadow: 0px 0px 1px 1px #55555591;
+    padding: 10px 0px;
+}
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
 
+li {
+    float: left;
+}
+li>img {
+    margin-left: 90px;
+    margin-right: 50vw;
+    width: 60px;
+}
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+    border: 1px solid #55555500;;
+}
+
+li a:hover:not(.active) {
+    border: 1px solid #111;
+}
+
+.active {
+    background-color: var(--dark_purple);
+    color: white;
+}
