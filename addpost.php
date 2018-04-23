@@ -20,7 +20,7 @@ if(! empty($_POST)) {
 
     if (in_array($fileActualExt, $allowed)){
         if ($fileError === 0){
-            if ($fileSize < 10000){
+            if ($fileSize < 100000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = 'uploads/'.$fileNameNew;
                 print_r($fileDestination);
@@ -41,6 +41,13 @@ if(! empty($_POST)) {
                 $newPost->setLocation($location);
                 if ($newPost->AddPost() ){
                     $feedback = "Post has been saved.";
+                }
+                $string = $_POST['tag'];
+                $tags = explode(',' , $string);
+
+                foreach($tags as $t) {
+                    $newPost->setTag($t);
+                    $newPost->AddTags();
                 }
 
             } else{

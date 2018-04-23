@@ -4,7 +4,9 @@ include_once('classes/User.class.php');
 include_once("includes/functions.inc.php");
 checklogin();
 
-
+if(!empty($_GET)){
+    $post = Post::PostDetail();
+}
 
 ?><!doctype html>
 <html lang="en">
@@ -37,6 +39,8 @@ checklogin();
     <meta name="twitter:image" content="">
 </head>
 <body>
-
+<h1><?php echo $post[0]['post_title']?></h1>
+<p><?php echo $post[0]['description']?></p>
+<img src="<?php echo $post[0]['image']?>" alt="">
 </body>
 </html>

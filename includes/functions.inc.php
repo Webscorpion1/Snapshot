@@ -6,7 +6,7 @@ function canilogin( $username, $password){
     //$result = $conn->query($query);
     
 
-    $conn = new PDO('mysql:host=localhost:4000; dbname=snapshot', 'root', 'root');
+    $conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
 
     //$query = "select * FROM users WHERE email='".$conn->real_escape_string($username). "'";
     $statement = $conn->prepare("select * from users where email = :username");

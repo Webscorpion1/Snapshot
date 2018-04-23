@@ -3,10 +3,13 @@ include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
 include_once("includes/functions.inc.php");
 checklogin();
-$post = Post::ShowPosts();
 
-
-
+if (! empty($_POST)){
+    $post = Post::SearchPosts();
+}
+else{
+    $post = Post::ShowPosts();
+}
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -44,14 +47,13 @@ $post = Post::ShowPosts();
     <nav>
         <ul>
             <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-
             <li><a class="active" href="index.php">Home</a></li>
             <li><a href="posts.php">Posts</a></li>
             <li><a href="addpost.php">Add post</a></li>
             <li><a href="account.php">Profile settings</a></li>
             <li><a href="logout.php">Log out</a></li>
             <form action="" method="post">
-                <input type="text" id="bio" name="bio" placeholder="">
+                <input type="text" name="search" id="search" placeholder="">
                 <input type="submit" name="submit" value="SEARCH">
             </form>
         </ul>
@@ -60,12 +62,12 @@ $post = Post::ShowPosts();
 <h1>Posts</h1>
 <div class="post-container">
 <?php foreach($post as $p): ?>
-    <div class="post">
+    <a href="posts.php?post=<?php echo $p['id']; ?>"><div class="post">
         <div class="post_title"><p><?php echo $p['post_title'] ?></p></div>
         <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
         <div class="post_desc"><p><?php echo $p['description'] ?></p></div>
         <div class="post_date"><?php echo $p['post_date'] ?></div>
-    </div>
+    </div></a>
 <?php endforeach; ?>
 </div>
 </div>
@@ -73,9 +75,9 @@ $post = Post::ShowPosts();
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    var limit = 5;
+    var limit = 20;
     $('.button--load-more').on('click',function () {
-        limit = limit + 5;
+        limit = limit + 20;
         $.ajax({
             url:"ajax/post_load.php",
             method: "POST",
@@ -85,6 +87,18 @@ $post = Post::ShowPosts();
             }
         });
     });
+$('#search').keyup(function () {
+    $keyword = $('#search').val();
+    $.ajax({
+        url:"ajax/post_search.php",
+        method: "POST",
+        data:{keyword:$keyword},
+        success:function (data) {
+            $(".post-container").html(data);
+        }
+    });
+});
+
 </script>
 </html>
 
