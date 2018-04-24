@@ -58,7 +58,7 @@ else{
             </form>
         </ul>
     </nav>
-<div class="wrapper">
+<div class="wrapper_home">
 <h1>Posts</h1>
 <div class="post-container">
 <?php foreach($post as $p): ?>

@@ -20,7 +20,7 @@ if(isset($limit)){
 
         while($row = $result->fetch()) {
             $output.='<a href="posts.php?post="'.$row['id'].'">';
-            $output.=' <div class="post">';
+            $output.='<div class="post">';
             $output .='<div class="post_desc"><p>'. $row['post_title'].'</p></div>';
             $output .='<div class="post__picture"><img src="'. $row['picture'].'" alt=""></div>';
             $output .='<div class="post_desc"><p>'. $row['description'].'</p></div>';
