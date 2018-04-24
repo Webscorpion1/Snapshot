@@ -2,15 +2,15 @@
 
 include_once("includes/functions.inc.php");
 
-// get username and password from $_POST
+// get email and password from $_POST
 if(!empty($_POST)){
-    $username = $_POST['email'];
+    $email = $_POST['email'];
     $password = $_POST['password'];
 
     // check if a user can login (function)
-    if(canilogin($username, $password)){
+    if(canilogin($email, $password)){
         session_start();
-        $_SESSION['username'] = $username;
+        $_SESSION['email'] = $email;
         $_SESSION['loggedin'] = true; 
     //    setcookie("login", $cookieval, time()+60*60*24*7); //1 week
         header('Location: index.php');

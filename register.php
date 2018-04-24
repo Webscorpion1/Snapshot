@@ -77,7 +77,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
 					<input type="text" id="lastname" name="lastname" placeholder="Debelder" required>
 				</div>
                 <div>
-					<label for="username">USERNAME</label><br/>
+					<label for="email">USERNAME</label><br/>
 					<input type="text" id="username" name="username" placeholder="ZanicL3" required>
 				</div>
 				<div>
