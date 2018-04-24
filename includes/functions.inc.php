@@ -1,12 +1,14 @@
 <?php
+
+
 function canilogin( $email, $password){
     //OUDE MANIER WERKT
     //$conn = new mysqli("localhost:3310", "root", "root", "snapshot");
     //$query = "select * FROM users WHERE email='".$conn->real_escape_string($email). "'";
     //$result = $conn->query($query);
-    
 
-    $conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
+
+    $conn = db::getInstance();
 
     //$query = "select * FROM users WHERE email='".$conn->real_escape_string($email). "'";
     $statement = $conn->prepare("select * from users where email = :email");

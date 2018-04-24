@@ -4,12 +4,8 @@ include_once('classes/User.class.php');
 include_once("includes/functions.inc.php");
 checklogin();
 
-if (! empty($_POST)){
-    $post = Post::SearchPosts();
-}
-else{
-    $post = Post::ShowPosts();
-}
+$post = Post::ShowPosts();
+
 ?><!DOCTYPE html>
 <html lang="en">
 

@@ -1,5 +1,6 @@
-<?php 
+<?php
 
+include_once ("classes/Db.class.php");
 include_once("includes/functions.inc.php");
 
 // get email and password from $_POST
