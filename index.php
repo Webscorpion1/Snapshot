@@ -3,7 +3,6 @@ include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
 
 User::checklogin();
-
 $post = Post::ShowPosts();
 
 ?><!DOCTYPE html>
@@ -43,14 +42,14 @@ $post = Post::ShowPosts();
 <?php include_once("includes/nav.inc.php"); ?>
 <div class="wrapper">
 <h1>Posts</h1>
-<div class="post-container">
+<div class="container post-container">
 <?php foreach($post as $p): ?>
 
         <div class="post">
         <div class="post__title"><p><?php echo $p['post_title'] ?></p></div>
         <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
         <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
-            <div class="post__user"><p><?php echo $p['username'] ?></p></div>
+            <a href="profile.php?user=<?php echo $p['user_id']; ?>"><div class="post__user"><p><?php echo $p['username'] ?></p></div></a>
         <div class="post__date"><?php echo $p['post_date'] ?></div>
     </div>
     <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">Vieuw full post</button></a>
@@ -61,9 +60,9 @@ $post = Post::ShowPosts();
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    var limit = 20;
+    var limit = 40;
     $('.button--load-more').on('click',function () {
-        limit = limit + 20;
+        limit = limit + 40;
         $.ajax({
             url:"ajax/post_load.php",
             method: "POST",

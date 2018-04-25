@@ -179,5 +179,23 @@ include_once("Db.class.php");
          }
 
      }
+     public static function getUser(){
+         $conn = db::getInstance();
+         $id = $_GET['user'];
+         $query = "SELECT * FROM users WHERE id = '$id'";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+         return $result;
+     }
+     public function follow($user, $friend){
+         $conn = db::getInstance();
+         $statement = $conn->prepare("insert into friends (user1_id, user2_id) values(:user1,:user2)");
+         $statement->bindParam(':user1',$user);
+         $statement->bindParam(':user2',$friend);
+
+         $result = $statement->execute();
+         return $result;
+     }
  }
  ?>

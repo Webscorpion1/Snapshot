@@ -89,7 +89,7 @@ class Post {
         $userid = $_SESSION['userid'];
 
         $conn = db::getInstance();
-        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, users.username
+        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, posts.user_id, users.username
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
@@ -97,7 +97,7 @@ class Post {
                   ON posts.user_id = users.id 
                   WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
                   ORDER BY posts.post_date DESC
-                  LIMIT 20";
+                  LIMIT 40";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -127,28 +127,7 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    /*
-   public static function SearchPosts(){
-       $conn = db::getInstance();
-       $userid = $_SESSION['userid'];
-       $keyword = $_POST['search'];
-       $conn = db::getInstance();
-       $query = "SELECT posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, tags.tag_title
-                  FROM posts
-                  INNER JOIN friends 
-                  ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
-                  INNER JOIN tags
-                  ON posts.id = tags.post_id
-                  WHERE (friends.user1_id='$userid' OR friends.user2_id='$userid')
-                  AND tags.tag_title = '$keyword'
-                  ORDER BY posts.post_date DESC
-                  LIMIT 5";
-       $statement = $conn->prepare($query);
-       $statement->execute();
-       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-       return $result;
-   }
-    */
+
     public static function PostDetail(){
         $p_id = $_GET['post'];
         $conn = db::getInstance();

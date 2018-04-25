@@ -1,8 +1,8 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
-include_once("includes/functions.inc.php");
-checklogin();
+
+User::checklogin();
 $post = Post::ShowPosts();
 
 if(! empty($_POST)) {
@@ -97,18 +97,7 @@ if(! empty($_POST)) {
 </head>
 
 <body>
-<nav>
-    <ul>
-        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-
-        <li><a href="index.php">Home</a></li>
-        <li><a href="posts.php">Posts</a></li>
-        <li><a class="active" href="addpost.php">Add post</a></li>
-        <li><a href="account.php">Profile settings</a></li>
-        <li><a href="logout.php">Log out</a></li>
-    </ul>
-</nav>
-
+<?php include_once("includes/nav.inc.php"); ?>
 <form  action="" method="post" enctype="multipart/form-data">
 
             <h1 form__title>Add post</h1>
