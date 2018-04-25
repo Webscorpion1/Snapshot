@@ -124,8 +124,12 @@ if(! empty($_POST)) {
             <div class="form__field">
                 <input class="btn_login" type="submit" name="submit" value="Add post"">
             </div>
-
         </form>
+<?php  if(isset($feedback)): ?>
+    <div class="feedback">
+        <p><?php echo $feedback; ?></p>
+    </div>
+<?php endif; ?>
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
