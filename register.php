@@ -13,14 +13,14 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
         $user->setUsername($_POST['username']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
-
         if($user->register()){
             $user->login();
+
         }
     }
     else{
         $error_confirmation = "Passwords don't match";
-       // if no -> $error tonen
+
             }
         }
     }

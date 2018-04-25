@@ -89,10 +89,12 @@ class Post {
         $userid = $_SESSION['userid'];
 
         $conn = db::getInstance();
-        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date
+        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, users.username
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
+                  INNER JOIN users
+                  ON posts.user_id = users.id 
                   WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
                   ORDER BY posts.post_date DESC
                   LIMIT 20";

@@ -1,8 +1,8 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
-include_once("includes/functions.inc.php");
-checklogin();
+
+User::checklogin();
 
 $post = Post::ShowPosts();
 
@@ -40,30 +40,20 @@ $post = Post::ShowPosts();
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-            <li><a class="active" href="index.php">Home</a></li>
-            <li><a href="posts.php">Posts</a></li>
-            <li><a href="addpost.php">Add post</a></li>
-            <li><a href="account.php">Profile settings</a></li>
-            <li><a href="logout.php">Log out</a></li>
-            <form action="" method="post">
-                <input type="text" name="search" id="search" placeholder="">
-                <input type="submit" name="submit" value="SEARCH">
-            </form>
-        </ul>
-    </nav>
+<?php include_once("includes/nav.inc.php"); ?>
 <div class="wrapper">
 <h1>Posts</h1>
 <div class="post-container">
 <?php foreach($post as $p): ?>
-    <a href="posts.php?post=<?php echo $p['id']; ?>"><div class="post">
-        <div class="post_title"><p><?php echo $p['post_title'] ?></p></div>
+
+        <div class="post">
+        <div class="post__title"><p><?php echo $p['post_title'] ?></p></div>
         <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-        <div class="post_desc"><p><?php echo $p['description'] ?></p></div>
-        <div class="post_date"><?php echo $p['post_date'] ?></div>
-    </div></a>
+        <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
+            <div class="post__user"><p><?php echo $p['username'] ?></p></div>
+        <div class="post__date"><?php echo $p['post_date'] ?></div>
+    </div>
+    <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">Vieuw full post</button></a>
 <?php endforeach; ?>
 </div>
 </div>
