@@ -4,7 +4,12 @@ include_once('classes/User.class.php');
 
 User::checklogin();
 $post = Post::ShowPosts();
-
+if(count($post) < 1){
+    return $empty;
+}
+else{
+    return $full;
+}
 ?><!DOCTYPE html>
 <html lang="en">
 
