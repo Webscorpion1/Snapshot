@@ -5,10 +5,10 @@ include_once('classes/User.class.php');
 User::checklogin();
 $post = Post::ShowPosts();
 if(count($post) < 1){
-    return $empty;
+
 }
 else{
-    return $full;
+
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -49,6 +49,8 @@ else{
 <h1>Posts</h1>
 <div class="container post-container">
 <?php foreach($post as $p): ?>
+
+
 
         <div class="post">
         <div class="post__title"><p><?php echo $p['post_title'] ?></p></div>
