@@ -3,12 +3,9 @@ include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
 
 User::checklogin();
-$user = User::getUser();
-if(!empty($_POST['follow'])){
-    $u = new User();
-    $current_user = $_GET['user'];
-    $friend = $_SESSION['userid'];
-    $u->follow($current_user, $friend);
+if(!empty($_POST['final_delete'])){
+    Post::DeletePost($_GET['delete']);
+    $feedback = "Post has been deleted";
 }
 ?><!DOCTYPE html>
 <html lang="en">
@@ -45,17 +42,20 @@ if(!empty($_POST['follow'])){
 
 <body>
 <?php include_once("includes/nav.inc.php"); ?>
+
 <div class="wrapper">
-    <h1>Profile</h1>
+    <?php echo $_GET['delete'] ?>
+    <?php if(isset($feedback)): ?>
+        <p><?php echo $feedback ?></p>
+    <?php endif; ?>
+    <h2>Are you sure you want to delete your post?</h2>
     <div class="container">
-        <h2><?php echo $user[0]['firstname'] ?>&nbsp;<?php echo $user[0]['lastname'] ?></h2>
-        <p><?php echo $user[0]['avatar'] ?></p>
-        <p><?php echo $user[0]['description'] ?></p>
-        <?php if($_SESSION['userid'] !== $_GET['user'] ): ?>
         <form action="" method="post">
-                <input type="submit" value="Follow" name="follow">
+            <input type="submit" value="Yes" name="final_delete">
         </form>
-        <?php endif; ?>
+        <form action="index.php" method="post">
+            <input type="submit" value="no">
+        </form>
     </div>
 </div>
 </body>

@@ -20,7 +20,7 @@ if(! empty($_POST)) {
 
     if (in_array($fileActualExt, $allowed)){
         if ($fileError === 0){
-            if ($fileSize < 100000){
+            if ($fileSize < 10000000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = 'uploads/'.$fileNameNew;
                 print_r($fileDestination);
@@ -101,6 +101,11 @@ if(! empty($_POST)) {
 <form  action="" method="post" enctype="multipart/form-data">
 
             <h1 form__title>Add post</h1>
+    <?php  if(isset($feedback)): ?>
+        <div class="feedback">
+            <p><?php echo $feedback; ?></p>
+        </div>
+    <?php endif; ?>
             <div class="form__field">
                 <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
                 <input type="text" name="title">
@@ -125,11 +130,7 @@ if(! empty($_POST)) {
                 <input class="btn_login" type="submit" name="submit" value="Add post"">
             </div>
         </form>
-<?php  if(isset($feedback)): ?>
-    <div class="feedback">
-        <p><?php echo $feedback; ?></p>
-    </div>
-<?php endif; ?>
+
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

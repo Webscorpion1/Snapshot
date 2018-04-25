@@ -193,7 +193,6 @@ include_once("Db.class.php");
          $statement = $conn->prepare("insert into friends (user1_id, user2_id) values(:user1,:user2)");
          $statement->bindParam(':user1',$user);
          $statement->bindParam(':user2',$friend);
-
          $result = $statement->execute();
          return $result;
      }

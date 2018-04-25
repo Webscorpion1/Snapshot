@@ -4,12 +4,14 @@ include_once('classes/User.class.php');
 
 User::checklogin();
 $post = Post::ShowPosts();
+
 if(count($post) < 1){
 
 }
 else{
 
 }
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -46,6 +48,7 @@ else{
 <body>
 <?php include_once("includes/nav.inc.php"); ?>
 <div class="wrapper">
+
 <h1>Posts</h1>
 <div class="container post-container">
 <?php foreach($post as $p): ?>
@@ -58,8 +61,15 @@ else{
         <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
             <a href="profile.php?user=<?php echo $p['user_id']; ?>"><div class="post__user"><p><?php echo $p['username'] ?></p></div></a>
         <div class="post__date"><?php echo $p['post_date'] ?></div>
+
     </div>
-    <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">Vieuw full post</button></a>
+    <?php if($_SESSION['userid'] == $p['user_id']): ?>
+        <form action="" method="post">
+            <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="Edit" name="edit"></a>
+            <a href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="button" value="Delete" name="delete"></a>
+        </form>
+    <?php endif; ?>
+    <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">View full post</button></a>
 <?php endforeach; ?>
 </div>
 </div>
