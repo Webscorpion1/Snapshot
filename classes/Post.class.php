@@ -137,6 +137,13 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public static function DeleteTags($delete){
+        $conn = db::getInstance();
+        $query = "DELETE FROM tags WHERE post_id=:id";
+        $statement = $conn->prepare($query);
+        $statement->bindValue(':id',$delete,PDO::PARAM_INT);
+        $statement->execute();
+    }
     public static function DeletePost($delete){
         $conn = db::getInstance();
         $query = "DELETE FROM posts WHERE id=:id";
@@ -145,4 +152,5 @@ class Post {
         $statement->execute();
 
     }
+
 }

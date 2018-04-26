@@ -4,6 +4,7 @@ include_once('classes/User.class.php');
 
 User::checklogin();
 if(!empty($_POST['final_delete'])){
+    Post::DeleteTags($_GET['delete']);
     Post::DeletePost($_GET['delete']);
     $feedback = "Post has been deleted";
 }
