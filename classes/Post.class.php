@@ -118,11 +118,19 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    public function AddTags(){
+    public static function getLastId(){
         $conn = db::getInstance();
-        $query = "insert into tags (tag_title, post_id) values (:tag_title, LAST_INSERT_ID())";
+        $query = "SELECT from posts LAST_INSERT_ID";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        return $conn->lastInsertId();;
+    }
+    public function AddTags($postid){
+        $conn = db::getInstance();
+        $query = "insert into tags (tag_title, post_id) values (:tag_title, :post_id)";
         $statement = $conn->prepare($query);
         $statement->bindValue(':tag_title',$this->getTag());
+        $statement->bindValue(':post_id',$postid);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;

@@ -25,7 +25,7 @@ if(! empty($_POST)) {
                 $fileDestination = 'uploads/'.$fileNameNew;
                 print_r($fileDestination);
                 move_uploaded_file($fileTmpName, $fileDestination);
-
+                $feedback = "Post has been saved.";
                 $title = $_POST['title'];
                 $desc = $_POST['description'];
                 $date = date("Y-m-d");
@@ -39,15 +39,16 @@ if(! empty($_POST)) {
                 $newPost->setDate($date);
                 $newPost->setUserId($userid);
                 $newPost->setLocation($location);
-                if ($newPost->AddPost() ){
-                    $feedback = "Post has been saved.";
-                }
+                $newPost->AddPost();
+                $postId = Post::getLastId();
+
+
                 $string = $_POST['tag'];
                 $tags = explode(',' , $string);
 
                 foreach($tags as $t) {
                     $newPost->setTag($t);
-                    $newPost->AddTags();
+                    $newPost->AddTags($postId);
                 }
 
             } else{
