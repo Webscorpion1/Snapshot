@@ -49,6 +49,7 @@ if(!empty($_POST['final_delete'])){
     <?php if(isset($feedback)): ?>
         <p><?php echo $feedback ?></p>
     <?php endif; ?>
+    <?php if(empty($_POST['final_delete'])): ?>
     <h2>Are you sure you want to delete your post?</h2>
     <div class="container">
         <form action="" method="post">
@@ -58,6 +59,7 @@ if(!empty($_POST['final_delete'])){
             <input type="submit" value="no">
         </form>
     </div>
+    <?php endif; ?>
 </div>
 </body>
 </html>

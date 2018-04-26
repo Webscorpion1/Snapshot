@@ -196,5 +196,24 @@ include_once("Db.class.php");
          $result = $statement->execute();
          return $result;
      }
+     public static function checkFollow($user, $friend){
+         $conn = db::getInstance();
+         $query = "SELECT * FROM friends WHERE user1_id = $user AND user2_id = $friend";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+         $count =  $statement->rowCount();
+
+         if ( $count > 0) {
+             return true;
+         }else{
+             return false;
+         }
+     }
+     public static function unFollow($user, $friend){
+         $conn = db::getInstance();
+         $query = "DELETE FROM friends WHERE user1_id = $user AND user2_id = $friend";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+     }
  }
  ?>

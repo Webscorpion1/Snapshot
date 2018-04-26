@@ -4,12 +4,22 @@ include_once('classes/User.class.php');
 
 User::checklogin();
 $user = User::getUser();
+if(!empty($_POST['unfollow'])){
+    $u = new User();
+    $current_user = $_SESSION['userid'];
+    $friend = $_GET['user'];
+    $u->unFollow($current_user, $friend);
+
+}
 if(!empty($_POST['follow'])){
     $u = new User();
-    $current_user = $_GET['user'];
-    $friend = $_SESSION['userid'];
+    $current_user = $_SESSION['userid'];
+    $friend = $_GET['user'];
     $u->follow($current_user, $friend);
+
 }
+
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -51,11 +61,19 @@ if(!empty($_POST['follow'])){
         <h2><?php echo $user[0]['firstname'] ?>&nbsp;<?php echo $user[0]['lastname'] ?></h2>
         <p><?php echo $user[0]['avatar'] ?></p>
         <p><?php echo $user[0]['description'] ?></p>
-        <?php if($_SESSION['userid'] !== $_GET['user'] ): ?>
+        <div class="follow">
+        <?php $checkfollow = User::checkFollow($_SESSION['userid'], $_GET['user']); ?>
+        <?php if($_SESSION['userid'] !== $_GET['user'] && $checkfollow == false): ?>
         <form action="" method="post">
-                <input type="submit" value="Follow" name="follow">
+            <input type="submit" value="Follow" name="follow">
         </form>
         <?php endif; ?>
+        <?php if($_SESSION['userid'] !== $_GET['user'] && $checkfollow == true): ?>
+            <form action="" method="post">
+                <input type="submit" value="unfollow" name="unfollow">
+            </form>
+        <?php endif; ?>
+        </div>
     </div>
 </div>
 </body>
