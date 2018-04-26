@@ -152,5 +152,26 @@ class Post {
         $statement->execute();
 
     }
+    public static function editPost($id, $title, $desc){
+        $conn = db::getInstance();
+        $query = "UPDATE posts 
+                  SET post_title = :title,
+                      description = :description  
+                  WHERE id=:id";
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':id',$id);
+        $statement->bindParam(':title',$title);
+        $statement->bindParam(':description',$desc);
+        $statement->execute();
+    }
+    public static function showEditPost($id){
+        $conn = db::getInstance();
+        $query = "SELECT * FROM posts WHERE id = :id";
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':id',$id);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 }
