@@ -85,7 +85,7 @@ textarea:focus, input:focus, *:focus {
 nav {
     width: 100%;
     box-shadow: 0px 0px 1px 1px #55555591;
-    padding: 10px 0px;
+    padding: 30px 0px;
 }
 ul {
     list-style-type: none;
@@ -99,7 +99,7 @@ li {
 }
 li>img {
     margin-left: 90px;
-    margin-right: 50vw;
+    margin-right: 20vw;
     width: 60px;
 }
 li a {
@@ -119,5 +119,17 @@ li a:hover:not(.active) {
     background-color: var(--dark_purple);
     color: white;
 }
+.nav_search {
+    width: 30%;
+    max-width: 460px;
+    margin: 0;
+    float: left;
+    padding: 0px;
+    margin-right: 8vw;
+}
 
-
+.post_container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 50px;
+}

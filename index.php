@@ -50,7 +50,7 @@ else{
 <div class="wrapper">
 
 <h1>Posts</h1>
-<div class="container post-container">
+<div class="container, post_container">
 <?php foreach($post as $p): ?>
 
 
@@ -61,16 +61,16 @@ else{
         <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
             <a href="profile.php?user=<?php echo $p['user_id']; ?>"><div class="post__user"><p><?php echo $p['username'] ?></p></div></a>
         <div class="post__date"><?php echo $p['post_date'] ?></div>
-
+            <?php if($_SESSION['userid'] == $p['user_id']): ?>
+                <form action="" method="post">
+                    <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="Edit" name="edit"></a>
+                    <a href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="button" value="Delete" name="delete"></a>
+                </form>
+            <?php endif; ?>
+            <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">View full post</button></a>
+            <?php endforeach; ?>
     </div>
-    <?php if($_SESSION['userid'] == $p['user_id']): ?>
-        <form action="" method="post">
-            <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="Edit" name="edit"></a>
-            <a href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="button" value="Delete" name="delete"></a>
-        </form>
-    <?php endif; ?>
-    <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">View full post</button></a>
-<?php endforeach; ?>
+
 </div>
 </div>
 <input type="button" name="load-more" class="button button--load-more" value="load more">
