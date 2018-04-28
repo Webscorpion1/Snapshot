@@ -68,8 +68,9 @@ else{
                 </form>
             <?php endif; ?>
             <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">View full post</button></a>
+        </div>
             <?php endforeach; ?>
-    </div>
+
 
 </div>
 </div>
