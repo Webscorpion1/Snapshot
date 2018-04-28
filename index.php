@@ -1,15 +1,17 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
-include_once("includes/functions.inc.php");
-checklogin();
 
-if (! empty($_POST)){
-    $post = Post::SearchPosts();
+User::checklogin();
+$post = Post::ShowPosts();
+
+if(count($post) < 1){
+
 }
 else{
-    $post = Post::ShowPosts();
+
 }
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -44,30 +46,30 @@ else{
 </head>
 
 <body>
-    <nav>
-        <ul>
-            <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-            <li><a class="active" href="index.php">Home</a></li>
-            <li><a href="posts.php">Posts</a></li>
-            <li><a href="addpost.php">Add post</a></li>
-            <li><a href="account.php">Profile settings</a></li>
-            <li><a href="logout.php">Log out</a></li>
-            <form action="" method="post">
-                <input type="text" name="search" id="search" placeholder="">
-                <input type="submit" name="submit" value="SEARCH">
-            </form>
-        </ul>
-    </nav>
-<div class="wrapper_home">
+<?php include_once("includes/nav.inc.php"); ?>
+<div class="wrapper">
+
 <h1>Posts</h1>
-<div class="post-container">
+<div class="container post-container">
 <?php foreach($post as $p): ?>
-    <a href="posts.php?post=<?php echo $p['id']; ?>"><div class="post">
-        <div class="post_title"><p><?php echo $p['post_title'] ?></p></div>
+
+
+
+        <div class="post">
+        <div class="post__title"><p><?php echo $p['post_title'] ?></p></div>
         <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-        <div class="post_desc"><p><?php echo $p['description'] ?></p></div>
-        <div class="post_date"><?php echo $p['post_date'] ?></div>
-    </div></a>
+        <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
+            <a href="profile.php?user=<?php echo $p['user_id']; ?>"><div class="post__user"><p><?php echo $p['username'] ?></p></div></a>
+        <div class="post__date"><?php echo $p['post_date'] ?></div>
+
+    </div>
+    <?php if($_SESSION['userid'] == $p['user_id']): ?>
+        <form action="" method="post">
+            <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="Edit" name="edit"></a>
+            <a href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="button" value="Delete" name="delete"></a>
+        </form>
+    <?php endif; ?>
+    <a href="posts.php?post=<?php echo $p['id']; ?>"><button class="button post__button">View full post</button></a>
 <?php endforeach; ?>
 </div>
 </div>
@@ -75,9 +77,9 @@ else{
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
-    var limit = 20;
+    var limit = 40;
     $('.button--load-more').on('click',function () {
-        limit = limit + 20;
+        limit = limit + 40;
         $.ajax({
             url:"ajax/post_load.php",
             method: "POST",

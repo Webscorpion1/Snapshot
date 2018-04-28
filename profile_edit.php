@@ -1,8 +1,8 @@
 <?php
 include_once("classes/User.class.php");
-include_once("includes/functions.inc.php");
 
-checklogin();
+
+User::checklogin();
 if (!empty ($_POST)) {
     $file = $_FILES['photo'];
     $fileName = $_FILES['photo']['name'];
@@ -67,17 +67,7 @@ if (in_array($fileActualExt, $allowed)) {
     <meta name="twitter:image" content="">
 
 </head>
-<nav>
-    <ul>
-        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-
-        <li><a href="index.php">Home</a></li>
-        <li><a href="posts.php">Posts</a></li>
-        <li><a href="addpost.php">Add post</a></li>
-        <li><a class="active" href="account.php">Profile settings</a></li>
-        <li><a href="logout.php">Log out</a></li>
-    </ul>
-</nav>
+<?php include_once("includes/nav.inc.php"); ?>
 <form action="" method="post" enctype="multipart/form-data">
     <h1 form__title>Update account</h1>
 

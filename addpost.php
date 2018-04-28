@@ -1,8 +1,8 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
-include_once("includes/functions.inc.php");
-checklogin();
+
+User::checklogin();
 $post = Post::ShowPosts();
 
 if(! empty($_POST)) {
@@ -20,7 +20,7 @@ if(! empty($_POST)) {
 
     if (in_array($fileActualExt, $allowed)){
         if ($fileError === 0){
-            if ($fileSize < 100000){
+            if ($fileSize < 10000000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = 'uploads/'.$fileNameNew;
                 print_r($fileDestination);
@@ -98,21 +98,15 @@ if(! empty($_POST)) {
 </head>
 
 <body>
-<nav>
-    <ul>
-        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-
-        <li><a href="index.php">Home</a></li>
-        <li><a href="posts.php">Posts</a></li>
-        <li><a class="active" href="addpost.php">Add post</a></li>
-        <li><a href="account.php">Profile settings</a></li>
-        <li><a href="logout.php">Log out</a></li>
-    </ul>
-</nav>
-
+<?php include_once("includes/nav.inc.php"); ?>
 <form  action="" method="post" enctype="multipart/form-data">
 
             <h1 form__title>Add post</h1>
+    <?php  if(isset($feedback)): ?>
+        <div class="feedback">
+            <p><?php echo $feedback; ?></p>
+        </div>
+    <?php endif; ?>
             <div class="form__field">
                 <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
                 <input type="text" name="title">
@@ -136,8 +130,8 @@ if(! empty($_POST)) {
             <div class="form__field">
                 <input class="btn_login" type="submit" name="submit" value="Add post"">
             </div>
-
         </form>
+
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

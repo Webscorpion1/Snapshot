@@ -1,8 +1,8 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
-include_once("includes/functions.inc.php");
-checklogin();
+
+User::checklogin();
 
 if(!empty($_GET)){
     $post = Post::PostDetail();
