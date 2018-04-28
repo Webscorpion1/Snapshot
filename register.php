@@ -100,7 +100,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
                 <?php endif; ?>
                 
 				<div>
-                    <input type="submit" value="REGISTER" class="btn_login">
+                    <input type="submit" value="REGISTER" class="btn_style">
                 </div>
                 
                 <p class="center_align">Already have an account?</p>

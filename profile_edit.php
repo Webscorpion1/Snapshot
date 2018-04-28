@@ -102,7 +102,7 @@ if (in_array($fileActualExt, $allowed)) {
     </div>
 
     <div>
-        <input type="submit" name="submit" value="SAVE PROFILE" class="btn_login">
+        <input type="submit" name="submit" value="SAVE PROFILE" class="btn_style">
     </div>
     </form>
     </body>

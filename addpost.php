@@ -128,7 +128,7 @@ if(! empty($_POST)) {
             <p>JPG, GIF or PNG. Snapshots are 400 × 300 pixels or 800 × 600 (for HiDPI displays). </p>
 
             <div class="form__field">
-                <input class="btn_login" type="submit" name="submit" value="Add post"">
+                <input class="btn_style" type="submit" name="submit" value="Add post"">
             </div>
         </form>
 

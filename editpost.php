@@ -55,14 +55,14 @@ if(!empty($_POST['edit_post'])){
         <div class="container">
             <form action="" method="post">
                 <div>
-                    <label for="title">TITLE</label><br/>
+                    <label for="title">CHANGE TITLE TO</label><br/>
                     <input type="text" id="description" name="title" value="<?php echo $editpost[0]['post_title'] ?>" placeholder="">
                 </div>
                 <div>
-                    <label for="description">DESCRIPTION</label><br/>
+                    <label for="description">CHANGE DESCRIPTION TO</label><br/>
                     <input type="text" id="description" name="description" value="<?php echo $editpost[0]['description'] ?>" placeholder="">
                 </div>
-                <input type="submit" value="Edit post" name="edit_post">
+                <input class="btn_style" type="submit" value="Edit post" name="edit_post">
             </form>
         </div>
 

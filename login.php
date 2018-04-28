@@ -83,7 +83,7 @@ if(!empty($_POST)){
 
                 
 				<div>
-                    <input type="submit" value="LOG IN" class="btn_login">
+                    <input type="submit" value="LOG IN" class="btn_style">
                     <!-- REMEMBER ME - kunnen we later nog toevoegen? 
                     <input type="checkbox" id="rememberMe"><label for="rememberMe" class="label__inline">Remember me</label>
                     -->
