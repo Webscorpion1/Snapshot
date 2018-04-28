@@ -173,7 +173,9 @@ li a:hover:not(.active) {
     margin: 50px auto;
 }
 
-
+.post__details{
+    line-height: 1.3em;
+}
 
 
 

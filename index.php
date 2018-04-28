@@ -52,17 +52,12 @@ else{
 <h1>Viewing all Posts</h1>
 <div class="post_container">
 <?php foreach($post as $p): ?>
-
-
-
         <div class="post">
-            <div class="post__title"><h1>Title: <?php echo $p['post_title'] ?></h1></div>
-            <div class="post__user"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
-            <div class="post__date"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
-
-
+            <div class="post__title"><h1><?php echo $p['post_title'] ?></h1></div>
+            <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
+            <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
             <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-            <div class="post__desc"><p><span>Description:</span> <?php echo $p['description'] ?></p></div>
+            <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
             <?php if($_SESSION['userid'] == $p['user_id']): ?>
                 <form class="post_form" action="" method="post">
                     <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="&#xf044; Edit" style="font-family:Arial, FontAwesome" name="edit"></a>
