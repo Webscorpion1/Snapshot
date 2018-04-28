@@ -1,7 +1,8 @@
 <?php
 
 include_once("Db.class.php");
-
+//das hier voor die DB connectie met arrays ma sander moet ge ff manueel aanpassen werkt ni juist 100% en wij hebbn da nie echt nodig tbh
+//include_once("../settings/settings.php");
 
  class User {
     private $firstname;
@@ -12,26 +13,41 @@ include_once("Db.class.php");
     private $avatar;
     private $descr;
 
+     /**
+      * @return mixed
+      */
      public function getDescr()
      {
          return $this->descr;
      }
 
+     /**
+      * @param mixed $descr
+      */
      public function setDescr($descr)
      {
          $this->descr = $descr;
      }
 
+     /**
+      * @return mixed
+      */
      public function getAvatar()
      {
          return $this->avatar;
      }
 
-
+     /**
+      * @param mixed $avatar
+      */
      public function setAvatar($avatar)
      {
          $this->avatar = $avatar;
      }
+
+     /**
+      * @return mixed
+      */
 
     public function setFirstname($firstname)
      {
@@ -102,7 +118,7 @@ include_once("Db.class.php");
          if(strlen($password) < 8){
              throw  new Exception("Password must be at least 8 characters long.");
          }
-
+         //encrypten van het password
          $hash = password_hash($password,PASSWORD_DEFAULT);// standaard 10 keer als je geen options mee geeft
          $this->password = $hash;
          return $this;
@@ -114,19 +130,25 @@ include_once("Db.class.php");
      }
 
      public function register(){
-
-         $conn = db::getInstance();
-
+        //connection
+         $conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
+         //$conn = new PDO("mysql:host=".['host'].['port'].";dbname=".['dbname'], ['username'], ['password']);
+         //query (insert)
          $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password) values(:firstname,:lastname,:username,:email,:password)");
          $statement->bindParam(':firstname',$this->firstname);
          $statement->bindParam(':lastname',$this->lastname);
          $statement->bindParam(':username',$this->username);
          $statement->bindParam(':email',$this->email);
          $statement->bindParam(':password',$this->password);
+         //execute
          $result = $statement->execute();
+         //return true/false
          return $result;
      }
-
+     /*
+      * start a new session and redirect a user
+      * @return: null
+      */
      public function login()
      {
          session_start();
@@ -142,57 +164,6 @@ include_once("Db.class.php");
          $statement->bindParam(':descr',$this->descr);
          $statement->bindParam(':email',$this->email);
          $statement->bindParam(':password',$this->password);
-         $result = $statement->execute();
-         return $result;
-     }
-     public static function canilogin( $email, $password){
-
-         $conn = db::getInstance();
-         $statement = $conn->prepare("select * from users where email = :email");
-         $statement->bindValue(':email', $email);
-         $statement->execute();
-         $result = $statement;
-
-
-
-         if($result->rowCount() != 1){
-             return false;
-         }
-         $user = $result->fetch(PDO::FETCH_ASSOC);
-         if(password_verify($password, $user['password'])){
-             session_start();
-             $_SESSION['userid']= $user['id'];
-             return true;
-         }
-         else{
-             return false;
-         }
-
-     }
-
-     public static function checklogin()
-     {
-
-         session_start();
-         if (!isset($_SESSION['loggedin'])) {
-             header('Location: login.php');
-         }
-
-     }
-     public static function getUser(){
-         $conn = db::getInstance();
-         $id = $_GET['user'];
-         $query = "SELECT * FROM users WHERE id = '$id'";
-         $statement = $conn->prepare($query);
-         $statement->execute();
-         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-         return $result;
-     }
-     public function follow($user, $friend){
-         $conn = db::getInstance();
-         $statement = $conn->prepare("insert into friends (user1_id, user2_id) values(:user1,:user2)");
-         $statement->bindParam(':user1',$user);
-         $statement->bindParam(':user2',$friend);
          $result = $statement->execute();
          return $result;
      }

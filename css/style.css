@@ -120,7 +120,6 @@ li a:hover:not(.active) {
     color: white;
 }
 
-<<<<<<< HEAD
 .wrapper_home {
     max-width: 960px;
     display: block;
@@ -133,6 +132,3 @@ li a:hover:not(.active) {
     grid-auto-rows: minmax(150px, auto);
     grid-gap: 40px;
 }
-=======
-
->>>>>>> 7afab69b74768313cb331c6d990e8d64bf3df70d
