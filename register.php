@@ -2,9 +2,7 @@
 
 include_once("classes/User.class.php");
 try{
-    
 
-// Alleen saven in DB alles alle velden ingevuld zijn
 if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POST['username']) && !empty ($_POST['email']) && !empty ($_POST['password'])){
     if($_POST['password'] == $_POST['password_confirmation']) {
         $user = new User();
@@ -13,14 +11,14 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
         $user->setUsername($_POST['username']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
-
         if($user->register()){
             $user->login();
+
         }
     }
     else{
         $error_confirmation = "Passwords don't match";
-       // if no -> $error tonen
+
             }
         }
     }
@@ -84,9 +82,6 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
 					<label for="email">EMAIL</label><br/>
 					<input type="email" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
 				</div>
-                
-                <!-- PW matchen ni error mssg -->
-               
 
 				<div>
 					<label for="password">PASSWORD</label><br/>
