@@ -1,7 +1,8 @@
 <?php
 
 include_once("Db.class.php");
-
+//das hier voor die DB connectie met arrays ma sander moet ge ff manueel aanpassen werkt ni juist 100% en wij hebbn da nie echt nodig tbh
+//include_once("../settings/settings.php");
 
  class User {
     private $firstname;
@@ -12,26 +13,41 @@ include_once("Db.class.php");
     private $avatar;
     private $descr;
 
+     /**
+      * @return mixed
+      */
      public function getDescr()
      {
          return $this->descr;
      }
 
+     /**
+      * @param mixed $descr
+      */
      public function setDescr($descr)
      {
          $this->descr = $descr;
      }
 
+     /**
+      * @return mixed
+      */
      public function getAvatar()
      {
          return $this->avatar;
      }
 
-
+     /**
+      * @param mixed $avatar
+      */
      public function setAvatar($avatar)
      {
          $this->avatar = $avatar;
      }
+
+     /**
+      * @return mixed
+      */
 
     public function setFirstname($firstname)
      {
@@ -102,7 +118,7 @@ include_once("Db.class.php");
          if(strlen($password) < 8){
              throw  new Exception("Password must be at least 8 characters long.");
          }
-
+         //encrypten van het password
          $hash = password_hash($password,PASSWORD_DEFAULT);// standaard 10 keer als je geen options mee geeft
          $this->password = $hash;
          return $this;
@@ -114,19 +130,25 @@ include_once("Db.class.php");
      }
 
      public function register(){
-
-         $conn = db::getInstance();
-
+        //connection
+         $conn = new PDO('mysql:host=localhost; dbname=snapshot', 'root', 'root');
+         //$conn = new PDO("mysql:host=".['host'].['port'].";dbname=".['dbname'], ['username'], ['password']);
+         //query (insert)
          $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password) values(:firstname,:lastname,:username,:email,:password)");
          $statement->bindParam(':firstname',$this->firstname);
          $statement->bindParam(':lastname',$this->lastname);
          $statement->bindParam(':username',$this->username);
          $statement->bindParam(':email',$this->email);
          $statement->bindParam(':password',$this->password);
+         //execute
          $result = $statement->execute();
+         //return true/false
          return $result;
      }
-
+     /*
+      * start a new session and redirect a user
+      * @return: null
+      */
      public function login()
      {
          session_start();
@@ -145,6 +167,7 @@ include_once("Db.class.php");
          $result = $statement->execute();
          return $result;
      }
+<<<<<<< HEAD
      public static function canilogin( $email, $password){
 
          $conn = db::getInstance();
@@ -215,5 +238,7 @@ include_once("Db.class.php");
          $statement = $conn->prepare($query);
          $statement->execute();
      }
+=======
+>>>>>>> 30a76b54d02349a6e1c9982524169be64812fac8
  }
  ?>

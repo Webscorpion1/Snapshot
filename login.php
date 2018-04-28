@@ -1,23 +1,23 @@
-<?php
+<?php 
 
-include_once ("classes/Db.class.php");
-include_once ("classes/User.class.php");
+include_once("includes/functions.inc.php");
 
-
+// get email and password from $_POST
 if(!empty($_POST)){
     $email = $_POST['email'];
     $password = $_POST['password'];
 
-
-    if(User::canilogin($email, $password)){
+    // check if a user can login (function)
+    if(canilogin($email, $password)){
         session_start();
         $_SESSION['email'] = $email;
-        $_SESSION['loggedin'] = true;
+        $_SESSION['loggedin'] = true; 
+    //    setcookie("login", $cookieval, time()+60*60*24*7); //1 week
         header('Location: index.php');
     }
     else{
         $error = true;
-
+    // if no -> $error tonen
     }
 }
 

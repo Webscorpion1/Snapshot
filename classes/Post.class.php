@@ -89,15 +89,13 @@ class Post {
         $userid = $_SESSION['userid'];
 
         $conn = db::getInstance();
-        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, posts.user_id, users.username
+        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
-                  INNER JOIN users
-                  ON posts.user_id = users.id 
                   WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
                   ORDER BY posts.post_date DESC
-                  LIMIT 40";
+                  LIMIT 20";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
@@ -135,7 +133,28 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-
+    /*
+   public static function SearchPosts(){
+       $conn = db::getInstance();
+       $userid = $_SESSION['userid'];
+       $keyword = $_POST['search'];
+       $conn = db::getInstance();
+       $query = "SELECT posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, tags.tag_title
+                  FROM posts
+                  INNER JOIN friends 
+                  ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
+                  INNER JOIN tags
+                  ON posts.id = tags.post_id
+                  WHERE (friends.user1_id='$userid' OR friends.user2_id='$userid')
+                  AND tags.tag_title = '$keyword'
+                  ORDER BY posts.post_date DESC
+                  LIMIT 5";
+       $statement = $conn->prepare($query);
+       $statement->execute();
+       $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+       return $result;
+   }
+    */
     public static function PostDetail(){
         $p_id = $_GET['post'];
         $conn = db::getInstance();
@@ -145,6 +164,7 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+<<<<<<< HEAD
     public static function DeleteTags($delete){
         $conn = db::getInstance();
         $query = "DELETE FROM tags WHERE post_id=:id";
@@ -182,4 +202,6 @@ class Post {
         return $result;
     }
 
+=======
+>>>>>>> 30a76b54d02349a6e1c9982524169be64812fac8
 }
