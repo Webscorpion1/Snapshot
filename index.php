@@ -46,7 +46,21 @@ else{
 </head>
 
 <body>
-<?php include_once("includes/nav.inc.php"); ?>
+<nav>
+    <ul>
+
+        <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
+        <form class="nav_search" action="" method="post">
+            <input type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
+        </form>
+        <li><a class="active" href="index.php">Home</a></li>
+        <li><a href="addpost.php">Add post</a></li>
+        <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
+        <li><a href="logout.php">Log out</a></li>
+
+    </ul>
+</nav>
+
 <div class="wrapper">
 
 <h1>Viewing all Posts</h1>
@@ -78,7 +92,7 @@ else{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     var limit = 40;
-    $('.button--load-more').on('click',function () {
+    $('.btn_loadmore').on('click',function () {
         limit = limit + 40;
         $.ajax({
             url:"ajax/post_load.php",
