@@ -57,9 +57,7 @@ if(!empty($_GET)){
 
     <h1><?php echo $post[0]['post_title']?></h1>
     <p><?php echo $post[0]['description']?></p>
-    <img src="<?php echo $post[0]['image']?>" alt="">
-
-
+    <img src="<?php echo $post[0]['picture'] ?>" alt="">
 </div>
 </body>
 </html>
