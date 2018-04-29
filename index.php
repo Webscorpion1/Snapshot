@@ -83,7 +83,7 @@ else{
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
     var limit = 40;
-    $('.button--load-more').on('click',function () {
+    $('.btn_loadmore').on('click',function () {
         limit = limit + 40;
         $.ajax({
             url:"ajax/post_load.php",
