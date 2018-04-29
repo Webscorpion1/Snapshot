@@ -55,9 +55,13 @@ if(!empty($_GET)){
 </nav>
 <div class="wrapper">
 
-    <h1><?php echo $post[0]['post_title']?></h1>
-    <p><?php echo $post[0]['description']?></p>
-    <img src="<?php echo $post[0]['picture'] ?>" alt="">
+    <form action="" method="post" enctype="multipart/form-data">
+        
+        <h1><?php echo $post[0]['post_title']?></h1>
+        <p><?php echo $post[0]['description']?></p>
+        <img src="<?php echo $post[0]['picture'] ?>" alt="">
+
+    </form>
 </div>
 </body>
 </html>

@@ -113,7 +113,7 @@ if(! empty($_POST)) {
     </ul>
 </nav>
 
-<form  action="" method="post" enctype="multipart/form-data">
+<form action="" method="post" enctype="multipart/form-data">
 
             <h1 form__title>Add post</h1>
     <?php  if(isset($feedback)): ?>
