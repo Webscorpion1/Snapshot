@@ -28,7 +28,7 @@ if(! empty($_POST)) {
                 $feedback = "Post has been saved.";
                 $title = $_POST['title'];
                 $desc = $_POST['description'];
-                $date = date("Y-m-d");
+                $date = date("Y-m-d H:i:s");
                 $location = "";
                 $userid = $_SESSION['userid'];
                 $newPost = new Post();
@@ -149,9 +149,6 @@ if(! empty($_POST)) {
 
 </body>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script>
-
-</script>
 </html>
 
 
