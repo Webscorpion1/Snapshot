@@ -174,9 +174,6 @@ li a:hover:not(.active) {
 }
 
 
-
-
-
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
     .post_container{
