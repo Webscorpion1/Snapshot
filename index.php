@@ -72,6 +72,8 @@ else{
             <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
             <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
             <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
+            <div><a class="post__reported" href="index.php?reported=<?php echo $p['id']; ?>"><button>Report</button></a>
+            </div>
             <?php if($_SESSION['userid'] == $p['user_id']): ?>
                 <form class="post_form" action="" method="post">
                     <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="&#xf044; Edit" style="font-family:Arial, FontAwesome" name="edit"></a>
@@ -89,7 +91,10 @@ else{
 </div>
 <button class=" btn_post btn_loadmore" type="button" name="load-more" value="Load more Snapshots">Load more Snapshots</button>
 </body>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 <script>
     var limit = 40;
     $('.btn_loadmore').on('click',function () {
@@ -103,6 +108,7 @@ else{
             }
         });
     });
+
 $('#search').keyup(function () {
     $keyword = $('#search').val();
     $.ajax({
@@ -114,6 +120,30 @@ $('#search').keyup(function () {
         }
     });
 });
+
+
+    $(".post__reported").on("click", function(e) {
+        var url = ($(this).attr('href'));
+        var postid = getURLParameter(url, 'reported');
+        $.ajax({
+            context: this,
+            method: "POST",
+            url: "ajax/reported.php",
+            data: {postid: postid}
+        })
+            .done(function( res ) {
+                if(res.status == "success"){
+                    console.log("yes");
+               $(this).parents('.post').fadeOut();
+                }
+
+            });
+        e.preventDefault();
+        $(this).fadeOut();
+    });
+    function getURLParameter(url, name) {
+        return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
+    }
 
 </script>
 </html>

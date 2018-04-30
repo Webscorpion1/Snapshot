@@ -187,7 +187,9 @@ li a:hover:not(.active) {
     width: 30%;
     margin-top: 10px;
 }
-
+.hidden{
+    display: none;
+}
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
     .post_container{

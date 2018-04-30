@@ -11,6 +11,17 @@ class Post {
     private $user_id;
     private $title;
     private $tag;
+    private $reported;
+
+    public function setReported($reported)
+    {
+        $this->reported = $reported;
+    }
+
+    public function getReported()
+    {
+        return $this->reported;
+    }
 
 
     public function setTag($tag)
@@ -95,7 +106,8 @@ class Post {
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
                   INNER JOIN users
                   ON posts.user_id = users.id 
-                  WHERE friends.user1_id='$userid' OR friends.user2_id='$userid'
+                  WHERE (friends.user1_id='$userid' OR friends.user2_id='$userid') 
+                  AND posts.reported < 3
                   ORDER BY posts.post_date DESC
                   LIMIT 40";
         $statement = $conn->prepare($query);
@@ -181,5 +193,22 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public function reported($postid){
+        $conn = db::getInstance();
+        $query = "UPDATE posts 
+                  SET    reported=reported+1
+                  WHERE id=$postid";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+    }
+    public static function checkReported($postid){
+        $conn = db::getInstance();
+        $query = "SELECT * FROM posts WHERE id = $postid";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 
 }
