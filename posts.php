@@ -19,7 +19,7 @@ if(! empty($_POST)) {
     $newComment->setComment( $_POST['comment'] );
     $newComment->setDate($date);
     $newComment->setUserId($userid);
-    $newComment->AddComment();
+    $newComment->AddComment($_GET['post']);
 
 }
 

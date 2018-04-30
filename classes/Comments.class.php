@@ -9,6 +9,7 @@ class Comments extends Post{
     private $Comment;
 
 
+
     public function getComment()
     {
         return $this->Comment;
@@ -19,11 +20,12 @@ class Comments extends Post{
         $this->Comment = $Comment;
     }
 
-    public function AddComment(){
+    public function AddComment($postid){
 
         $conn = db::getInstance();
-        $query = "insert into comments (comment, user_id, post_date) values (:comment, :user_id, :post_date)";
+        $query = "insert into comments (post_id, comment, user_id, post_date) values (:post_id, :comment, :user_id, :post_date)";
         $statement = $conn->prepare($query);
+        $statement->bindValue(':post_id',$postid);
         $statement->bindValue(':comment',$this->getComment());
         $statement->bindValue(':user_id',$this->getUserId());
         $statement->bindValue(':post_date',$this->getDate());
