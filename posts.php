@@ -1,11 +1,26 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
+include_once('classes/Comments.class.php');
 
 User::checklogin();
 
 if(!empty($_GET)){
     $post = Post::PostDetail();
+}
+
+if(! empty($_POST)) {
+
+    $date = date("Y-m-d H:i:s");
+    $userid = $_SESSION['userid'];
+
+    $newComment = new Comments();
+
+    $newComment->setComment( $_POST['comment'] );
+    $newComment->setDate($date);
+    $newComment->setUserId($userid);
+    $newComment->AddComment();
+
 }
 
 ?><!doctype html>
@@ -55,12 +70,21 @@ if(!empty($_GET)){
 </nav>
 <div class="wrapper">
 
-    <form action="" method="post" enctype="multipart/form-data">
-        
-        <h1><?php echo $post[0]['post_title']?></h1>
-        <p><?php echo $post[0]['description']?></p>
-        <img src="<?php echo $post[0]['picture'] ?>" alt="">
+    <form class="post" action="" method="post" enctype="multipart/form-data">
 
+        <div class="post__title"><h1><?php echo $post[0]['post_title']?></h1></div>
+        <div class="post__user"><h3>Posted by: <?php echo $post[0]['user_id']; ?> </h3></div>
+        <div class="post__date"><p><span>Posted on: </span> <?php echo $post[0]['post_date']; ?> </p></div>
+        <div class="post__picture"><img src="<?php echo $post[0]['picture'] ?>" alt=""></div>
+        <div class="post__desc"><p><?php echo $post[0]['description']?></p></div>
+
+    </form>
+
+    <form class="post" action="" method="post" enctype="multipart/form-data">
+        <div class="form__field">
+            <label for="comment" class="label">YOUR COMMENT</label><br/>
+            <input name="comment">
+        </div>
     </form>
 </div>
 </body>

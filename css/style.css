@@ -173,11 +173,14 @@ li a:hover:not(.active) {
     margin: 50px auto;
 }
 
+<<<<<<< HEAD
 .post__details{
     line-height: 1.3em;
 }
 
 
+=======
+>>>>>>> 89961a3fe42099622ad9ffaf7f189741dfb56621
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
