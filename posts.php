@@ -5,8 +5,11 @@ include_once('classes/Comments.class.php');
 
 User::checklogin();
 
+
 if(!empty($_GET)){
     $post = Post::PostDetail();
+    $comment = Comments::ShowComments();
+
 }
 
 if(! empty($_POST)) {
@@ -31,7 +34,7 @@ if(! empty($_POST)) {
     <title>Posts - Snapshot</title>
     <meta name="description" content="snapshot" />
     <meta name="keywords" content="snapshot, imd" />
-    <meta name="author" content="Lucas Debelder, Jasmina Dahou, Sander Verbesselt, Frederik Delaet" />
+    <meta name="author" content="Lucas Debelder, Sander Verbesselt, Frederik Delaet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800|Open+Sans" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />
@@ -84,6 +87,12 @@ if(! empty($_POST)) {
         <div class="form__field">
             <label for="comment" class="label">YOUR COMMENT</label><br/>
             <input name="comment">
+
+
+            <h1>All comments</h1>
+            <div class="post__comment"><h1><?php echo $comment[0]['comment']?></h1></div>
+            <div class="post__user"><h3>Posted by: <?php echo $comment[0]['user_id']?> </h3></div>
+            <div class="post__date"><p><span>Posted on: </span><?php echo $comment[0]['post_date']?>  </p></div>
         </div>
     </form>
 </div>
