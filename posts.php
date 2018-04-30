@@ -12,6 +12,10 @@ if(!empty($_GET)){
 
 }
 
+if(count($comment) < 1){
+}
+else{ }
+
 if(! empty($_POST)) {
 
     $date = date("Y-m-d H:i:s");
@@ -90,9 +94,11 @@ if(! empty($_POST)) {
 
 
             <h1>All comments</h1>
-            <div class="post__comment"><h1><?php echo $comment[0]['comment']?></h1></div>
-            <div class="post__user"><h3>Posted by: <?php echo $comment[0]['user_id']?> </h3></div>
-            <div class="post__date"><p><span>Posted on: </span><?php echo $comment[0]['post_date']?>  </p></div>
+            <?php foreach($comment as $c): ?>
+                <div class="post__comment"><h1><?php echo $c['comment']?></h1></div>
+                <div class="post__user"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
+                <div class="post__date"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p></div>
+            <?php endforeach; ?>
         </div>
     </form>
 </div>
