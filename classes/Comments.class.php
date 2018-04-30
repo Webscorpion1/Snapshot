@@ -37,7 +37,8 @@ class Comments extends Post{
     public static function ShowComments($p_id){
 
         $conn = db::getInstance();
-        $query = "SELECT * FROM comments WHERE post_id = $p_id";
+        $query = "SELECT * FROM comments WHERE post_id = $p_id ORDER BY post_date DESC;
+";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);

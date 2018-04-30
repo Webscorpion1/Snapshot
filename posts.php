@@ -11,12 +11,14 @@ if(!empty($_GET)){
     $comment = Comments::ShowComments($_GET['post']);
 
 }
+$newComment = new Comments();
 
 if(count($comment) < 1){
 }
 else{ }
 
-if(! empty($_POST)) {
+/*
+if(isset($_POST['btnCreatePost'])) {
 
     $date = date("Y-m-d H:i:s");
     $userid = $_SESSION['userid'];
@@ -29,6 +31,7 @@ if(! empty($_POST)) {
     $newComment->AddComment($_GET['post']);
 
 }
+*/
 
 ?><!doctype html>
 <html lang="en">
@@ -90,17 +93,43 @@ if(! empty($_POST)) {
     <form class="post" action="" method="post" enctype="multipart/form-data">
         <div class="form__field">
             <label for="comment" class="label">YOUR COMMENT</label><br/>
-            <input name="comment">
+            <textarea name="comment" id="post" cols="30" rows="2"></textarea>
+            <input type="submit" name="btnCreatePost" id="btnCreatePost" value="Send" />
 
 
             <h1>All comments</h1>
             <?php foreach($comment as $c): ?>
-                <div class="post__comment"><h1><?php echo $c['comment']?></h1></div>
+                <div class="post__comment"><h3><?php echo $c['comment']?></h3></div>
                 <div class="post__user"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
-                <div class="post__date"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p></div>
+                <div class="post__date"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p><br/><br/></div>
             <?php endforeach; ?>
         </div>
     </form>
 </div>
 </body>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script>
+    $("#btnCreatePost").on("click", function(e) {
+        var text = $("#post").val();
+
+        $.ajax({
+            method: "POST",
+            url: "ajax/ajax_comments.php",
+            data: { text: text }
+        })
+
+        /*debug messages*/
+        success: function(result) { //we got the response
+            alert('Successfully called');
+        },
+        error: function(jqxhr, status, exception) {
+            alert('Exception:', exception);
+        }
+
+
+        e.preventDefault();
+        $("#post").val("");
+
+    });
+</script>
 </html>
