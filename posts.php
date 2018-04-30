@@ -94,10 +94,13 @@ if(isset($_POST['btnCreatePost'])) {
         <div class="form__field">
             <label for="comment" class="label">YOUR COMMENT</label><br/>
             <textarea name="comment" id="post" cols="30" rows="2"></textarea>
-            <input type="submit" name="btnCreatePost" id="btnCreatePost" value="Send" />
+            <input type="submit" class="btn_comment" name="btnCreatePost" id="btnCreatePost" value="Send" />
+
+            <div class="comment-container"></div>
+            <br/>
 
 
-            <h1>All comments</h1>
+            <h1>View all comments</h1>
             <?php foreach($comment as $c): ?>
                 <div class="post__comment"><h3><?php echo $c['comment']?></h3></div>
                 <div class="post__user"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
@@ -111,21 +114,25 @@ if(isset($_POST['btnCreatePost'])) {
 <script>
     $("#btnCreatePost").on("click", function(e) {
         var text = $("#post").val();
-
+        var postid = <?php echo $_GET['post']; ?>;
+        console.log(postid);
+        console.log(text);
         $.ajax({
             method: "POST",
             url: "ajax/ajax_comments.php",
-            data: { text: text }
+            data: {text: text, postid: postid}
         })
+            .done(function( res ) {
+                if(res.status == "success"){
+                    var ctext = `
+                            <h2>Your comment has been posted.</h2>
+                            <h3>${res.text}</h3>
+                            `;
+                    $('.comment-container').append(ctext);
+                    $(".comment-container").first().slideDown();
+                }
 
-        /*debug messages*/
-        success: function(result) { //we got the response
-            alert('Successfully called');
-        },
-        error: function(jqxhr, status, exception) {
-            alert('Exception:', exception);
-        }
-
+            });
 
         e.preventDefault();
         $("#post").val("");
