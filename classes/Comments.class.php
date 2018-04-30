@@ -47,10 +47,10 @@ class Comments extends Post{
         return $result;
     }
     */
-    public static function ShowComments(){
-        $p_id = $_GET['post'];
+    public static function ShowComments($p_id){
+
         $conn = db::getInstance();
-        $query = "SELECT * FROM comments WHERE id = post_id";
+        $query = "SELECT * FROM comments WHERE post_id = $p_id";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);

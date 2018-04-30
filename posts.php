@@ -8,7 +8,7 @@ User::checklogin();
 
 if(!empty($_GET)){
     $post = Post::PostDetail();
-    $comment = Comments::ShowComments();
+    $comment = Comments::ShowComments($_GET['post']);
 
 }
 
