@@ -69,7 +69,7 @@ if(isset($_POST['btnCreatePost'])) {
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <form class="nav_search" action="" method="post">
-            <input type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
+            <input type="text" class="form__input" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
         </form>
         <li><a class="active" href="index.php">Home</a></li>
         <li><a href="addpost.php">Add post</a></li>
@@ -96,17 +96,20 @@ if(isset($_POST['btnCreatePost'])) {
             <textarea name="comment" id="post" cols="30" rows="2"></textarea>
             <input type="submit" class="btn_comment" name="btnCreatePost" id="btnCreatePost" value="Send" />
 
-            <div class="comment-container"></div>
+
             <br/>
 
 
-            <h1>View all comments</h1>
+        </div>
+        <div class="comment-container">
+            <h2>View all comments</h2>
             <?php foreach($comment as $c): ?>
                 <div class="post__comment"><h3><?php echo $c['comment']?></h3></div>
-                <div class="post__user"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
-                <div class="post__date"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p><br/><br/></div>
-            <?php endforeach; ?>
-        </div>
+            <div class="post__detail_top_grid">
+                <div class="post__user post__details"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
+                <div class="post__date post__details"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p><br/><br/></div>
+            </div>
+                <?php endforeach; ?></div>
     </form>
 </div>
 </body>
@@ -125,7 +128,7 @@ if(isset($_POST['btnCreatePost'])) {
             .done(function( res ) {
                 if(res.status == "success"){
                     var ctext = `
-                            <h2>Your comment has been posted.</h2>
+
                             <h3>${res.text}</h3>
                             `;
                     $('.comment-container').append(ctext);

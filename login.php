@@ -74,11 +74,11 @@ if(!empty($_POST)){
 
 				<div>
 					<label for="email">EMAIL</label><br/>
-					<input type="text" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
+					<input  class="form__input" type="text" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
 				</div>
 				<div>
 					<label for="password">PASSWORD</label><br/>
-					<input type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
+					<input  class="form__input" type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
 				</div>
 
                 

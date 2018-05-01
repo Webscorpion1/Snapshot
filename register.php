@@ -68,28 +68,28 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
 
                 <div>
 					<label for="firstname">FIRST NAME</label><br/>
-					<input type="text" id="firstname" name="firstname" placeholder="Lucas" required>
+					<input class="form__input" type="text" id="firstname" name="firstname" placeholder="Lucas" required>
                 </div>
                 <div>
 					<label for="lastname">LAST NAME</label><br/>
-					<input type="text" id="lastname" name="lastname" placeholder="Debelder" required>
+					<input  class="form__input" type="text" id="lastname" name="lastname" placeholder="Debelder" required>
 				</div>
                 <div>
 					<label for="email">USERNAME</label><br/>
-					<input type="text" id="username" name="username" placeholder="ZanicL3" required>
+					<input  class="form__input" type="text" id="username" name="username" placeholder="ZanicL3" required>
 				</div>
 				<div>
 					<label for="email">EMAIL</label><br/>
-					<input type="email" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
+					<input  class="form__input" type="email" id="email" name="email" placeholder="Lucasdebelder@snapshot.be" required>
 				</div>
 
 				<div>
 					<label for="password">PASSWORD</label><br/>
-					<input type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
+					<input  class="form__input" type="password" id="password" name="password" placeholder="Atleast 8 characters" required>
                 </div>
                 <div>
                     <label for="password_confirmation">CONFIRM YOUR PASSWORD</label><br/>
-                    <input type="password" id="password_confirmation" name="password_confirmation" placeholder="Password confirm" required>
+                    <input  class="form__input" type="password" id="password_confirmation" name="password_confirmation" placeholder="Password confirm" required>
                 </div>
                  <?php if(isset($error_confirmation)): ?>
                 <div>

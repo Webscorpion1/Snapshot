@@ -103,7 +103,7 @@ if(! empty($_POST)) {
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <form class="nav_search" action="" method="post">
-            <input type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
+            <input class="form__input" type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
         </form>
         <li><a href="index.php">Home</a></li>
         <li><a class="active" href="addpost.php">Add post</a></li>
@@ -123,11 +123,11 @@ if(! empty($_POST)) {
     <?php endif; ?>
             <div class="form__field">
                 <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
-                <input type="text" name="title">
+                <input class="form__input" type="text" name="title">
             </div>
             <div class="form__field">
                 <label for="file" class="label">UPLOAD PICTURE</label><br/>
-                <input type="file" name="file" class="fileToUpload">
+                <input class="form__input" type="file" name="file" class="fileToUpload">
             </div>
             <div class="form__field">
                 <label for="description" class="label">DESCRIPTION</label><br/>
@@ -136,7 +136,7 @@ if(! empty($_POST)) {
 
             <div class="form__field">
                 <label for="tag" class="label">ADD SOME TAGS TO YOUR SHOT (seperated with , )</label><br/>
-                <input type="text" name="tag">
+                <input class="form__input" type="text" name="tag">
             </div>
 
             <p>JPG, GIF or PNG. Snapshots are 400 × 300 pixels or 800 × 600 (for HiDPI displays). </p>

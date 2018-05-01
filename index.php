@@ -51,7 +51,7 @@ else{
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <form class="nav_search" action="" method="post">
-            <input type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
+            <input class="form__input" type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
         </form>
         <li><a class="active" href="index.php">Home</a></li>
         <li><a href="addpost.php">Add post</a></li>
@@ -67,20 +67,25 @@ else{
 <div class="post_container">
 <?php foreach($post as $p): ?>
         <div class="post">
-            <div class="post__title"><h1><?php echo $p['post_title'] ?></h1></div>
+            <div class="post__title"><h2><?php echo $p['post_title'] ?></h2></div>
+            <div class="post__detail_top_grid">
             <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
             <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
-            <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-            <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
-            <div><a class="post__reported" href="index.php?reported=<?php echo $p['id']; ?>"><button>Report</button></a>
             </div>
-            <?php if($_SESSION['userid'] == $p['user_id']): ?>
-                <form class="post_form" action="" method="post">
-                    <a href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="button" value="&#xf044; Edit" style="font-family:Arial, FontAwesome" name="edit"></a>
-                    <a href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="button" value="&#xf1f8; Delete" style="font-family:Arial, FontAwesome" name="delete"></a>
+                <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
+
+            <div>
+                <form class="post_form post__detail_grid" action="" method="post">
+                    <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>
+                    <?php if($_SESSION['userid'] == $p['user_id']): ?>
+                    <a class="post__link" href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Edit"  name="edit"></a>
+                    <a class="post__link" href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Delete"  name="delete"></a>
+                    <?php endif; ?>
                 </form>
-            <?php endif; ?>
-            <a class="btn_post" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn_post">View full post</button></a>
+
+            </div>
+            <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
+            <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
         </div>
 
 
