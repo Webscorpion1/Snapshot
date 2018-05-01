@@ -63,7 +63,7 @@ else{
 
 <div class="wrapper">
 
-<h1>Viewing all Posts</h1>
+<h1 class="home-title">Viewing all Posts</h1>
 <div class="post_container">
 <?php foreach($post as $p): ?>
         <div class="post">

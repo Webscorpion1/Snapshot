@@ -62,17 +62,18 @@ if(!empty($_POST['edit_post'])){
     <?php if(isset($feedback)): ?>
         <p><?php echo $feedback ?></p>
     <?php endif; ?>
-        <h2>Edit post</h2>
-        <h3>You can only edit title and description.</h3>
+
         <div class="container">
+
             <form action="" method="post">
+                <h1>Edit post</h1>
                 <div>
                     <label for="title">CHANGE TITLE TO</label><br/>
-                    <input type="text" id="description" name="title" value="<?php echo $editpost[0]['post_title'] ?>" placeholder="">
+                    <input class="form__input" type="text" id="description" name="title" value="<?php echo $editpost[0]['post_title'] ?>" placeholder="">
                 </div>
                 <div>
                     <label for="description">CHANGE DESCRIPTION TO</label><br/>
-                    <input type="text" id="description" name="description" value="<?php echo $editpost[0]['description'] ?>" placeholder="">
+                    <input class="form__input" type="text" id="description" name="description" value="<?php echo $editpost[0]['description'] ?>" placeholder="">
                 </div>
                 <input class="btn_style" type="submit" value="Edit post" name="edit_post">
             </form>

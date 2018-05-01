@@ -69,8 +69,9 @@ if(!empty($_POST['follow'])){
     </ul>
 </nav>
 <div class="wrapper">
-    <h1>Profile</h1>
+
     <div class="container">
+        <h1>Profile</h1>
         <h2><?php echo $user[0]['firstname'] ?>&nbsp;<?php echo $user[0]['lastname'] ?></h2>
         <p><?php echo $user[0]['avatar'] ?></p>
         <p><?php echo $user[0]['description'] ?></p>

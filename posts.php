@@ -83,9 +83,11 @@ if(isset($_POST['btnCreatePost'])) {
     <form class="post" action="" method="post" enctype="multipart/form-data">
 
         <div class="post__title"><h1><?php echo $post[0]['post_title']?></h1></div>
-        <div class="post__user"><h3>Posted by: <?php echo $post[0]['user_id']; ?> </h3></div>
-        <div class="post__date"><p><span>Posted on: </span> <?php echo $post[0]['post_date']; ?> </p></div>
-        <div class="post__picture"><img src="<?php echo $post[0]['picture'] ?>" alt=""></div>
+        <div class="post__detail_top_grid">
+        <div class="post__user post__details"><h3>Posted by: <?php echo $post[0]['user_id']; ?> </h3></div>
+        <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $post[0]['post_date']; ?> </p></div>
+        </div>
+            <div class="post__picture"><img src="<?php echo $post[0]['picture'] ?>" alt=""></div>
         <div class="post__desc"><p><?php echo $post[0]['description']?></p></div>
 
     </form>
@@ -94,7 +96,7 @@ if(isset($_POST['btnCreatePost'])) {
         <div class="form__field">
             <label for="comment" class="label">YOUR COMMENT</label><br/>
             <textarea name="comment" id="post" cols="30" rows="2"></textarea>
-            <input type="submit" class="btn_comment" name="btnCreatePost" id="btnCreatePost" value="Send" />
+            <input type="submit" class="btn__confirm btn_post btn_comment" name="btnCreatePost" id="btnCreatePost" value="Send" />
 
 
             <br/>
