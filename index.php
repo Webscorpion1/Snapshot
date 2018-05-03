@@ -20,6 +20,7 @@ if(isset($_POST['btnLikePost'])) {
 
     $newLike = new Like();
     $newLike->setUserId($userid);
+    $newLike->Addlike(15);
 }
 
 

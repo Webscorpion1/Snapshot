@@ -4,30 +4,30 @@ include_once("Db.class.php");
 include_once("Post.class.php");
 include_once("User.class.php");
 
-class Like extends Post {
+class Like {
 
-    private $like;
-    private $unlike;
+    private $userid;
+    private $postid;
 
-    public function getLike()
+
+    public function setPostid($postid)
     {
-        return $this->like;
+        $this->postid = $postid;
     }
 
-
-    public function setLike($like)
+    public function getPostid()
     {
-        $this->like = $like;
+        return $this->postid;
     }
 
-    public function getUnlike()
+    public function setUserid($userid)
     {
-        return $this->unlike;
+        $this->userid = $userid;
     }
 
-    public function setUnlike($unlike)
+    public function getUserid()
     {
-        $this->unlike = $unlike;
+        return $this->userid;
     }
 
 
