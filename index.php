@@ -4,6 +4,8 @@ include_once('classes/User.class.php');
 include_once('classes/Like.class.php');
 
 User::checklogin();
+$likecount = Like::Countlike();
+
 $post = Post::ShowPosts();
 
 if(count($post) < 1){
@@ -14,6 +16,16 @@ else{
 }
 
 
+if(isset($_POST['btnUnlikePost'])) {
+
+    $userid = $_SESSION['userid'];
+
+    $newLike = new Like();
+    $newLike->setUserId($userid);
+    $newLike->Removelike(15);
+    /* $newLike->Addlike($_POST['postid']);  <- in ajax */
+}
+
 if(isset($_POST['btnLikePost'])) {
 
     $userid = $_SESSION['userid'];
@@ -21,8 +33,8 @@ if(isset($_POST['btnLikePost'])) {
     $newLike = new Like();
     $newLike->setUserId($userid);
     $newLike->Addlike(15);
+    /* $newLike->Addlike($_POST['postid']);  <- in ajax */
 }
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -95,8 +107,9 @@ if(isset($_POST['btnLikePost'])) {
                 </form>
             </div>
             <div>
-                <form action="" method="post">
-                    <input type="submit" class="post__like" name="btnLikePost" id="btnLikePost" value="Like" />
+                <form class="form__like" action="" method="post">
+                    <input type="submit" class="post__like" name="btnLikePost" id="btnLikePost" value="Like (<?php echo $likecount; ?>)" />
+                    <input type="submit" class="post__like" name="btnUnlikePost" id="btnUnlikePost" value="Unlike?" />
                 </form>
             </div>
             <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
@@ -129,18 +142,17 @@ if(isset($_POST['btnLikePost'])) {
         });
     });
 
-$('#search').keyup(function () {
-    $keyword = $('#search').val();
-    $.ajax({
-        url:"ajax/post_search.php",
-        method: "POST",
-        data:{keyword:$keyword},
-        success:function (data) {
-            $(".post-container").html(data);
-        }
+    $('#search').keyup(function () {
+        $keyword = $('#search').val();
+        $.ajax({
+            url:"ajax/post_search.php",
+            method: "POST",
+            data:{keyword:$keyword},
+            success:function (data) {
+                $(".post-container").html(data);
+            }
+        });
     });
-});
-
 
     $(".post__reported").on("click", function(e) {
         var url = ($(this).attr('href'));
@@ -164,7 +176,6 @@ $('#search').keyup(function () {
     function getURLParameter(url, name) {
         return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
     }
-
 
 </script>
 </html>

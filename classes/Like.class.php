@@ -42,4 +42,25 @@ class Like {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+
+    public function Removelike($postid){
+
+        $conn = db::getInstance();
+        $query = "delete from likes (post_id, user_id) values (:post_id, :user_id)";
+        $statement = $conn->prepare($query);
+        $statement->bindValue(':post_id',$postid);
+        $statement->bindValue(':user_id',$this->getUserId());
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+    public static function Countlike(){
+        $conn = db::getInstance();
+        $statement = $conn->prepare("SELECT * from likes");
+        $statement->execute();
+        $likecount =  $statement->rowCount();
+        return $likecount;
+    }
+
 }

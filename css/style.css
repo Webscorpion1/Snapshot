@@ -246,7 +246,7 @@ li a:hover:not(.active) {
     text-decoration: none;
     color: black;
     border: 1px solid var(--primary_orange);
-    width: 20%;
+    width: 40%;
     height: 40px;
     border-radius: 20px;
     margin: 10px 0px;
@@ -265,7 +265,11 @@ input[type="button"]{
 input[type="button"]::-moz-focus-inner {
     border: 0;
 }
-
+.form__like {
+    max-width: 540px;
+    margin: 10px auto;
+    padding: 0px;
+}
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
