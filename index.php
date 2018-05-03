@@ -4,9 +4,10 @@ include_once('classes/User.class.php');
 include_once('classes/Like.class.php');
 
 User::checklogin();
-$likecount = Like::Countlike();
+
 
 $post = Post::ShowPosts();
+$likefeedback = "unlike";
 
 if(count($post) < 1){
 
@@ -16,25 +17,9 @@ else{
 }
 
 
-if(isset($_POST['btnUnlikePost'])) {
 
-    $userid = $_SESSION['userid'];
 
-    $newLike = new Like();
-    $newLike->setUserId($userid);
-    $newLike->Removelike(15);
-    /* $newLike->Addlike($_POST['postid']);  <- in ajax */
-}
 
-if(isset($_POST['btnLikePost'])) {
-
-    $userid = $_SESSION['userid'];
-
-    $newLike = new Like();
-    $newLike->setUserId($userid);
-    $newLike->Addlike(15);
-    /* $newLike->Addlike($_POST['postid']);  <- in ajax */
-}
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -90,11 +75,23 @@ if(isset($_POST['btnLikePost'])) {
 <h1 class="home-title">Viewing all Posts</h1>
 <div class="post_container">
 <?php foreach($post as $p): ?>
+  <?php
+    $likecount = Like::Checklike($p['id'],$_SESSION['userid']);
+    if($likecount > 0){
+      $likefeedback = "like";
+  }
+  else{
+      $likefeedback = "unlike";
+  }
+  ?>
+
+
         <div class="post">
             <div class="post__title"><h2><?php echo $p['post_title'] ?></h2></div>
             <div class="post__detail_top_grid">
             <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
             <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
+
             </div>
                 <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
             <div>
@@ -104,13 +101,11 @@ if(isset($_POST['btnLikePost'])) {
                     <a class="post__link" href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Edit"  name="edit"></a>
                     <a class="post__link" href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Delete"  name="delete"></a>
                     <?php endif; ?>
-                </form>
+                   </form>
             </div>
             <div>
-                <form class="form__like" action="" method="post">
-                    <input type="submit" class="post__like" name="btnLikePost" id="btnLikePost" value="Like (<?php echo $likecount; ?>)" />
-                    <input type="submit" class="post__like" name="btnUnlikePost" id="btnUnlikePost" value="Unlike?" />
-                </form>
+                <img src="media/<?php echo $likefeedback; ?>.png" class="img_like" id="<?php echo $p['id']; ?>">
+                <div class="like-count"><?php echo Like::Countlike($p['id']) ?></div>
             </div>
             <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
             <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
@@ -173,6 +168,78 @@ if(isset($_POST['btnLikePost'])) {
         e.preventDefault();
         $(this).fadeOut();
     });
+
+
+
+    $(".img_like").on('click',function () {
+
+        var postid = $(this).attr('id');
+            console.log(postid);
+        $.ajax({
+            context: this,
+            method: "POST",
+            url: "ajax/post_like.php",
+            data: {postid: postid}
+        })
+            .done(function( res ) {
+                if(res.status == "success"){
+                    console.log("yes");
+
+                    $(this).attr('src','media/like.png');
+                    $(this).val("like");
+                    var number =  $(".img_like").closest('.like-count').text();
+                    console.log(number);
+                    var total = number + 1;
+                    $(".img_like").closest('.like-count').text(total);
+
+                }
+                else{
+                    console.log("no");
+                    $(this).attr('src','media/unlike.png');
+                    $(this).val("unlike");
+                    var number =  $(".img_like").closest('.like-count').text();
+                    console.log(number);
+                    var total = number - 1;
+                    $(".img_like").closest('.like-count').text(total);
+                }
+            });
+
+    });
+
+/*
+
+
+    $(".post__like").on('click',function (e) {
+        e.preventDefault();
+
+        var postid = $(this).attr('id');
+        console.log(postid);
+        $.ajax({
+            context: this,
+            method: "POST",
+            url: "ajax/post_like.php",
+            data: {postid: postid}
+        })
+            .done(function( res ) {
+                if(res.status == "success"){
+                    console.log("yes");
+                    $(this).val("unlike");
+                    $(this).closest('.like-count').text(+1);
+
+                }
+                else{
+                    console.log("no");
+                    $(this).val("like");
+                    $(this).closest('.like-count').text(-1);
+                }
+            });
+
+    });
+
+
+    */
+
+
     function getURLParameter(url, name) {
         return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
     }

@@ -31,36 +31,39 @@ class Like {
     }
 
 
-    public function Addlike($postid){
+    public function Addlike($postid, $userid){
 
         $conn = db::getInstance();
         $query = "insert into likes (post_id, user_id) values (:post_id, :user_id)";
         $statement = $conn->prepare($query);
         $statement->bindValue(':post_id',$postid);
-        $statement->bindValue(':user_id',$this->getUserId());
+        $statement->bindValue(':user_id',$userid);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
 
-    public function Removelike($postid){
+    public static function Removelike($postid, $userid){
 
         $conn = db::getInstance();
-        $query = "delete from likes (post_id, user_id) values (:post_id, :user_id)";
+        $query = "delete from likes WHERE post_id = $postid AND user_id = $userid";
         $statement = $conn->prepare($query);
-        $statement->bindValue(':post_id',$postid);
-        $statement->bindValue(':user_id',$this->getUserId());
         $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
     }
 
-    public static function Countlike(){
+    public static function Countlike($postid){
         $conn = db::getInstance();
-        $statement = $conn->prepare("SELECT * from likes");
+        $statement = $conn->prepare("SELECT * from likes WHERE post_id = $postid");
         $statement->execute();
-        $likecount =  $statement->rowCount();
-        return $likecount;
+        $count =  $statement->rowCount();
+        return $count;
+    }
+    public static function Checklike($postid, $userid){
+        $conn = db::getInstance();
+        $statement = $conn->prepare("SELECT * from likes WHERE post_id = $postid AND user_id = $userid");
+        $statement->execute();
+        $count =  $statement->rowCount();
+        return $count;
     }
 
 }

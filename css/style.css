@@ -270,6 +270,11 @@ input[type="button"]::-moz-focus-inner {
     margin: 10px auto;
     padding: 0px;
 }
+.img_like{
+    max-width: 20px;
+
+    cursor: pointer;
+}
 
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
