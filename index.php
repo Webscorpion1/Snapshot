@@ -1,6 +1,7 @@
 <?php
 include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
+include_once('classes/Like.class.php');
 
 User::checklogin();
 $post = Post::ShowPosts();
@@ -11,6 +12,16 @@ if(count($post) < 1){
 else{
 
 }
+
+
+if(isset($_POST['btnLikePost'])) {
+
+    $userid = $_SESSION['userid'];
+
+    $newLike = new Like();
+    $newLike->setUserId($userid);
+}
+
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -73,7 +84,6 @@ else{
             <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
             </div>
                 <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
-
             <div>
                 <form class="post_form post__detail_grid" action="" method="post">
                     <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>
@@ -82,7 +92,11 @@ else{
                     <a class="post__link" href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Delete"  name="delete"></a>
                     <?php endif; ?>
                 </form>
-
+            </div>
+            <div>
+                <form action="" method="post">
+                    <input type="submit" class="post__like" name="btnLikePost" id="btnLikePost" value="Like" />
+                </form>
             </div>
             <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
             <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
@@ -149,6 +163,7 @@ $('#search').keyup(function () {
     function getURLParameter(url, name) {
         return (RegExp(name + '=' + '(.+?)(&|$)').exec(url)||[,null])[1];
     }
+
 
 </script>
 </html>

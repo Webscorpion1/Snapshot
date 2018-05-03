@@ -210,5 +210,4 @@ class Post {
         return $result;
     }
 
-
 }

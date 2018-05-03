@@ -194,7 +194,6 @@ li a:hover:not(.active) {
     background: none;
     border: none;
     color: dimgray;
-
 }
 .post__link:hover{
     color: black;
@@ -242,6 +241,32 @@ li a:hover:not(.active) {
 .hidden{
     display: none;
 }
+
+.post__like{
+    text-decoration: none;
+    color: black;
+    border: 1px solid var(--primary_orange);
+    width: 20%;
+    height: 40px;
+    border-radius: 20px;
+    margin: 10px 0px;
+    transition: 0.3s;
+    outline: 0;
+}
+.post__like:hover {
+    background: var(--primary_orange);
+    color: white;
+    transition: 0.3s;
+    cursor: pointer;
+}
+input[type="button"]{
+    outline:none;
+}
+input[type="button"]::-moz-focus-inner {
+    border: 0;
+}
+
+
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
     .post_container{

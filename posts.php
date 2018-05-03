@@ -107,11 +107,11 @@ if(isset($_POST['btnCreatePost'])) {
             <h2>View all comments</h2>
             <?php foreach($comment as $c): ?>
                 <div class="post__comment"><h3><?php echo $c['comment']?></h3></div>
-            <div class="post__detail_top_grid">
-                <div class="post__user post__details"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
-                <div class="post__date post__details"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p><br/><br/></div>
-            </div>
-                <?php endforeach; ?></div>
+                <div class="post__detail_top_grid">
+                    <div class="post__user post__details"><h3>Posted by: <?php echo $c['user_id']?> </h3></div>
+                    <div class="post__date post__details"><p><span>Posted on: </span><?php echo $c['post_date']?>  </p><br/><br/></div>
+                </div>
+            <?php endforeach; ?></div>
     </form>
 </div>
 </body>
