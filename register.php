@@ -41,7 +41,8 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
     <link rel="stylesheet" type="text/css" href="css/normalize.css" />
     <link rel="stylesheet" type="text/css" href="css/master.css" />
     <link rel="stylesheet" type="text/css" href="css/style.css" />
-    
+    <link rel="stylesheet" href="https://cssgram-cssgram.netdna-ssl.com/cssgram.min.css">
+
     <meta property="og:url" content="">
     <meta property="og:type" content=""/>
     <meta property="og:title" content=""/>
