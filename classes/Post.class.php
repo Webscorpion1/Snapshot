@@ -12,6 +12,19 @@ class Post {
     private $title;
     private $tag;
     private $reported;
+    private $filter;
+
+
+    public function getFilter()
+    {
+        return $this->filter;
+    }
+
+
+    public function setFilter($filter)
+    {
+        $this->filter = $filter;
+    }
 
     public function setReported($reported)
     {
@@ -100,7 +113,7 @@ class Post {
         $userid = $_SESSION['userid'];
 
         $conn = db::getInstance();
-        $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, posts.user_id, users.username
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username
                   FROM posts
                   INNER JOIN friends 
                   ON posts.user_id = friends.user1_id
@@ -118,11 +131,12 @@ class Post {
     public function AddPost(){
 
         $conn = db::getInstance();
-        $query = "insert into posts (post_title, picture, description, location, user_id, post_date) values (:post_title, :picture, :description, :location, :user_id, :post_date)";
+        $query = "insert into posts (post_title, picture, description, filter, location, user_id, post_date) values (:post_title, :picture, :description, :filter, :location,  :user_id, :post_date)";
         $statement = $conn->prepare($query);
         $statement->bindValue(':post_title',$this->getTitle());
         $statement->bindValue(':picture',$this->getPicture());
         $statement->bindValue(':description',$this->getDescription());
+        $statement->bindValue(':filter', $this->getFilter());
         $statement->bindValue(':location',$this->getLocation());
         $statement->bindValue(':user_id',$this->getUserId());
         $statement->bindValue(':post_date',$this->getDate());
@@ -151,7 +165,7 @@ class Post {
     public static function PostDetail(){
         $p_id = $_GET['post'];
         $conn = db::getInstance();
-        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.location, posts.reported, posts.post_date, users.username
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.filter, posts.description, posts.location, posts.reported, posts.post_date, users.username
                   FROM posts 
                   INNER JOIN users
                   ON posts.user_id=users.id

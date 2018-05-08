@@ -86,7 +86,7 @@ else{
             <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
 
             </div>
-                <div class="post__picture"><img src="<?php echo $p['picture'] ?>" alt=""></div>
+            <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
             <div>
                 <form class="post_form post__detail_grid" action="" method="post">
                     <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>

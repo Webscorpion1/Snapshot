@@ -86,7 +86,7 @@ if(isset($_POST['btnCreatePost'])) {
         <div class="post__user post__details"><h3>Posted by: <?php echo $post[0]['username']; ?> </h3></div>
         <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $post[0]['post_date']; ?> </p></div>
         </div>
-            <div class="post__picture"><img src="<?php echo $post[0]['picture'] ?>" alt=""></div>
+        <div class="post__picture"><img class="<?php echo $post[0]['filter'] ?>" src="<?php echo $post[0]['picture'] ?>" alt=""></div>
         <div class="post__desc"><p><?php echo $post[0]['description']?></p></div>
 
     </form>

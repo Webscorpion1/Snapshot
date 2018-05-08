@@ -28,6 +28,7 @@ if(! empty($_POST)) {
                 $feedback = "Post has been saved.";
                 $title = $_POST['title'];
                 $desc = $_POST['description'];
+                $filter = $_POST['filter'];
                 $date = date("Y-m-d H:i:s");
                 $location = "";
                 $userid = $_SESSION['userid'];
@@ -39,6 +40,7 @@ if(! empty($_POST)) {
                 $newPost->setDate($date);
                 $newPost->setUserId($userid);
                 $newPost->setLocation($location);
+                $newPost->setFilter($filter);
                 $newPost->AddPost();
                 $postId = Post::getLastId();
 
@@ -103,7 +105,6 @@ if(! empty($_POST)) {
     <ul>
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
-
         <li><a href="index.php">Home</a></li>
         <li><a href="friends.php">Friend's posts</a></li>
         <li><a class="active" href="addpost.php">Add post</a></li>
@@ -115,39 +116,73 @@ if(! empty($_POST)) {
 
 <form action="" method="post" enctype="multipart/form-data">
 
-            <h1 form__title>Add post</h1>
+    <h1 form__title>Add post</h1>
     <?php  if(isset($feedback)): ?>
         <div class="feedback">
             <p><?php echo $feedback; ?></p>
         </div>
     <?php endif; ?>
-            <div class="form__field">
-                <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
-                <input class="form__input" type="text" name="title">
-            </div>
-            <div class="form__field">
-                <label for="file" class="label">UPLOAD PICTURE</label><br/>
-                <input class="form__input" type="file" name="file" class="fileToUpload">
-            </div>
-            <div class="form__field">
-                <label for="description" class="label">DESCRIPTION</label><br/>
-                <textarea name="description" cols="25" rows="5"></textarea>
-            </div>
+    <div class="form__field">
+        <label for="title" class="label">YOUR SHOT TITLE:</label> <br/>
+        <input class="form__input" type="text" name="title">
+    </div>
+    <div class="form__field">
+        <label for="file" class="label">UPLOAD PICTURE</label><br/>
+        <input class="form__input" type="file" name="file" class="fileToUpload">
+    </div>
+    <div class="form__field">
+        <label for="description" class="label">DESCRIPTION</label><br/>
+        <textarea name="description" cols="25" rows="5"></textarea>
+    </div>
 
-            <div class="form__field">
-                <label for="tag" class="label">ADD SOME TAGS TO YOUR SHOT (seperated with , )</label><br/>
-                <input class="form__input" type="text" name="tag">
-            </div>
+    <div class="form__field">
+        <label for="tag" class="label">ADD SOME TAGS TO YOUR SHOT (seperated with , )</label><br/>
+        <input class="form__input" type="text" name="tag">
+    </div>
 
-            <p>JPG, GIF or PNG. Snapshots are 400 × 300 pixels or 800 × 600 (for HiDPI displays). </p>
+    <p>JPG, GIF or PNG. Snapshots are 400 × 300 pixels or 800 × 600 (for HiDPI displays). </p><br/><br/>
 
-            <div class="form__field">
-                <input class="btn_style" type="submit" name="submit" value="Add post"">
-            </div>
-        </form>
+    <div class="form__field">
+        <label for="tag" class="label">ADD ONE (Instagram) FILTER TO YOUR SHOT </label><br/>
+
+        <select name="filter">
+            <option value="_1977">1977</option>
+            <option value="aden">aden</option>
+            <option value="brannan">brannan</option>
+            <option value="brooklyn">brooklyn</option>
+            <option value="clarendon">clarendon</option>
+            <option value="earlybird">earlybird</option>
+            <option value="gingham">gingham</option>
+            <option value="hudson">hudson</option>
+            <option value="inkwell">inkwell</option>
+            <option value="kelvin">kelvin</option>
+            <option value="lark">lark</option>
+            <option value="lofi">lofi</option>
+            <option value="maven">maven</option>
+            <option value="mayfair">mayfair</option>
+            <option value="moon">moon</option>
+            <option value="nashville">nashville</option>
+            <option value="perpetua">perpetua</option>
+            <option value="reyes">reyes</option>
+            <option value="rise">rise</option>
+            <option value="slumber">slumber</option>
+            <option value="stinson">stinson</option>
+            <option value="toaster">toaster</option>
+            <option value="valencia">valencia</option>
+            <option value="walden">walden</option>
+            <option value="willow">willow</option>
+            <option value="xpro2">xpro2</option>
+        </select>
+    </div>
+
+    <div class="form__field">
+        <input class="btn_style" type="submit" name="submit" value="Add post"">
+    </div>
+</form>
 
 
 </body>
+
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </html>
 
