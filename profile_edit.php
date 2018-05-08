@@ -1,8 +1,8 @@
 <?php
 include_once("classes/User.class.php");
-
-
 User::checklogin();
+
+
 if (!empty ($_POST)) {
     $file = $_FILES['photo'];
     $fileName = $_FILES['photo']['name'];
@@ -30,7 +30,7 @@ if (in_array($fileActualExt, $allowed)) {
             $user->setAvatar($fileDestination);
             $user->setDescr($_POST['bio']);
             $user->setPassword($_POST['change_password']);
-            $user->editprofile();
+            $user->editprofile($_GET['user']);
             header('Location: index.php');
         }
     }
@@ -85,35 +85,31 @@ if (in_array($fileActualExt, $allowed)) {
 <form action="" method="post" enctype="multipart/form-data">
     <h1 form__title>Update account</h1>
 
-    <!-- Profiel foto -->
     <div>
         <label for="photo">UPDATE PROFILE PICTURE</label><br/>
         <input  class="form__input"  type="file" class="fileToUpload" name="photo" placeholder="">
     </div>
 
-    <!-- Bio/descriptie -->
     <div>
         <label for="bio">UPDATE/EDIT BIO</label><br/>
         <input  class="form__input" type="text" id="bio" name="bio" placeholder="">
     </div>
 
-    <!-- Bio/descriptie -->
-    <div>
-        <label for="change_password">CHANGE PASSWORD</label><br/>
-        <input  class="form__input" type="password" id="change_password" name="change_password" placeholder="">
-    </div>
-
-    <!-- Bio/descriptie -->
     <div>
         <label for="change_email">CHANGE EMAIL</label><br/>
         <input  class="form__input" type="email" id="change_email" name="change_email" placeholder="">
     </div>
-
-    <!-- RETYPE PASSWORD -->
+    <div>
+        <label for="change_password">CHANGE PASSWORD</label><br/>
+        <input  class="form__input" type="password" id="change_password" name="change_password" placeholder="">
+    </div>
     <div>
         <label for="confirmation_pw">TYPE IN THE CURRENT PASSWORD TO VERIFY</label><br/>
         <input  class="form__input" style="background-color: rgba(247, 129, 34, 0.1);" type="password" id="confirmation_pw" name="confirmation_pw" placeholder="">
     </div>
+
+
+
 
     <div>
         <input  class="form__input" type="submit" name="submit" value="SAVE PROFILE" class="btn_style">

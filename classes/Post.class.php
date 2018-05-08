@@ -106,7 +106,7 @@ class Post {
                   ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
                   INNER JOIN users
                   ON posts.user_id = users.id 
-                  WHERE (friends.user1_id='$userid' OR friends.user2_id='$userid') 
+                  WHERE friends.user2_id=posts.user_id
                   AND posts.reported < 3
                   ORDER BY posts.post_date DESC
                   LIMIT 40";

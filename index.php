@@ -15,12 +15,6 @@ if(count($post) < 1){
 else{
 
 }
-
-
-
-
-
-
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -58,22 +52,21 @@ else{
 <body>
 <nav>
     <ul>
-
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <form class="nav_search" action="" method="post">
-            <input class="form__input" type="text" name="search" id="search" placeholder="&#xF002; Search on tags" style="font-family:Arial, FontAwesome" />
+            <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
         </form>
         <li><a class="active" href="index.php">Home</a></li>
         <li><a href="addpost.php">Add post</a></li>
         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
         <li><a href="logout.php">Log out</a></li>
-
     </ul>
 </nav>
 
 <div class="wrapper">
 
 <h1 class="home-title">Viewing all Posts</h1>
+
 <div class="post_container">
 <?php foreach($post as $p): ?>
   <?php
@@ -112,9 +105,7 @@ else{
             <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
         </div>
 
-
 <?php endforeach; ?>
-
 
 </div>
 </div>

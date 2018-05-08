@@ -114,15 +114,14 @@ include_once("Db.class.php");
      }
 
      public function register(){
-
          $conn = db::getInstance();
-
-         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password) values(:firstname,:lastname,:username,:email,:password)");
+         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password, avatar) values(:firstname,:lastname,:username,:email,:password, :avatar)");
          $statement->bindParam(':firstname',$this->firstname);
          $statement->bindParam(':lastname',$this->lastname);
          $statement->bindParam(':username',$this->username);
          $statement->bindParam(':email',$this->email);
          $statement->bindParam(':password',$this->password);
+         $statement->bindParam(':avatar',$this->avatar);
          $result = $statement->execute();
          return $result;
      }
@@ -133,8 +132,8 @@ include_once("Db.class.php");
          $_SESSION['loggedin'] = true;
          header('Location: index.php');
      }
-     public function editprofile(){
-         $userid = $_SESSION['userid'];
+     public function editprofile($userid){
+
 
          $conn = db::getInstance();
          $statement = $conn->prepare("update users set avatar = :avatar, description = :descr, email = :email, password = :password WHERE  id = $userid");
