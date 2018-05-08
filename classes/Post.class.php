@@ -103,10 +103,10 @@ class Post {
         $query = "SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, posts.user_id, users.username
                   FROM posts
                   INNER JOIN friends 
-                  ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
+                  ON posts.user_id = friends.user1_id
                   INNER JOIN users
                   ON posts.user_id = users.id 
-                  WHERE friends.user2_id=posts.user_id
+                  WHERE posts.user_id = friends.user1_id
                   AND posts.reported < 3
                   ORDER BY posts.post_date DESC
                   LIMIT 40";

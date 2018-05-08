@@ -57,6 +57,7 @@ else{
             <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
         </form>
         <li><a class="active" href="index.php">Home</a></li>
+        <li><a href="friends.php">Friend's posts</a></li>
         <li><a href="addpost.php">Add post</a></li>
         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
         <li><a href="logout.php">Log out</a></li>
@@ -78,8 +79,6 @@ else{
       $likefeedback = "unlike";
   }
   ?>
-
-
         <div class="post">
             <div class="post__title"><h2><?php echo $p['post_title'] ?></h2></div>
             <div class="post__detail_top_grid">
