@@ -151,7 +151,11 @@ class Post {
     public static function PostDetail(){
         $p_id = $_GET['post'];
         $conn = db::getInstance();
-        $query = "SELECT * FROM posts WHERE id = '$p_id'";
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.location, posts.reported, posts.post_date, users.username
+                  FROM posts 
+                  INNER JOIN users
+                  ON posts.user_id=users.id
+                  WHERE posts.id = '$p_id'";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
