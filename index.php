@@ -15,6 +15,52 @@ if(count($post) < 1){
 else{
 
 }
+
+
+$colors = array(
+    "black"     => array(0, 0, 0),
+    "green"     => array(0, 128, 0),
+    "silver"    => array(192, 192, 192),
+    "lime"      => array(0, 255, 0),
+    "gray"      => array(128, 0, 128),
+    "olive"     => array(128, 128, 0),
+    "white"     => array(255, 255, 255),
+    "yellow"    => array(255, 255, 0),
+    "maroon"    => array(128, 0, 0),
+    "navy"      => array(0, 0, 128),
+    "red"       => array(255, 0, 0),
+    "blue"      => array(0, 0, 255),
+    "purple"    => array(128, 0, 128),
+    "teal"      => array(0, 128, 128),
+    "fuchsia"   => array(255, 0, 255),
+    "aqua"      => array(0, 255, 255),
+);
+function html2rgb($color)
+{
+    if ($color[0] == '#')
+        $color = substr($color, 1);
+
+    if (strlen($color) == 6)
+        list($r, $g, $b) = array($color[0].$color[1],
+            $color[2].$color[3],
+            $color[4].$color[5]);
+    elseif (strlen($color) == 3)
+        list($r, $g, $b) = array($color[0].$color[0],
+            $color[1].$color[1], $color[2].$color[2]);
+    else
+        return false;
+
+    $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
+
+    return array($r, $g, $b);
+}
+
+function distancel2(array $color1, array $color2) {
+    return sqrt(pow($color1[0] - $color2[0], 2) +
+        pow($color1[1] - $color2[1], 2) +
+        pow($color1[2] - $color2[2], 2));
+}
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -38,15 +84,15 @@ else{
     <meta property="og:title" content=""/>
     <meta property="og:description" content=""/>
     <meta property="og:image" content=""/>
-    
-    
+
+
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="">
     <meta name="twitter:creator" content="">
     <meta name="twitter:title" content="">
     <meta name="twitter:description" content=" ">
-    <meta name="twitter:image" content=""> 
-    
+    <meta name="twitter:image" content="">
+
 </head>
 
 <body>
@@ -66,47 +112,72 @@ else{
 
 <div class="wrapper">
 
-<h1 class="home-title">Viewing all Posts</h1>
+    <h1 class="home-title">Viewing all Posts</h1>
 
-<div class="post_container">
-<?php foreach($post as $p): ?>
-  <?php
-    $likecount = Like::Checklike($p['id'],$_SESSION['userid']);
-    if($likecount > 0){
-      $likefeedback = "like";
-  }
-  else{
-      $likefeedback = "unlike";
-  }
-  ?>
-        <div class="post">
-            <div class="post__title"><h2><?php echo $p['post_title'] ?></h2></div>
-            <div class="post__detail_top_grid">
-            <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
-            <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
+    <div class="post_container">
+        <?php foreach($post as $p): ?>
+            <?php
+            $likecount = Like::Checklike($p['id'],$_SESSION['userid']);
+            if($likecount > 0){
+                $likefeedback = "like";
+            }
+            else{
+                $likefeedback = "unlike";
+            }
+            ?>
+            <div class="post">
+                <div class="post__title"><h2><?php echo $p['post_title'] ?></h2></div>
+                <div class="post__detail_top_grid">
+                    <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
+                    <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
 
+                </div>
+                <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
+                <?php
+
+                $image=imagecreatefromjpeg($p['picture']);
+                $thumb=imagecreatetruecolor(1,1); imagecopyresampled($thumb,$image,0,0,0,0,1,1,imagesx($image),imagesy($image));
+                $mainColor=strtoupper(dechex(imagecolorat($thumb,0,0)));
+                echo $mainColor;
+
+                $distances = array();
+                $val = html2rgb($mainColor);
+                foreach ($colors as $name => $c) {
+                    $distances[$name] = distancel2($c, $val);
+                }
+
+                $mincolor = "";
+                $minval = pow(2, 30); /*big value*/
+                foreach ($distances as $k => $v) {
+                    if ($v < $minval) {
+                        $minval = $v;
+                        $mincolor = $k;
+                    }
+                }
+
+                echo "Main color: $mincolor\n";
+                ?>
+
+                <div>
+                    <form class="post_form post__detail_grid" action="" method="post">
+                        <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>
+                        <?php if($_SESSION['userid'] == $p['user_id']): ?>
+                            <a class="post__link" href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Edit"  name="edit"></a>
+                            <a class="post__link" href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Delete"  name="delete"></a>
+                        <?php endif; ?>
+                    </form>
+                </div>
+                <div>
+                    <img src="media/<?php echo $likefeedback; ?>.png" class="img_like" id="<?php echo $p['id']; ?>">
+                    <div class="like-count"><?php echo Like::Countlike($p['id']) ?></div>
+                </div>
+                <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
+                <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
             </div>
-            <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
-            <div>
-                <form class="post_form post__detail_grid" action="" method="post">
-                    <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>
-                    <?php if($_SESSION['userid'] == $p['user_id']): ?>
-                    <a class="post__link" href="editpost.php?edit=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Edit"  name="edit"></a>
-                    <a class="post__link" href="deletepost.php?delete=<?php echo $p['id'] ?>"><input type="button" class="post__link" value="Delete"  name="delete"></a>
-                    <?php endif; ?>
-                   </form>
-            </div>
-            <div>
-                <img src="media/<?php echo $likefeedback; ?>.png" class="img_like" id="<?php echo $p['id']; ?>">
-                <div class="like-count"><?php echo Like::Countlike($p['id']) ?></div>
-            </div>
-            <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
-            <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
-        </div>
 
-<?php endforeach; ?>
+        <?php endforeach; ?>
 
-</div>
+    </div>
 </div>
 <button class=" btn_post btn_loadmore" type="button" name="load-more" value="Load more Snapshots">Load more Snapshots</button>
 </body>
@@ -152,7 +223,7 @@ else{
             .done(function( res ) {
                 if(res.status == "success"){
                     console.log("yes");
-               $(this).parents('.post').fadeOut();
+                    $(this).parents('.post').fadeOut();
                 }
 
             });
@@ -165,7 +236,7 @@ else{
     $(".img_like").on('click',function () {
 
         var postid = $(this).attr('id');
-            console.log(postid);
+        console.log(postid);
         $.ajax({
             context: this,
             method: "POST",
@@ -197,38 +268,38 @@ else{
 
     });
 
-/*
+    /*
 
 
-    $(".post__like").on('click',function (e) {
-        e.preventDefault();
+        $(".post__like").on('click',function (e) {
+            e.preventDefault();
 
-        var postid = $(this).attr('id');
-        console.log(postid);
-        $.ajax({
-            context: this,
-            method: "POST",
-            url: "ajax/post_like.php",
-            data: {postid: postid}
-        })
-            .done(function( res ) {
-                if(res.status == "success"){
-                    console.log("yes");
-                    $(this).val("unlike");
-                    $(this).closest('.like-count').text(+1);
+            var postid = $(this).attr('id');
+            console.log(postid);
+            $.ajax({
+                context: this,
+                method: "POST",
+                url: "ajax/post_like.php",
+                data: {postid: postid}
+            })
+                .done(function( res ) {
+                    if(res.status == "success"){
+                        console.log("yes");
+                        $(this).val("unlike");
+                        $(this).closest('.like-count').text(+1);
 
-                }
-                else{
-                    console.log("no");
-                    $(this).val("like");
-                    $(this).closest('.like-count').text(-1);
-                }
-            });
+                    }
+                    else{
+                        console.log("no");
+                        $(this).val("like");
+                        $(this).closest('.like-count').text(-1);
+                    }
+                });
 
-    });
+        });
 
 
-    */
+        */
 
 
     function getURLParameter(url, name) {

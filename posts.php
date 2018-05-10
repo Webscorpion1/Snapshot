@@ -17,22 +17,6 @@ if(count($comment) < 1){
 }
 else{ }
 
-/*
-if(isset($_POST['btnCreatePost'])) {
-
-    $date = date("Y-m-d H:i:s");
-    $userid = $_SESSION['userid'];
-
-    $newComment = new Comments();
-
-    $newComment->setComment( $_POST['comment'] );
-    $newComment->setDate($date);
-    $newComment->setUserId($userid);
-    $newComment->AddComment($_GET['post']);
-
-}
-*/
-
 ?><!doctype html>
 <html lang="en">
 <head>
