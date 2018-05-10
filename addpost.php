@@ -128,7 +128,8 @@ if(! empty($_POST)) {
     </div>
     <div class="form__field">
         <label for="file" class="label">UPLOAD PICTURE</label><br/>
-        <input class="form__input" type="file" name="file" class="fileToUpload">
+        <input class="form__input" type="file" name="file" class="fileToUpload" onchange="showIMG(this);">
+        <img id="preview" src="#" alt="Snapshot preview" />
     </div>
     <div class="form__field">
         <label for="description" class="label">DESCRIPTION</label><br/>
@@ -146,6 +147,7 @@ if(! empty($_POST)) {
         <label for="tag" class="label">ADD ONE (Instagram) FILTER TO YOUR SHOT </label><br/>
 
         <select name="filter">
+            <option value="no_filter">-None-</option>
             <option value="_1977">1977</option>
             <option value="aden">aden</option>
             <option value="brannan">brannan</option>
@@ -182,7 +184,27 @@ if(! empty($_POST)) {
 
 
 </body>
+<script>
+    function showIMG(input) {
+        document.getElementById("preview").style.display = "block";
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
+            reader.onload = function (e) {
+                $('#preview')
+                    .attr('src', e.target.result)
+                    .style.display = "block";
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    var selectElem = document.querySelector('.form__field select');
+
+    selectElem.onchange = function() {
+        document.querySelector('#preview').className = this.value;
+    }
+</script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </html>
 

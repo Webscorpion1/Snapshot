@@ -273,7 +273,18 @@ input[type="button"]::-moz-focus-inner {
 
     cursor: pointer;
 }
-
+#preview {
+    border: 1px solid var(--grey);
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 14px;
+    outline: 0;
+    transition: border-color 0.7s ease;
+    width: 100%;
+    resize: none;
+    margin: 20px auto;
+    display: none;
+}
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
     .post_container{
@@ -300,6 +311,9 @@ input[type="button"]::-moz-focus-inner {
     }
     form {
         max-width: 100%;
+    }
+    form .btn_style {
+        width: 100%;
     }
 }
 
