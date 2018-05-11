@@ -115,7 +115,7 @@ include_once("Db.class.php");
 
      public function register(){
          $conn = db::getInstance();
-         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password, avatar) values(:firstname,:lastname,:username,:email,:password, :avatar)");
+         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password, avatar) values(:firstname,:lastname,:username,:email,:password,:avatar)");
          $statement->bindParam(':firstname',$this->firstname);
          $statement->bindParam(':lastname',$this->lastname);
          $statement->bindParam(':username',$this->username);

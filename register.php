@@ -11,6 +11,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
         $user->setUsername($_POST['username']);
         $user->setEmail($_POST['email']);
         $user->setPassword($_POST['password']);
+        $user->setAvatar("");
         if($user->register()){
             $user->login();
 

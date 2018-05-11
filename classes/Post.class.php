@@ -109,25 +109,65 @@ class Post {
         return $this->date;
     }
 
-    public static function ShowPosts(){
-        $userid = $_SESSION['userid'];
-
+    public static function ShowPosts($limit, $userid){
         $conn = db::getInstance();
         $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username
                   FROM posts
                   INNER JOIN friends 
-                  ON posts.user_id = friends.user1_id
+                  ON posts.user_id = friends.user2_id
                   INNER JOIN users
                   ON posts.user_id = users.id 
-                  WHERE posts.user_id = friends.user1_id
+                  WHERE $userid = friends.user1_id 
                   AND posts.reported < 3
                   ORDER BY posts.post_date DESC
-                  LIMIT 40";
+                  LIMIT $limit";
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public static function SearchPosts($limit, $userid, $keyword){
+        $conn = db::getInstance();
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username, tags.tag_title
+                  FROM posts
+                  INNER JOIN friends 
+                  ON posts.user_id = friends.user2_id
+                  INNER JOIN users
+                  ON posts.user_id = users.id 
+                  INNER JOIN tags
+                  ON posts.id = tags.post_id
+                  WHERE $userid = friends.user1_id 
+                  AND posts.reported < 3
+                  AND tags.tag_title = '$keyword'
+                  ORDER BY posts.post_date DESC
+                  LIMIT $limit";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
+
+
+    /*
+    public static function SearchPosts($keyword){
+        $conn = db::getInstance();
+        $query ="SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, tags.tag_title
+                  FROM posts
+                  INNER JOIN friends 
+                  ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
+                  INNER JOIN tags
+                  ON posts.id = tags.post_id
+                  WHERE posts.user_id = friends.user2_id 
+                  AND tags.tag_title = $keyword
+                  ORDER BY posts.post_date DESC
+                  LIMIT 5";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+    */
     public function AddPost(){
 
         $conn = db::getInstance();

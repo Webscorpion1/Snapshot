@@ -6,7 +6,8 @@ include_once('classes/Like.class.php');
 User::checklogin();
 
 
-$post = Post::ShowPosts();
+$post = Post::ShowPosts(2,$_SESSION['userid']);
+
 $likefeedback = "unlike";
 
 if(count($post) < 1){
@@ -242,18 +243,43 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
         crossorigin="anonymous"></script>
 <script>
-    var limit = 40;
+    /*
+    var limit = 2;
     $('.btn_loadmore').on('click',function () {
-        limit = limit + 40;
+        limit = limit + 2;
         $.ajax({
             url:"ajax/post_load.php",
             method: "POST",
             data:{limit:limit},
             success:function (data) {
+                console.log(data);
                 $(".post-container").html(data);
             }
         });
     });
+    */
+    var limit = 2;
+    $('.btn_loadmore').on('click',function () {
+        limit = limit + 2;
+        $.ajax({
+            url:"ajax/post_loadmore.php",
+            method: "POST",
+            data:{limit:limit},
+            success:function (data) {
+                console.log(data);
+
+                $(".post_container").html(data);
+            }
+        });
+    });
+
+
+
+
+
+
+
+
 
     $('#search').keyup(function () {
         $keyword = $('#search').val();
@@ -262,7 +288,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
             method: "POST",
             data:{keyword:$keyword},
             success:function (data) {
-                $(".post-container").html(data);
+                $(".post_container").html(data);
             }
         });
     });
@@ -323,39 +349,6 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
             });
 
     });
-
-    /*
-
-
-        $(".post__like").on('click',function (e) {
-            e.preventDefault();
-
-            var postid = $(this).attr('id');
-            console.log(postid);
-            $.ajax({
-                context: this,
-                method: "POST",
-                url: "ajax/post_like.php",
-                data: {postid: postid}
-            })
-                .done(function( res ) {
-                    if(res.status == "success"){
-                        console.log("yes");
-                        $(this).val("unlike");
-                        $(this).closest('.like-count').text(+1);
-
-                    }
-                    else{
-                        console.log("no");
-                        $(this).val("like");
-                        $(this).closest('.like-count').text(-1);
-                    }
-                });
-
-        });
-
-
-        */
 
 
     function getURLParameter(url, name) {
