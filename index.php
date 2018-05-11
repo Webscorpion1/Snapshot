@@ -16,24 +16,25 @@ else{
 
 }
 
+/*HOOFD KLEUR ALLEEN VINDEN*/
 
 $colors = array(
-    "black"     => array(0, 0, 0),
-    "green"     => array(0, 128, 0),
-    "silver"    => array(192, 192, 192),
-    "lime"      => array(0, 255, 0),
-    "gray"      => array(128, 0, 128),
-    "olive"     => array(128, 128, 0),
-    "white"     => array(255, 255, 255),
-    "yellow"    => array(255, 255, 0),
-    "maroon"    => array(128, 0, 0),
-    "navy"      => array(0, 0, 128),
-    "red"       => array(255, 0, 0),
-    "blue"      => array(0, 0, 255),
-    "purple"    => array(128, 0, 128),
-    "teal"      => array(0, 128, 128),
-    "fuchsia"   => array(255, 0, 255),
-    "aqua"      => array(0, 255, 255),
+    "Black"     => array(0, 0, 0),
+    "Green"     => array(0, 128, 0),
+    "Silver"    => array(192, 192, 192),
+    "Lime Green"      => array(0, 255, 0),
+    "Gray"      => array(128, 0, 128),
+    "Olive Green"     => array(128, 128, 0),
+    "White"     => array(255, 255, 255),
+    "Yellow"    => array(255, 255, 0),
+    "Dark Red"    => array(128, 0, 0),
+    "Dark Blue"      => array(0, 0, 128),
+    "Red"       => array(255, 0, 0),
+    "Blue"      => array(0, 0, 255),
+    "Purple"    => array(128, 0, 128),
+    "Teal Blue"      => array(0, 128, 128),
+    "Pink"   => array(255, 0, 255),
+    "Aqua Blue"      => array(0, 255, 255),
 );
 function html2rgb($color)
 {
@@ -61,6 +62,52 @@ function distancel2(array $color1, array $color2) {
         pow($color1[2] - $color2[2], 2));
 }
 
+
+/*ALLE KLEUR  VINDEN*/
+
+function colorPalette($imageFile, $numColors, $granularity = 5)
+{
+    $granularity = max(1, abs((int)$granularity));
+    $colors = array();
+    $size = @getimagesize($imageFile);
+    if($size === false)
+    {
+        user_error("Unable to get image size data");
+        return false;
+    }
+    $img = @imagecreatefromstring(file_get_contents($imageFile));
+    // Andres mentioned in the comments the above line only loads jpegs,
+    // and suggests that to load any file type you can use this:
+    // $img = @imagecreatefromstring(file_get_contents($imageFile));
+
+    if(!$img)
+    {
+        user_error("Unable to open image file");
+        return false;
+    }
+    for($x = 0; $x < $size[0]; $x += $granularity)
+    {
+        for($y = 0; $y < $size[1]; $y += $granularity)
+        {
+            $thisColor = imagecolorat($img, $x, $y);
+            $rgb = imagecolorsforindex($img, $thisColor);
+            $red = round(round(($rgb['red'] / 0x33)) * 0x33);
+            $green = round(round(($rgb['green'] / 0x33)) * 0x33);
+            $blue = round(round(($rgb['blue'] / 0x33)) * 0x33);
+            $thisRGB = sprintf('%02X%02X%02X', $red, $green, $blue);
+            if(array_key_exists($thisRGB, $colors))
+            {
+                $colors[$thisRGB]++;
+            }
+            else
+            {
+                $colors[$thisRGB] = 1;
+            }
+        }
+    }
+    arsort($colors);
+    return array_slice(array_keys($colors), 0, $numColors);
+}
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -134,11 +181,10 @@ function distancel2(array $color1, array $color2) {
                 </div>
                 <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
                 <?php
-
+                // HOOFD KLEUR VINDEN
                 $image=imagecreatefromjpeg($p['picture']);
                 $thumb=imagecreatetruecolor(1,1); imagecopyresampled($thumb,$image,0,0,0,0,1,1,imagesx($image),imagesy($image));
                 $mainColor=strtoupper(dechex(imagecolorat($thumb,0,0)));
-                echo $mainColor;
 
                 $distances = array();
                 $val = html2rgb($mainColor);
@@ -154,10 +200,20 @@ function distancel2(array $color1, array $color2) {
                         $mincolor = $k;
                     }
                 }
-
-                echo "Main color: $mincolor\n";
                 ?>
+                    <p>The main color in this Snapshot is  <?php echo $mincolor ?></p>
 
+
+                <div class="flex">
+                    <?php
+                    // ALLE KLEUREN VINDEN
+                    $palette = colorPalette($p['picture'], 5, 4);
+                    foreach($palette as $color)
+                    {
+                       echo "<div class='colordiv' style='background-color:#$color;'>&nbsp;</div>";
+                    }
+                    ?>
+                </div>
                 <div>
                     <form class="post_form post__detail_grid" action="" method="post">
                         <a class="post__reported post__link" href="index.php?reported=<?php echo $p['id']; ?>"><input type="button" class="post__link" value="Report"></a>

@@ -285,6 +285,19 @@ input[type="button"]::-moz-focus-inner {
     margin: 20px auto;
     display: none;
 }
+.flex {
+    display: flex;
+    flex-direction: row;
+}
+.colordiv  {
+    justify-content: space-evenly;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    width: 20%;
+}
+
+
+
 /* MEDIA QUERIES */
 @media screen and (min-width: 1700px) {
     .post_container{
