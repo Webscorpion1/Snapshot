@@ -110,6 +110,14 @@ ul {
 .links {
     display: flex;
 }
+.delete {
+    margin: 0px auto;
+    padding: 0px;
+}
+.formdelete {
+    margin: 70px auto;
+    padding: 0px;
+}
 li>img {
     display: block;
     margin: 0 auto;

@@ -59,21 +59,22 @@ if(!empty($_POST['final_delete'])){
         </div>
     </ul>
 </nav>
-<div class="wrapper">
-    <?php echo $_GET['delete'] ?>
+<div class="container">
+
+    <form class="formdelete" action="" method="post">
     <?php if(isset($feedback)): ?>
         <p><?php echo $feedback ?></p>
     <?php endif; ?>
     <?php if(empty($_POST['final_delete'])): ?>
     <h2>Are you sure you want to delete your post?</h2>
-    <div class="container">
-        <form action="" method="post">
-            <input type="submit" value="Yes" name="final_delete">
+        <form class="delete" action="" method="post">
+            <input class="btn_style delete" type="submit" value="Yes" name="final_delete">
         </form>
-        <form action="index.php" method="post">
-            <input type="submit" value="no">
+        <form class="delete" action="index.php" method="post">
+            <input class="btn_style delete" type="submit" value="No">
         </form>
-    </div>
+
+    </form>
     <?php endif; ?>
 </div>
 </body>
