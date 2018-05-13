@@ -152,7 +152,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         <div class="logo">
             <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         </div>
-        
+
         <form class="nav_search" action="" method="post">
             <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
             <input class="btn_post btn_search" type="submit" name="searchsubmit" value="Search">
