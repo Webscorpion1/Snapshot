@@ -192,6 +192,12 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     <div class="like-count" id="num-<?php echo $p['id'] ?>"><?php echo Like::Countlike($p['id']) ?></div>
 
                 </div>
+                <?php $tags = Post::ShowTags($p['id']) ?>
+                <div class="tag-container">
+                    <?php foreach($tags as $t): ?>
+                        <div class="tag"><?php echo $t['tag_title']; ?></div>
+                    <?php endforeach; ?>
+                </div>
                 <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
                 <?php
                 // HOOFD KLEUR VINDEN
