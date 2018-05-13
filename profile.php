@@ -72,6 +72,7 @@ if(!empty($_POST['follow'])){
 <div class="wrapper">
 
     <div class="container">
+        <div class="profile-container">
         <h1>Profile</h1>
         <h2><?php echo $user[0]['firstname'] ?>&nbsp;<?php echo $user[0]['lastname'] ?></h2>
         <p><?php echo $user[0]['avatar'] ?></p>
@@ -80,18 +81,19 @@ if(!empty($_POST['follow'])){
         <?php $checkfollow = User::checkFollow($_SESSION['userid'], $_GET['user']); ?>
         <?php if($_SESSION['userid'] !== $_GET['user'] && $checkfollow == false): ?>
         <form action="" method="post">
-            <input type="submit" value="Follow" name="follow">
+            <input class="btn_style" type="submit" value="Follow" name="follow">
         </form>
         <?php endif; ?>
         <?php if($_SESSION['userid'] !== $_GET['user'] && $checkfollow == true): ?>
             <form action="" method="post">
-                <input type="submit" value="unfollow" name="unfollow">
+                <input class="btn_style" type="submit" value="unfollow" name="unfollow">
             </form>
         <?php endif; ?>
             <?php if($_SESSION['userid'] == $_GET['user']): ?>
                 <a href="profile_edit.php?user=<?php echo $_GET['user']; ?>">Edit profile</a>
             <?php endif; ?>
         </div>
+    </div>
     </div>
 </div>
 </body>

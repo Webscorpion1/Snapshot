@@ -10,6 +10,7 @@ $post = Post::ShowAllPosts(2,$_SESSION['userid']);
 
 if(!empty($_POST['searchsubmit'])){
     $post = Post::SearchAllPosts(100,$_SESSION['userid'],$_POST['search']);
+    $searchtext = " (Searched by : ". $_POST['search'] .")";
 }
 
 $likefeedback = "unlike";
@@ -170,7 +171,12 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
 <div class="wrapper">
 
-    <h1 class="home-title">Viewing all Posts</h1>
+    <h1 class="home-title">Viewing all Posts
+        <?php if(isset($searchtext)): ?>
+        <?php echo $searchtext; ?>
+        <?php endif; ?>
+
+    </h1>
 
     <div class="post_container">
         <?php foreach($post as $p): ?>
