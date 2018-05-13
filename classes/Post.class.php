@@ -132,7 +132,7 @@ class Post {
                   FROM posts               
                   INNER JOIN users
                   ON posts.user_id = users.id            
-                  AND posts.reported < 3
+                  WHERE posts.reported < 3
                   ORDER BY posts.post_date DESC
                   LIMIT $limit";
         $statement = $conn->prepare($query);
@@ -140,18 +140,15 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    public static function SearchPosts($limit, $userid, $keyword){
+    public static function SearchAllPosts($limit, $userid, $keyword){
         $conn = db::getInstance();
         $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username, tags.tag_title
                   FROM posts
-                  INNER JOIN friends 
-                  ON posts.user_id = friends.user2_id
                   INNER JOIN users
                   ON posts.user_id = users.id 
                   INNER JOIN tags
                   ON posts.id = tags.post_id
-                  WHERE $userid = friends.user1_id 
-                  AND posts.reported < 3
+                  WHERE posts.reported < 3
                   AND tags.tag_title = '$keyword'
                   ORDER BY posts.post_date DESC
                   LIMIT $limit";
@@ -160,28 +157,30 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-
-
-
-    /*
-    public static function SearchPosts($keyword){
+    public static function SearchFriendsPosts($limit, $userid, $keyword){
         $conn = db::getInstance();
-        $query ="SELECT posts.id, posts.post_title, posts.picture ,posts.description, posts.location, posts.post_date, tags.tag_title
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username, tags.tag_title
                   FROM posts
+                  INNER JOIN users
+                  ON posts.user_id = users.id 
                   INNER JOIN friends 
-                  ON posts.user_id = friends.user1_id OR posts.user_id = friends.user2_id
+                  ON posts.user_id = friends.user2_id
                   INNER JOIN tags
                   ON posts.id = tags.post_id
-                  WHERE posts.user_id = friends.user2_id 
-                  AND tags.tag_title = $keyword
+                  WHERE posts.reported < 3
+                  AND tags.tag_title = '$keyword'
+                  AND $userid = friends.user1_id 
                   ORDER BY posts.post_date DESC
-                  LIMIT 5";
+                  LIMIT $limit";
         $statement = $conn->prepare($query);
+
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
-    */
+
+
+
     public function AddPost(){
 
         $conn = db::getInstance();
@@ -195,8 +194,7 @@ class Post {
         $statement->bindValue(':user_id',$this->getUserId());
         $statement->bindValue(':post_date',$this->getDate());
         $statement->execute();
-        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+
     }
     public static function getLastId(){
         $conn = db::getInstance();
@@ -217,14 +215,14 @@ class Post {
     }
 
     public static function PostDetail(){
-        $p_id = $_GET['post'];
         $conn = db::getInstance();
         $query = "SELECT posts.id, posts.post_title, posts.picture, posts.filter, posts.description, posts.location, posts.reported, posts.post_date, users.username
                   FROM posts 
                   INNER JOIN users
                   ON posts.user_id=users.id
-                  WHERE posts.id = '$p_id'";
+                  WHERE posts.id = :post_id";
         $statement = $conn->prepare($query);
+        $statement->bindValue(':post_id', $_GET['post']);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;

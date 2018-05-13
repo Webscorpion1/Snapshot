@@ -8,6 +8,10 @@ User::checklogin();
 
 $post = Post::ShowAllPosts(2,$_SESSION['userid']);
 
+if(!empty($_POST['searchsubmit'])){
+    $post = Post::SearchAllPosts(100,$_SESSION['userid'],$_POST['search']);
+}
+
 $likefeedback = "unlike";
 
 if(count($post) < 1){
@@ -17,7 +21,6 @@ else{
 
 }
 
-/*HOOFD KLEUR ALLEEN VINDEN*/
 
 $colors = array(
     "Black"     => array(0, 0, 0),
@@ -152,6 +155,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
         <form class="nav_search" action="" method="post">
             <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
+            <input type="submit" name="searchsubmit" value="search">
         </form>
 
         <div class="links">
@@ -285,7 +289,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
 
 
-
+/*
 
     $('#search').keyup(function () {
         $keyword = $('#search').val();
@@ -298,7 +302,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
             }
         });
     });
-
+*/
     $(".post__reported").on("click", function(e) {
         var url = ($(this).attr('href'));
         var postid = getURLParameter(url, 'reported');

@@ -7,6 +7,9 @@ User::checklogin();
 
 
 $post = Post::ShowPosts(5,$_SESSION['userid']);
+if(!empty($_POST['searchsubmit'])){
+    $post = Post::SearchFriendsPosts(100,$_SESSION['userid'],$_POST['search']);
+}
 
 $likefeedback = "unlike";
 
@@ -152,6 +155,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
         <form class="nav_search" action="" method="post">
             <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
+            <input type="submit" name="searchsubmit" value="search">
         </form>
 
         <div class="links">
@@ -272,32 +276,11 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
             method: "POST",
             data:{limit:limit},
             success:function (data) {
-                console.log(data);
-
                 $(".post_container").html(data);
             }
         });
     });
 
-
-
-
-
-
-
-
-
-    $('#search').keyup(function () {
-        $keyword = $('#search').val();
-        $.ajax({
-            url:"ajax/post_search.php",
-            method: "POST",
-            data:{keyword:$keyword},
-            success:function (data) {
-                $(".post_container").html(data);
-            }
-        });
-    });
 
     $(".post__reported").on("click", function(e) {
         var url = ($(this).attr('href'));

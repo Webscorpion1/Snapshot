@@ -60,11 +60,6 @@ if(!empty($_POST['follow'])){
         <div class="logo">
             <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         </div>
-
-        <form class="nav_search" action="" method="post">
-            <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
-        </form>
-
         <div class="links">
             <li><a href="index.php">Home</a></li>
             <li><a href="friendposts.php">Friend's posts</a></li>
