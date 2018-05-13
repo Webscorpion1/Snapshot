@@ -85,14 +85,10 @@ else{ }
             <label for="comment" class="label">YOUR COMMENT</label><br/>
             <textarea name="comment" id="post" cols="30" rows="2"></textarea>
             <input type="submit" class="btn__confirm btn_post btn_comment" name="btnCreatePost" id="btnCreatePost" value="Send" />
-
-
             <br/>
-
-
         </div>
         <div class="comment-container">
-            <h2>View all comments</h2>
+            <h2>All comments</h2>
             <?php foreach($comment as $c): ?>
                 <div class="post__comment"><h3><?php echo $c['comment']?></h3></div>
                 <div class="post__detail_top_grid">

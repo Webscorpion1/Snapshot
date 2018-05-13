@@ -288,6 +288,18 @@ input[type="button"]::-moz-focus-inner {
     display: flex;
     flex-direction: row;
 }
+.tag-container{
+    display: flex;
+    flex-direction: row;
+    margin: 0.3em 0%;
+}
+.tag{
+    background-color: #E8E8E8;
+    border-radius: 0.3em;
+    margin: 0% 0.2em;
+    padding: 0.5em;
+    font-size: 0.8em;
+}
 #preview {
     border: 1px solid var(--grey);
     border-radius: 5px;

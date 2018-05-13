@@ -279,5 +279,18 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public static function ShowTags($postid){
+        $conn = db::getInstance();
+        $query = "SELECT tags.tag_title
+                  FROM tags
+                  INNER JOIN posts
+                  ON tags.post_id = posts.id 
+                  WHERE posts.id = :postid";
+        $statement = $conn->prepare($query);
+        $statement->bindParam(':postid',$postid);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 
 }
