@@ -278,9 +278,15 @@ input[type="button"]::-moz-focus-inner {
     padding: 0px;
 }
 .img_like{
-    max-width: 20px;
-
+    max-width: 17px;
+    align-self: center;
     cursor: pointer;
+    margin-right: 1.5%;
+}
+.like{
+    margin: 3% 0%;
+    display: flex;
+    flex-direction: row;
 }
 #preview {
     border: 1px solid var(--grey);

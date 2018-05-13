@@ -188,6 +188,8 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                 <div class="post__detail_top_grid">
                     <div class="post__user post__details"><h3>Posted by: <a href="profile.php?user=<?php echo $p['user_id']; ?>"><?php echo $p['username'] ?></a></h3></div>
                     <div class="post__date post__details"><p><span>Posted on: </span> <?php echo $p['post_date'] ?></p></div>
+                    <img data-id="<?php echo $p['id'] ?>" src="media/<?php echo $likefeedback; ?>.png" class="img_like" id="<?php echo $p['id']; ?>">
+                    <div class="like-count" id="num-<?php echo $p['id'] ?>"><?php echo Like::Countlike($p['id']) ?></div>
 
                 </div>
                 <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
@@ -234,10 +236,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                         <?php endif; ?>
                     </form>
                 </div>
-                <div>
-                    <img src="media/<?php echo $likefeedback; ?>.png" class="img_like" id="<?php echo $p['id']; ?>">
-                    <div class="like-count"><?php echo Like::Countlike($p['id']) ?></div>
-                </div>
+
                 <div class="post__desc"><p><?php echo $p['description'] ?></p></div>
                 <a class="" href="posts.php?post=<?php echo $p['id']; ?>"><button class="btn__confirm btn_post">View full post</button></a>
             </div>
@@ -296,7 +295,6 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     console.log("yes");
                     $(this).parents('.post').fadeOut();
                 }
-
             });
         e.preventDefault();
         $(this).fadeOut();
@@ -304,10 +302,11 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
 
 
+
     $(".img_like").on('click',function () {
 
         var postid = $(this).attr('id');
-        console.log(postid);
+
         $.ajax({
             context: this,
             method: "POST",
@@ -320,20 +319,21 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
                     $(this).attr('src','media/like.png');
                     $(this).val("like");
-                    var number =  $(".img_like").closest('.like-count').text();
+                    var number = $(this).data("id");
                     console.log(number);
-                    var total = number + 1;
-                    $(".img_like").closest('.like-count').text(total);
+
+                    var total =  parseInt($("#num-"+number).text())+ 1;
+                    $("#num-"+number).text(total);
 
                 }
                 else{
                     console.log("no");
                     $(this).attr('src','media/unlike.png');
                     $(this).val("unlike");
-                    var number =  $(".img_like").closest('.like-count').text();
+                    var number =  $(this).data("id");
                     console.log(number);
-                    var total = number - 1;
-                    $(".img_like").closest('.like-count').text(total);
+                    var total =  parseInt($("#num-"+number).text())- 1;
+                    $("#num-"+number).text(total);
                 }
             });
 
