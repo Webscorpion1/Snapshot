@@ -3,7 +3,7 @@ include_once('classes/Post.class.php');
 include_once('classes/User.class.php');
 
 User::checklogin();
-$post = Post::ShowPosts();
+$post = Post::ShowPosts(0,$_SESSION['userid']);
 
 if(! empty($_POST)) {
 
@@ -106,7 +106,7 @@ if(! empty($_POST)) {
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <li><a href="index.php">Home</a></li>
-        <li><a href="friends.php">Friend's posts</a></li>
+        <li><a href="friendposts.php">Friend's posts</a></li>
         <li><a class="active" href="addpost.php">Add post</a></li>
         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
         <li><a href="logout.php">Log out</a></li>

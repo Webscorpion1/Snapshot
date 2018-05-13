@@ -6,7 +6,7 @@ include_once('classes/Like.class.php');
 User::checklogin();
 
 
-$post = Post::ShowAllPosts(2,$_SESSION['userid']);
+$post = Post::ShowPosts(5,$_SESSION['userid']);
 
 $likefeedback = "unlike";
 
@@ -155,8 +155,8 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         </form>
 
         <div class="links">
-            <li><a class="active" href="index.php">Home</a></li>
-            <li><a href="friendposts.php">Friend's posts</a></li>
+            <li><a  href="index.php">Home</a></li>
+            <li><a class="active" href="friendposts.php">Friend's posts</a></li>
             <li><a href="addpost.php">Add post</a></li>
             <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
             <li><a href="logout.php">Log out</a></li>
@@ -208,7 +208,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     }
                 }
                 ?>
-                    <p>The main color in this Snapshot is  <?php echo $mincolor ?></p>
+                <p>The main color in this Snapshot is  <?php echo $mincolor ?></p>
 
 
                 <div class="flex">
@@ -217,7 +217,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     $palette = colorPalette($p['picture'], 5, 4);
                     foreach($palette as $color)
                     {
-                       echo "<div class='colordiv' style='background-color:#$color;'>&nbsp;</div>";
+                        echo "<div class='colordiv' style='background-color:#$color;'>&nbsp;</div>";
                     }
                     ?>
                 </div>
@@ -245,9 +245,9 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 <button class=" btn_post btn_loadmore" type="button" name="load-more" value="Load more Snapshots">Load more Snapshots</button>
 </body>
 <script
-        src="https://code.jquery.com/jquery-3.3.1.min.js"
-        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-        crossorigin="anonymous"></script>
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
 <script>
     /*
     var limit = 2;

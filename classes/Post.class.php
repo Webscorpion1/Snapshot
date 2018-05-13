@@ -126,6 +126,20 @@ class Post {
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
         return $result;
     }
+    public static function ShowAllPosts($limit, $userid){
+        $conn = db::getInstance();
+        $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username
+                  FROM posts               
+                  INNER JOIN users
+                  ON posts.user_id = users.id            
+                  AND posts.reported < 3
+                  ORDER BY posts.post_date DESC
+                  LIMIT $limit";
+        $statement = $conn->prepare($query);
+        $statement->execute();
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
     public static function SearchPosts($limit, $userid, $keyword){
         $conn = db::getInstance();
         $query = "SELECT posts.id, posts.post_title, posts.picture, posts.description, posts.filter, posts.location, posts.post_date, posts.user_id, users.username, tags.tag_title

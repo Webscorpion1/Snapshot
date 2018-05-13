@@ -54,7 +54,7 @@ else{ }
 
         <li><img src="media/frontend/logo.svg" alt="Logo" ></li>
         <li><a class="active" href="index.php">Home</a></li>
-        <li><a href="friends.php">Friend's posts</a></li>
+        <li><a href="friendposts.php">Friend's posts</a></li>
         <li><a href="addpost.php">Add post</a></li>
         <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
         <li><a href="logout.php">Log out</a></li>
