@@ -62,7 +62,7 @@ form .form__input, textarea {
     outline: 0;
     transition: border-color 0.7s ease;
     display: block;
-    width: 100%;
+    width: 60%;
     resize: none;
 }
 form .btn_style {
@@ -109,6 +109,8 @@ ul {
 }
 .links {
     display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .delete {
     margin: 0px auto;
@@ -143,7 +145,7 @@ li a:hover:not(.active) {
 .nav_search {
     width: 80%;
     margin: 0 auto;
-    display: block;
+    display: flex;
     padding: 0px;
 }
 
@@ -239,6 +241,13 @@ li a:hover:not(.active) {
 .hidden{
     display: none;
 }
+.btn_search{
+    width: 30%;
+    border-radius: 5px;
+    padding: 0px 0px;
+    margin: 0px 5%;
+    font-size: 14px;
+}
 
 .post__like{
     text-decoration: none;
@@ -318,8 +327,6 @@ input[type="button"]::-moz-focus-inner {
     .links {
         grid-row-start: 2;
         grid-column-start: 2;
-        align-items: center;
-        justify-content: center;
     }
 }
 @media screen and (max-width: 966px) {

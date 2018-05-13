@@ -155,7 +155,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
 
         <form class="nav_search" action="" method="post">
             <input class="form__input" type="text" name="search" id="search" placeholder="Search on tags" style="font-family:Arial, FontAwesome" />
-            <input type="submit" name="searchsubmit" value="search">
+            <input class="btn_post btn_search" type="submit" name="searchsubmit" value="Search">
         </form>
 
         <div class="links">
