@@ -155,7 +155,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         </form>
 
         <div class="links">
-            <li><a  href="index.php">Home</a></li>
+            <li><a href="index.php">Home</a></li>
             <li><a class="active" href="friendposts.php">Friend's posts</a></li>
             <li><a href="addpost.php">Add post</a></li>
             <li><a href="profile.php?user=<?php echo $_SESSION['userid']; ?>">Profile</a></li>
