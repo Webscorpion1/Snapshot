@@ -90,7 +90,7 @@ if(!empty($_POST['follow'])){
             </form>
         <?php endif; ?>
             <?php if($_SESSION['userid'] == $_GET['user']): ?>
-                <a href="profile_edit.php?user=<?php echo $_GET['user']; ?>">Edit profile</a>
+                <a  href="profile_edit.php?user=<?php echo $_GET['user']; ?>">Edit profile</a>
             <?php endif; ?>
         </div>
     </div>

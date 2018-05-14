@@ -6,7 +6,7 @@ include_once('classes/Like.class.php');
 User::checklogin();
 
 
-$post = Post::ShowPosts(5,$_SESSION['userid']);
+$post = Post::ShowPosts(10,$_SESSION['userid']);
 if(!empty($_POST['searchsubmit'])){
     $post = Post::SearchFriendsPosts(100,$_SESSION['userid'],$_POST['search']);
 }
@@ -220,7 +220,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     }
                 }
                 ?>
-                <p>The main color in this Snapshot is  <?php echo $mincolor ?></p>
+                <p class="colortext">The main color in this Snapshot is  <?php echo $mincolor ?></p>
 
 
                 <div class="flex">
@@ -258,24 +258,9 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
     integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
     crossorigin="anonymous"></script>
 <script>
-    /*
-    var limit = 2;
+    var limit = 10;
     $('.btn_loadmore').on('click',function () {
-        limit = limit + 2;
-        $.ajax({
-            url:"ajax/post_load.php",
-            method: "POST",
-            data:{limit:limit},
-            success:function (data) {
-                console.log(data);
-                $(".post-container").html(data);
-            }
-        });
-    });
-    */
-    var limit = 2;
-    $('.btn_loadmore').on('click',function () {
-        limit = limit + 2;
+        limit = limit + 10;
         $.ajax({
             url:"ajax/post_loadmore.php",
             method: "POST",
@@ -305,9 +290,6 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         e.preventDefault();
         $(this).fadeOut();
     });
-
-
-
 
     $(".img_like").on('click',function () {
 

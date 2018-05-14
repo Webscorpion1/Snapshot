@@ -19,11 +19,11 @@ if(! empty($_POST)) {
     $allowed = array('jpg', 'jpeg', 'png');
 
     if (in_array($fileActualExt, $allowed)){
+       
         if ($fileError === 0){
             if ($fileSize < 10000000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;
                 $fileDestination = 'uploads/'.$fileNameNew;
-                print_r($fileDestination);
                 move_uploaded_file($fileTmpName, $fileDestination);
                 $feedback = "Post has been saved.";
                 $title = (strip_tags($_POST['title']));
@@ -187,6 +187,10 @@ if(! empty($_POST)) {
 
 
 </body>
+<script
+        src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+        crossorigin="anonymous"></script>
 <script>
     function showIMG(input) {
         document.getElementById("preview").style.display = "block";
@@ -196,7 +200,7 @@ if(! empty($_POST)) {
             reader.onload = function (e) {
                 $('#preview')
                     .attr('src', e.target.result)
-                    .style.display = "block";
+                    ;
             };
 
             reader.readAsDataURL(input.files[0]);

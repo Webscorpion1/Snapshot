@@ -6,7 +6,7 @@ include_once('classes/Like.class.php');
 User::checklogin();
 
 
-$post = Post::ShowAllPosts(2,$_SESSION['userid']);
+$post = Post::ShowAllPosts(10,$_SESSION['userid']);
 
 if(!empty($_POST['searchsubmit'])){
     $post = Post::SearchAllPosts(100,$_SESSION['userid'], strip_tags($_POST['search']));
@@ -226,7 +226,7 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     }
                 }
                 ?>
-                    <p>The main color in this Snapshot is  <?php echo $mincolor ?></p>
+                    <p class="colortext">The main color in this Snapshot is  <?php echo $mincolor ?></p>
 
 
                 <div class="flex">
@@ -282,9 +282,9 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
         });
     });
     */
-    var limit = 2;
+    var limit = 10;
     $('.btn_loadmore').on('click',function () {
-        limit = limit + 2;
+        limit = limit + 10;
         $.ajax({
             url:"ajax/post_loadmore.php",
             method: "POST",

@@ -176,7 +176,7 @@ li a:hover:not(.active) {
     width: 100%;
 }
 .post__picture {
-    margin: 3% 0%;
+    margin: 3% 0% 1% 0%;
 }
 .post__desc{
     margin: 3% 0% 8% 0%;
@@ -325,7 +325,11 @@ input[type="button"]::-moz-focus-inner {
     margin-bottom: 5px;
     width: 20%;
 }
-
+.colortext{
+    font-size: 0.8em;
+    color: grey;
+    font-style: italic;
+}
 
 
 /* MEDIA QUERIES */
