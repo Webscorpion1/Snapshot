@@ -35,7 +35,7 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
     <title>Register - Snapshot</title>
     <meta name="description" content="snapshot" />
     <meta name="keywords" content="snapshot, imd" />
-    <meta name="author" content="Lucas Debelder, Jasmina Dahou, Sander Verbesselt, Frederik Delaet" />
+    <meta name="author" content="Lucas Debelder, Sander Verbesselt, Frederik Delaet" />
     <link href="https://fonts.googleapis.com/css?family=Montserrat:600,800|Open+Sans" rel="stylesheet">
     <script defer src="https://use.fontawesome.com/releases/v5.0.4/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="css/reset.css" />

@@ -406,7 +406,6 @@ input[type="button"]::-moz-focus-inner {
         padding: 10px 10px;
     }
     form .form__input, textarea {
-        font-size: 0.8em;
         padding: 12px;
     }
     nav {
