@@ -19,7 +19,7 @@ if(! empty($_POST)) {
     $allowed = array('jpg', 'jpeg', 'png');
 
     if (in_array($fileActualExt, $allowed)){
-       
+
         if ($fileError === 0){
             if ($fileSize < 10000000){
                 $fileNameNew = uniqid('', true).".".$fileActualExt;

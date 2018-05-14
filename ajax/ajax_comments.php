@@ -12,9 +12,14 @@ try {
     $newComment->setDate($date);
     $newComment->setUserId($userid);
     $newComment->AddComment(strip_tags($_POST['postid']));
-
+    $user = User::getSingleUser($newComment->getUserId());
+    $username = $user[0]['username'];
     $feedback['status'] = 'success';
     $feedback['text'] = htmlspecialchars($newComment->getComment());
+    $feedback['date'] = htmlspecialchars($newComment->getDate());
+    $feedback['user'] = htmlspecialchars($username);
+
+
 }
 catch(Exception $e) {
 

@@ -11,10 +11,10 @@ if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POS
         $user->setUsername(strip_tags($_POST['username']));
         $user->setEmail(strip_tags($_POST['email']));
         $user->setPassword(strip_tags($_POST['password']));
+        $user->setDescr("No description yet");
         $user->setAvatar(strip_tags(""));
         if($user->register()){
             $user->login();
-
         }
     }
     else{

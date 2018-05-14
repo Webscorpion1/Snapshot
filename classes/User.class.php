@@ -115,13 +115,14 @@ include_once("Db.class.php");
 
      public function register(){
          $conn = db::getInstance();
-         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password, avatar) values(:firstname,:lastname,:username,:email,:password,:avatar)");
+         $statement = $conn->prepare("insert into users (firstname, lastname, username, email, password, avatar, description) values(:firstname,:lastname,:username,:email,:password,:avatar,:description)");
          $statement->bindParam(':firstname',$this->firstname);
          $statement->bindParam(':lastname',$this->lastname);
          $statement->bindParam(':username',$this->username);
          $statement->bindParam(':email',$this->email);
          $statement->bindParam(':password',$this->password);
          $statement->bindParam(':avatar',$this->avatar);
+         $statement->bindParam(':description',$this->descr);
          $result = $statement->execute();
          return $result;
      }
@@ -130,7 +131,7 @@ include_once("Db.class.php");
      {
          session_start();
          $_SESSION['loggedin'] = true;
-         header('Location: index.php');
+         header('Location: login.php');
      }
      public function editprofile($userid){
 
@@ -213,6 +214,14 @@ include_once("Db.class.php");
          $query = "DELETE FROM friends WHERE user1_id = $user AND user2_id = $friend";
          $statement = $conn->prepare($query);
          $statement->execute();
+     }
+     public static function getSingleUser($id){
+         $conn = db::getInstance();
+         $query = "SELECT * FROM users WHERE id = $id";
+         $statement = $conn->prepare($query);
+         $statement->execute();
+         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+         return $result;
      }
  }
  ?>

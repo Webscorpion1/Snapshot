@@ -105,8 +105,6 @@ else{ }
         var text = $("#post").val();
         var postid = <?php echo $_GET['post']; ?>;
 
-        console.log(postid);
-        console.log(text);
         $.ajax({
             method: "POST",
             url: "ajax/ajax_comments.php",
@@ -114,10 +112,11 @@ else{ }
         })
             .done(function( res ) {
                 if(res.status == "success"){
-                    var ctext = `
-
-                            <h3>${res.text}</h3>
-                            `;
+                    var ctext = ` <div class="post__comment"><h3>${res.text}</h3></div>
+                                <div class="post__detail_top_grid">
+                                 <div class="post__user post__details"><h3>Posted by: ${res.user}</h3></div>
+                                    <div class="post__date post__details"><p><span>Posted on: ${res.date}</span></p><br/><br/></div>
+                             </div>`;
                     $('.comment-container').append(ctext);
                     $(".comment-container").first().slideDown();
                 }
