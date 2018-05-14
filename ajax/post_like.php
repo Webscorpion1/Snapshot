@@ -2,15 +2,15 @@
 include_once("../classes/Like.class.php");
 session_start();
 $userid = $_SESSION['userid'];
-$likecount = Like::Checklike(strip_tags($_POST['postid'], $userid));
+$likecount = Like::Checklike($_POST['postid'], $userid);
 
 if ($likecount > 0){
-    Like::Removelike(strip_tags($_POST['postid'], $userid));
+    Like::Removelike($_POST['postid'], $userid);
     $feedback['status'] = 'unsuccess';
 }
 else{
 $like = new Like();
-$like->Addlike(strip_tags($_POST['postid'], $userid));
+$like->Addlike($_POST['postid'], $userid);
     $feedback['status'] = 'success';
 }
 

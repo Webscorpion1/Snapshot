@@ -8,9 +8,9 @@ try {
     $newComment = new Comments();
     $date = date("Y-m-d H:i:s");
     $userid = $_SESSION['userid'];
-    $newComment->setComment(strip_tags($_POST['text']));
-    $newComment->setDate(strip_tags($date));
-    $newComment->setUserId(strip_tags($userid));
+    $newComment->setComment($_POST['text']);
+    $newComment->setDate($date);
+    $newComment->setUserId($userid);
     $newComment->AddComment(strip_tags($_POST['postid']));
 
     $feedback['status'] = 'success';
