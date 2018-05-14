@@ -4,12 +4,12 @@ User::checklogin();
 
 
 if (!empty ($_POST)) {
-    $file = strip_tags($_FILES['photo']);
-    $fileName = strip_tags($_FILES['photo']['name']);
-    $fileTmpName = strip_tags($_FILES['photo']['tmp_name']);
-    $fileSize = strip_tags($_FILES['photo']['size']);
-    $fileError = strip_tags($_FILES['photo']['error']);
-    $fileType = strip_tags($_FILES['photo']['type']);
+    $file = $_FILES['photo'];
+    $fileName = $_FILES['photo']['name'];
+    $fileTmpName = $_FILES['photo']['tmp_name'];
+    $fileSize = $_FILES['photo']['size'];
+    $fileError = $_FILES['photo']['error'];
+    $fileType = $_FILES['photo']['type'];
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
