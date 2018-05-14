@@ -23,50 +23,6 @@ else{
 }
 
 
-$colors = array(
-    "Black"     => array(0, 0, 0),
-    "Green"     => array(0, 128, 0),
-    "Silver"    => array(192, 192, 192),
-    "Lime Green"      => array(0, 255, 0),
-    "Gray"      => array(128, 0, 128),
-    "Olive Green"     => array(128, 128, 0),
-    "White"     => array(255, 255, 255),
-    "Yellow"    => array(255, 255, 0),
-    "Dark Red"    => array(128, 0, 0),
-    "Dark Blue"      => array(0, 0, 128),
-    "Red"       => array(255, 0, 0),
-    "Blue"      => array(0, 0, 255),
-    "Purple"    => array(128, 0, 128),
-    "Teal Blue"      => array(0, 128, 128),
-    "Pink"   => array(255, 0, 255),
-    "Aqua Blue"      => array(0, 255, 255),
-);
-function html2rgb($color)
-{
-    if ($color[0] == '#')
-        $color = substr($color, 1);
-
-    if (strlen($color) == 6)
-        list($r, $g, $b) = array($color[0].$color[1],
-            $color[2].$color[3],
-            $color[4].$color[5]);
-    elseif (strlen($color) == 3)
-        list($r, $g, $b) = array($color[0].$color[0],
-            $color[1].$color[1], $color[2].$color[2]);
-    else
-        return false;
-
-    $r = hexdec($r); $g = hexdec($g); $b = hexdec($b);
-
-    return array($r, $g, $b);
-}
-
-function distancel2(array $color1, array $color2) {
-    return sqrt(pow($color1[0] - $color2[0], 2) +
-        pow($color1[1] - $color2[1], 2) +
-        pow($color1[2] - $color2[2], 2));
-}
-
 
 /*ALLE KLEUR  VINDEN*/
 
@@ -205,28 +161,6 @@ function colorPalette($imageFile, $numColors, $granularity = 5)
                     <?php endforeach; ?>
                 </div>
                 <div class="post__picture"><img class="<?php echo $p['filter']; ?>" src="<?php echo $p['picture']; ?>" alt=""></div>
-                <?php
-                // HOOFD KLEUR VINDEN
-                $image=imagecreatefromjpeg($p['picture']);
-                $thumb=imagecreatetruecolor(1,1); imagecopyresampled($thumb,$image,0,0,0,0,1,1,imagesx($image),imagesy($image));
-                $mainColor=strtoupper(dechex(imagecolorat($thumb,0,0)));
-
-                $distances = array();
-                $val = html2rgb($mainColor);
-                foreach ($colors as $name => $c) {
-                    $distances[$name] = distancel2($c, $val);
-                }
-
-                $mincolor = "";
-                $minval = pow(2, 30); /*big value*/
-                foreach ($distances as $k => $v) {
-                    if ($v < $minval) {
-                        $minval = $v;
-                        $mincolor = $k;
-                    }
-                }
-                ?>
-                    <p class="colortext">The main color in this Snapshot is  <?php echo $mincolor ?></p>
 
 
                 <div class="flex">
