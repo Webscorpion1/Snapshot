@@ -12,7 +12,7 @@ class Comments extends Post{
 
     public function getComment()
     {
-        return htmlspecialchars($this->Comment);
+        return strip_tags($this->Comment);
     }
 
     public function setComment($Comment)
