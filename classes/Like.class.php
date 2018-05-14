@@ -17,7 +17,7 @@ class Like {
 
     public function getPostid()
     {
-        return $this->postid;
+        return htmlspecialchars($this->postid);
     }
 
     public function setUserid($userid)
@@ -27,7 +27,7 @@ class Like {
 
     public function getUserid()
     {
-        return $this->userid;
+        return htmlspecialchars($this->userid);
     }
 
 
@@ -40,7 +40,7 @@ class Like {
         $statement->bindValue(':user_id',$userid);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return htmlspecialchars($result);
     }
 
     public static function Removelike($postid, $userid){
@@ -56,14 +56,14 @@ class Like {
         $statement = $conn->prepare("SELECT * from likes WHERE post_id = $postid");
         $statement->execute();
         $count =  $statement->rowCount();
-        return $count;
+        return htmlspecialchars($count);
     }
     public static function Checklike($postid, $userid){
         $conn = db::getInstance();
         $statement = $conn->prepare("SELECT * from likes WHERE post_id = $postid AND user_id = $userid");
         $statement->execute();
         $count =  $statement->rowCount();
-        return $count;
+        return htmlspecialchars($count);
     }
 
 }

@@ -14,7 +14,7 @@ include_once("Db.class.php");
 
      public function getDescr()
      {
-         return $this->descr;
+         return htmlspecialchars($this->descr);
      }
 
      public function setDescr($descr)
@@ -24,7 +24,7 @@ include_once("Db.class.php");
 
      public function getAvatar()
      {
-         return $this->avatar;
+         return htmlspecialchars($this->avatar);
      }
 
 
@@ -41,7 +41,7 @@ include_once("Db.class.php");
 
      public function getFirstname()
      {
-         return $this->firstname;
+         return htmlspecialchars($this->firstname);
      }
 
      public function setLastname($lastname)
@@ -52,7 +52,7 @@ include_once("Db.class.php");
 
      public function getLastname()
      {
-         return $this->lastname;
+         return htmlspecialchars($this->lastname);
      }
 
 
@@ -74,7 +74,7 @@ include_once("Db.class.php");
 
     public function getUsername()
     {
-        return $this->username;
+        return htmlspecialchars($this->username);
     }
 
 
@@ -94,7 +94,7 @@ include_once("Db.class.php");
 
     public function getEmail()
     {
-        return $this->email;
+        return htmlspecialchars($this->email);
     }
 
      public function setPassword($password)
@@ -105,12 +105,12 @@ include_once("Db.class.php");
 
          $hash = password_hash($password,PASSWORD_DEFAULT);// standaard 10 keer als je geen options mee geeft
          $this->password = $hash;
-         return $this;
+         return htmlspecialchars($this);
      }
      public function getPassword()
 
      {
-         return $this->password;
+         return htmlspecialchars($this->password);
      }
 
      public function register(){

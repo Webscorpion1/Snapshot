@@ -26,31 +26,31 @@ if(! empty($_POST)) {
                 print_r($fileDestination);
                 move_uploaded_file($fileTmpName, $fileDestination);
                 $feedback = "Post has been saved.";
-                $title = $_POST['title'];
-                $desc = $_POST['description'];
-                $filter = $_POST['filter'];
-                $date = date("Y-m-d H:i:s");
-                $location = "";
-                $userid = $_SESSION['userid'];
+                $title = (strip_tags($_POST['title']));
+                $desc = (strip_tags($_POST['description']));
+                $filter = (strip_tags($_POST['filter']));
+                $date = (strip_tags(date("Y-m-d H:i:s")));
+                $location = (strip_tags(""));
+                $userid = (strip_tags($_SESSION['userid']));
                 $newPost = new Post();
 
-                $newPost->setTitle($title);
-                $newPost->setPicture($fileDestination);
-                $newPost->setDescription($desc);
-                $newPost->setDate($date);
-                $newPost->setUserId($userid);
-                $newPost->setLocation($location);
-                $newPost->setFilter($filter);
+                $newPost->setTitle(strip_tags($title));
+                $newPost->setPicture(strip_tags($fileDestination));
+                $newPost->setDescription(strip_tags($desc));
+                $newPost->setDate(strip_tags($date));
+                $newPost->setUserId(strip_tags($userid));
+                $newPost->setLocation(strip_tags($location));
+                $newPost->setFilter(strip_tags($filter));
                 $newPost->AddPost();
                 $postId = Post::getLastId();
 
 
-                $string = $_POST['tag'];
+                $string = (strip_tags($_POST['tag']));
                 $tags = explode(',' , $string);
 
                 foreach($tags as $t) {
-                    $newPost->setTag($t);
-                    $newPost->AddTags($postId);
+                    $newPost->setTag(strip_tags($t));
+                    $newPost->AddTags(strip_tags($postId));
                 }
 
             } else{

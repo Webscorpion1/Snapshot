@@ -6,7 +6,7 @@ User::checklogin();
 $editpost = Post::showEditPost($_GET['edit']);
 
 if(!empty($_POST['edit_post'])){
-  Post::editPost($_GET['edit'],$_POST['title'],$_POST['description']);
+  Post::editPost($_GET['edit'], strip_tags($_POST['title']),  strip_tags($_POST['description']));
   $feedback = "Your post has been edited.";
 }
 ?><!DOCTYPE html>

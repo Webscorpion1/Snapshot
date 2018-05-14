@@ -9,8 +9,8 @@ User::checklogin();
 $post = Post::ShowAllPosts(2,$_SESSION['userid']);
 
 if(!empty($_POST['searchsubmit'])){
-    $post = Post::SearchAllPosts(100,$_SESSION['userid'],$_POST['search']);
-    $searchtext = " (Searched by : ". $_POST['search'] .")";
+    $post = Post::SearchAllPosts(100,$_SESSION['userid'], strip_tags($_POST['search']));
+    $searchtext = " (Searched by : ".  strip_tags($_POST['search']) .")";
 }
 
 $likefeedback = "unlike";

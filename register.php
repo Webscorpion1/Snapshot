@@ -6,12 +6,12 @@ try{
 if( !empty ($_POST['firstname']) && !empty ($_POST['lastname']) && !empty ($_POST['username']) && !empty ($_POST['email']) && !empty ($_POST['password'])){
     if($_POST['password'] == $_POST['password_confirmation']) {
         $user = new User();
-        $user->setFirstName($_POST['firstname']);
-        $user->setLastName($_POST['lastname']);
-        $user->setUsername($_POST['username']);
-        $user->setEmail($_POST['email']);
-        $user->setPassword($_POST['password']);
-        $user->setAvatar("");
+        $user->setFirstName(strip_tags($_POST['firstname']));
+        $user->setLastName(strip_tags($_POST['lastname']));
+        $user->setUsername(strip_tags($_POST['username']));
+        $user->setEmail(strip_tags($_POST['email']));
+        $user->setPassword(strip_tags($_POST['password']));
+        $user->setAvatar(strip_tags(""));
         if($user->register()){
             $user->login();
 

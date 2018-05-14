@@ -51,6 +51,9 @@ form label {
     display: block;
     font-size: 15px;
 }
+.form_login{
+    max-width: 740px;
+}
 span {
     font-weight: bold;
 }

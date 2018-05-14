@@ -4,12 +4,12 @@ User::checklogin();
 
 
 if (!empty ($_POST)) {
-    $file = $_FILES['photo'];
-    $fileName = $_FILES['photo']['name'];
-    $fileTmpName = $_FILES['photo']['tmp_name'];
-    $fileSize = $_FILES['photo']['size'];
-    $fileError = $_FILES['photo']['error'];
-    $fileType = $_FILES['photo']['type'];
+    $file = strip_tags($_FILES['photo']);
+    $fileName = strip_tags($_FILES['photo']['name']);
+    $fileTmpName = strip_tags($_FILES['photo']['tmp_name']);
+    $fileSize = strip_tags($_FILES['photo']['size']);
+    $fileError = strip_tags($_FILES['photo']['error']);
+    $fileType = strip_tags($_FILES['photo']['type']);
     $fileExt = explode('.', $fileName);
     $fileActualExt = strtolower(end($fileExt));
 
@@ -26,11 +26,11 @@ if (in_array($fileActualExt, $allowed)) {
             $user = new User();
             if ($_POST['confirmation_pw'] == $user->getPassword()) {
             }
-            $user->setEmail($_POST['change_email']);
-            $user->setAvatar($fileDestination);
-            $user->setDescr($_POST['bio']);
-            $user->setPassword($_POST['change_password']);
-            $user->editprofile($_GET['user']);
+            $user->setEmail(strip_tags($_POST['change_email']));
+            $user->setAvatar(strip_tags($fileDestination));
+            $user->setDescr(strip_tags($_POST['bio']));
+            $user->setPassword(strip_tags($_POST['change_password']));
+            $user->editprofile(strip_tags($_GET['user']));
             header('Location: index.php');
         }
     }

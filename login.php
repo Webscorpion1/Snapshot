@@ -5,8 +5,8 @@ include_once ("classes/User.class.php");
 
 
 if(!empty($_POST)){
-    $email = $_POST['email'];
-    $password = $_POST['password'];
+    $email = strip_tags($_POST['email']);
+    $password = strip_tags($_POST['password']);
 
 
     if(User::canilogin($email, $password)){

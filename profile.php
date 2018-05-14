@@ -6,15 +6,15 @@ User::checklogin();
 $user = User::getUser();
 if(!empty($_POST['unfollow'])){
     $u = new User();
-    $current_user = $_SESSION['userid'];
-    $friend = $_GET['user'];
+    $current_user = strip_tags($_SESSION['userid']);
+    $friend = strip_tags($_GET['user']);
     $u->unFollow($current_user, $friend);
 
 }
 if(!empty($_POST['follow'])){
     $u = new User();
-    $current_user = $_SESSION['userid'];
-    $friend = $_GET['user'];
+    $current_user = strip_tags($_SESSION['userid']);
+    $friend = strip_tags($_GET['user']);
     $u->follow($current_user, $friend);
 
 }

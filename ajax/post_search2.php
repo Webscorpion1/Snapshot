@@ -2,8 +2,8 @@
 include_once("../classes/db.class.php");
 session_start();
 $userid = $_SESSION['userid'];
-$output = "";
-$keyword = $_POST['keyword'];
+$output = strip_tags("");
+$keyword = strip_tags($_POST['keyword']);
 if(isset($keyword)){
     if($keyword != ""){
         $conn = db::getInstance();
@@ -31,7 +31,7 @@ if(isset($keyword)){
             $output .='</div>';
             $output.='</a>';
         };
-        echo $output;
+        echo htmlspecialchars($output);
     }
 }
 else{

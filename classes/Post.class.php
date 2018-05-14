@@ -17,7 +17,7 @@ class Post {
 
     public function getFilter()
     {
-        return $this->filter;
+        return htmlspecialchars($this->filter);
     }
 
 
@@ -33,7 +33,7 @@ class Post {
 
     public function getReported()
     {
-        return $this->reported;
+        return htmlspecialchars($this->reported);
     }
 
 
@@ -44,7 +44,7 @@ class Post {
 
     public function getTag()
     {
-        return $this->tag;
+        return htmlspecialchars($this->tag);
     }
 
 
@@ -55,7 +55,7 @@ class Post {
 
     public function getTitle()
     {
-        return $this->title;
+        return htmlspecialchars($this->title);
     }
 
     public function setLocation($location)
@@ -65,7 +65,7 @@ class Post {
 
     public function getLocation()
     {
-        return $this->location;
+        return htmlspecialchars($this->location);
     }
 
     public function setUserId($user_id)
@@ -75,7 +75,7 @@ class Post {
 
     public function getUserId()
     {
-        return $this->user_id;
+        return htmlspecialchars($this->user_id);
     }
 
     public function setPicture($picture)
@@ -85,7 +85,7 @@ class Post {
 
     public function getPicture()
     {
-        return $this->picture;
+        return htmlspecialchars($this->picture);
     }
 
 
@@ -96,7 +96,7 @@ class Post {
 
     public function getDescription()
     {
-        return $this->description;
+        return htmlspecialchars($this->description);
     }
 
     public function setDate($date)
@@ -106,7 +106,7 @@ class Post {
 
     public function getDate()
     {
-        return $this->date;
+        return htmlspecialchars($this->date);
     }
 
     public static function ShowPosts($limit, $userid){

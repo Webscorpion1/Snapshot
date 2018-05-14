@@ -31,7 +31,7 @@ class Comments extends Post{
         $statement->bindValue(':post_date',$this->getDate());
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return htmlspecialchars($result);
     }
 
     public static function ShowComments($p_id){
@@ -45,7 +45,7 @@ class Comments extends Post{
         $statement = $conn->prepare($query);
         $statement->execute();
         $result = $statement->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        return htmlspecialchars($result);
     }
 
 }

@@ -3,8 +3,8 @@ include_once("../classes/db.class.php");
 include_once("../classes/Post.class.php");
 session_start();
 $userid = $_SESSION['userid'];
-$output = "";
-$keyword = $_POST['keyword'];
+$output = strip_tags("");
+$keyword = strip_tags($_POST['keyword']);
 if(isset($keyword)){
     if($keyword != ""){
        $search = Post::SearchPosts(5,$userid,$keyword);
@@ -18,7 +18,7 @@ if(isset($keyword)){
             $output .='</div>';
 
         };
-        echo $output;
+        echo htmlspecialchars($output);
     }
 }
 

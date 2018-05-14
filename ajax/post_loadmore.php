@@ -3,8 +3,8 @@ include_once("../classes/db.class.php");
 include_once("../classes/Post.class.php");
 session_start();
 $userid = $_SESSION['userid'];
-$output = "";
-$limit = $_POST['limit'];
+$output = strip_tags("");
+$limit = strip_tags($_POST['limit']);
 if(isset($limit)){
     if($limit != ""){
         $post = Post::ShowPosts($limit,$userid);
@@ -20,7 +20,7 @@ if(isset($limit)){
 
 
         };
-        echo $output;
+        echo htmlspecialchars($output);
 
     }
 }
